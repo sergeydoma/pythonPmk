@@ -17,5 +17,6 @@ if __name__ == '__main__':
     import exchange
 
 
-    # exchange
+# exchange
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# проверка
