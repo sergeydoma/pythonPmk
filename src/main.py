@@ -15,6 +15,8 @@ def print_hi(name):
 if __name__ == '__main__':
     print("Begin")
     import exchange
+    import qtt
+
 
 
 # exchange
