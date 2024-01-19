@@ -1,21 +1,25 @@
-# This is a sample Python script.
+import sys
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from PySide6.QtWidgets import QApplication, QMainWindow
+
+from dialog import Ui_Dialog
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-    ##
+class MainWindow(QMainWindow):
+    def __init__(self, parent=None):
+        super(MainWindow, self).__init__(parent)
+        self.ui = Ui_Dialog()
+        # self.ui.setupUi(self)
 
-# Press the green button in the gutter to run the script.
 
 
 if __name__ == '__main__':
-    print("Begin")
-    import exchange
-    import qtt
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec())
+    
+
 
 
 
