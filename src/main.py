@@ -3,8 +3,8 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import exchange
-from exchange import myModbus
 
+from exchange import myModbus
 
 
 def print_hi(name):
@@ -20,12 +20,13 @@ if __name__ == '__main__':
     Mod = myModbus()
     # client = m_m.connect()
     try:
-        Mod.con(1,9600)
+        # Mod.con(1,9600)
         client = Mod.con(1,9600)
-        res = client.read_holding_registers(0, count=10, unit=0x02).registers
-        res2 = client.read_holding_registers(10, count=10, unit=0x02).registers
+        # res = client.read_holding_registers(0, count=10, unit=0x02).registers
+        # res2 = client.read_holding_registers(10, count=10, unit=0x02).registers
+        res = Mod.get_delta()
         print(res)
-        print(res2)
+        # print(res2)
         err = 0
 
     except Exception as e:

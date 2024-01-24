@@ -5,10 +5,27 @@
 from pymodbus.client.sync import ModbusSerialClient as ModbusClient
 
 
-class myModbus():
+class myModbus:
+    """
+    myModbus
+    """
+    # def __init__(self):
 
-    # addr = 1
+
+    def __init__(self):
+        self.__delta_Alarm = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.__delta_Warning = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+    def set_delta_Alarm(self, delta):
+
+        self.__delta_Alarm = delta
+
+    def get_delta_Alarm(self):
+        return self.__delta_Alarm
+
+
     def con(self, address, baudrate):
+        global _client
         self.address = address
         self.baudrate = baudrate
         try:
@@ -16,6 +33,8 @@ class myModbus():
                                    bytesize=8, timeout=1)
             con = _client.connect()
             _client.read_coils(address, count=1, unit=0x02)
+            self.__delta = _client.read_holding_registers(0, count=10, unit=0x02).registers
+            print('delta =', self.__delta)
             return _client
             # data = _client.read_holding_registers(1, count=10, unit=0x02)
             # if _client.connect():
