@@ -4,28 +4,60 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import exchange
 
+
+import os
+import sys
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget
 from exchange import myModbus
+from ui_pmk20_001 import Ui_MainWindow
+from threading import Thread
+from time import sleep
 
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
+class MainWindow(QMainWindow):
+
+    def __init__(self):
+
+        super().__init__()
+
+        self.ui = Ui_MainWindow()
+
+        self.ui.setupUi(self)
+
+
 
 # Press the green button in the gutter to run the script.
+
+
+
 if __name__ == '__main__':
     print_hi('PyCharm')
 
+    app = QApplication(sys.argv)
+
+    window = MainWindow()
+    # window.show()
+    # sys.exit(app.exec())
+
     # m_m.connect()
+
+    # th = Thread(target=func)
+    #
+    #
+    # th.start()
     Mod = myModbus()
     # client = m_m.connect()
     try:
         # Mod.con(1,9600)
         client = Mod.con(1,9600)
-        # res = client.read_holding_registers(0, count=10, unit=0x02).registers
+        res = client.read_holding_registers(0, count=10, unit=0x02).registers
         # res2 = client.read_holding_registers(10, count=10, unit=0x02).registers
-        res = Mod.get_delta()
-        print(res)
+        res3 = Mod.get_delta_Alarm()
+        print("Delta Alarm = ", res3)
         # print(res2)
         err = 0
 
@@ -50,6 +82,9 @@ if __name__ == '__main__':
     #     print("по порядку", dd)
     #     err = 11
     print("stop")
+
+    window.show()
+    sys.exit(app.exec())
     # except Exception as e:
     # except ConnectionError:
     #     print("Error! ")

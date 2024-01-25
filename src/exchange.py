@@ -33,8 +33,8 @@ class myModbus:
                                    bytesize=8, timeout=1)
             con = _client.connect()
             _client.read_coils(address, count=1, unit=0x02)
-            self.__delta = _client.read_holding_registers(0, count=10, unit=0x02).registers
-            print('delta =', self.__delta)
+            self.__delta_Alarm = _client.read_holding_registers(0, count=10, unit=0x02).registers
+            print('delta =', self.__delta_Alarm)
             return _client
             # data = _client.read_holding_registers(1, count=10, unit=0x02)
             # if _client.connect():
