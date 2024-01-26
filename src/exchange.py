@@ -46,16 +46,16 @@ class myModbus:
             print("Error while connecting client: \n" + e.__str__())
 
 
-# m_m = myModbus()
-# m_m.connect()
+m_m = myModbus()
+m_m.con(1, 9600)
 
 # client = m_m.con()
 # if client == 'Error con':
 #     raise Exception("Нет соединения с COM портом")
 # print(m_m.connect())
 
-# res = m_m.connect().read_coils(0x0001, count=1, unit=0x02).registers
-# print(res)
+res = m_m.get_delta_Alarm()
+print(res)
 # client = connect()
 # print(client.read_coils(0x0001, count=1, unit=0x02))
 # print(client.read_holding_registers(0, count=10, unit=0x02))

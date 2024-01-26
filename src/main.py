@@ -8,12 +8,13 @@ import exchange
 import os
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget
-from exchange import myModbus
+# from exchange import myModbus
 from ui_pmk20_001 import Ui_MainWindow
 from threading import Thread
+from exchange import func
 from time import sleep
 
-
+th =Thread(target = func() )
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
@@ -37,11 +38,13 @@ class MainWindow(QMainWindow):
 if __name__ == '__main__':
     print_hi('PyCharm')
 
+
+
     app = QApplication(sys.argv)
 
     window = MainWindow()
-    # window.show()
-    # sys.exit(app.exec())
+    window.show()
+    sys.exit(app.exec())
 
     # m_m.connect()
 
