@@ -1,4 +1,5 @@
 # This is a sample Python script.
+import time
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
@@ -11,10 +12,11 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QV
 # from exchange import myModbus
 from ui_pmk20_001 import Ui_MainWindow
 from threading import Thread
-from exchange import func
-from time import sleep
+from exchange import exchang
 
-th =Thread(target = func() )
+
+# th =Thread(target=exchang() )
+
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
@@ -29,22 +31,38 @@ class MainWindow(QMainWindow):
 
         self.ui.setupUi(self)
 
+def appvisu():
+    app = QApplication(sys.argv)
 
+    window = MainWindow()
+    window.show()
+    time.sleep(1)
+    th2 = Thread(target=appvisu())
+    sys.exit(app.exec())
 
 # Press the green button in the gutter to run the script.
 
 
 
 if __name__ == '__main__':
+
     print_hi('PyCharm')
 
+    # appvisu()
+    th = Thread(target=exchang())
+    # th2 = Thread(target=appvisu())
 
 
-    app = QApplication(sys.argv)
 
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec())
+    th.start()
+
+    th2.start()
+
+
+
+    # th.start()
+
+
 
     # m_m.connect()
 
@@ -52,25 +70,25 @@ if __name__ == '__main__':
     #
     #
     # th.start()
-    Mod = myModbus()
+    # Mod = myModbus()
     # client = m_m.connect()
-    try:
-        # Mod.con(1,9600)
-        client = Mod.con(1,9600)
-        res = client.read_holding_registers(0, count=10, unit=0x02).registers
-        # res2 = client.read_holding_registers(10, count=10, unit=0x02).registers
-        res3 = Mod.get_delta_Alarm()
-        print("Delta Alarm = ", res3)
-        # print(res2)
-        err = 0
-
-    except Exception as e:
-    # except ConnectionError:
-        print("Error33! " + str(e)+"FFFF!")
-        dd = e
-        print ('Number', e)
-        # print ('Con Error')
-        err = 1
+    # try:
+    #     # Mod.con(1,9600)
+    #     client = Mod.con(1,9600)
+    #     res = client.read_holding_registers(0, count=10, unit=0x02).registers
+    #     # res2 = client.read_holding_registers(10, count=10, unit=0x02).registers
+    #     res3 = Mod.get_delta_Alarm()
+    #     print("Delta Alarm = ", res3)
+    #     # print(res2)
+    #     err = 0
+    #
+    # except Exception as e:
+    # # except ConnectionError:
+    #     print("Error33! " + str(e)+"FFFF!")
+    #     dd = e
+    #     print ('Number', e)
+    #     # print ('Con Error')
+    #     err = 1
 
     # try:
     #     res = client.read_holding_registers(0, count=10, unit=0x02).registers
@@ -84,10 +102,7 @@ if __name__ == '__main__':
     #     dd = e
     #     print("по порядку", dd)
     #     err = 11
-    print("stop")
 
-    window.show()
-    sys.exit(app.exec())
     # except Exception as e:
     # except ConnectionError:
     #     print("Error! ")
@@ -95,6 +110,6 @@ if __name__ == '__main__':
     # res = client.read_holding_registers(1, count=10, unit=0x02).registers
     #
     # print(res)
-    print (err)
+    # print (err)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

@@ -1,8 +1,12 @@
 # import serial.tools.list_ports
 # from pymodbus.server.sync import StartSerialServer
-
+from time import sleep
 
 from pymodbus.client.sync import ModbusSerialClient as ModbusClient
+import sys
+import time
+import traceback
+
 
 
 class myModbus:
@@ -32,9 +36,9 @@ class myModbus:
             _client = ModbusClient(retries=0, method='rtu', port='/dev/ttyUSB0', baudrate=baudrate, stopbits=1, parity='N',
                                    bytesize=8, timeout=1)
             con = _client.connect()
-            _client.read_coils(address, count=1, unit=0x02)
+            # _client.read_coils(address, count=1, unit=0x02)
             self.__delta_Alarm = _client.read_holding_registers(0, count=10, unit=0x02).registers
-            print('delta =', self.__delta_Alarm)
+            # print('delta =', self.__delta_Alarm)
             return _client
             # data = _client.read_holding_registers(1, count=10, unit=0x02)
             # if _client.connect():
@@ -45,17 +49,20 @@ class myModbus:
         except Exception as e:
             print("Error while connecting client: \n" + e.__str__())
 
+def exchang():
+    m_m = myModbus()
+    m_m.con(1, 9600)
 
-m_m = myModbus()
-m_m.con(1, 9600)
+    # client = m_m.con()
+    # if client == 'Error con':
+    #     raise Exception("Нет соединения с COM портом")
+    # print(m_m.connect())
+    while(1):
+        res = m_m.get_delta_Alarm()
+        print('выход блока =', res)
+        time.sleep(2)
+# exchang()
 
-# client = m_m.con()
-# if client == 'Error con':
-#     raise Exception("Нет соединения с COM портом")
-# print(m_m.connect())
-
-res = m_m.get_delta_Alarm()
-print(res)
 # client = connect()
 # print(client.read_coils(0x0001, count=1, unit=0x02))
 # print(client.read_holding_registers(0, count=10, unit=0x02))
