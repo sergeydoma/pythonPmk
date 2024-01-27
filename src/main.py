@@ -1,25 +1,19 @@
 # This is a sample Python script.
 import time
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-import exchange
-
-
 import os
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget
-# from exchange import myModbus
 from ui_pmk20_001 import Ui_MainWindow
-from threading import Thread
-from exchange import exchang
+from multiprocessing import Process
+from exchange import exchang as ex
+from PySide6.QtCore import QRunnable, Slot, QThreadPool
 
 
-# th =Thread(target=exchang() )
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+
 
 class MainWindow(QMainWindow):
 
@@ -36,8 +30,11 @@ def appvisu():
 
     window = MainWindow()
     window.show()
-    time.sleep(1)
-    th2 = Thread(target=appvisu())
+    # time.sleep(1)
+    # th2 = Thread(target=appvisu())
+    # proc = Process(target=ex())
+    # proc.start()
+    # proc.join()
     sys.exit(app.exec())
 
 # Press the green button in the gutter to run the script.
@@ -49,14 +46,27 @@ if __name__ == '__main__':
     print_hi('PyCharm')
 
     # appvisu()
-    th = Thread(target=exchang())
+    # th = Thread(target=exchang())
     # th2 = Thread(target=appvisu())
 
+    p2 = Process(target=ex, daemon=True)
 
+    p2.start()
 
-    th.start()
+    p1 = Process(target=appvisu(), daemon=True)
 
-    th2.start()
+    p1.start()
+    # p1.start()
+    p2.join()
+    p1.join()
+
+    while True:
+        # ex()
+        pass
+
+# appvisu()
+# proc = Process(target=ex())
+# proc.start()
 
 
 
