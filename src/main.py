@@ -30,12 +30,16 @@ def appvisu():
 
     window = MainWindow()
     window.show()
+
     # time.sleep(1)
     # th2 = Thread(target=appvisu())
     # proc = Process(target=ex())
     # proc.start()
     # proc.join()
+
     sys.exit(app.exec())
+
+
 
 # Press the green button in the gutter to run the script.
 

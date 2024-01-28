@@ -60,7 +60,7 @@ def exchang():
     while(1):
         res = m_m.get_delta_Alarm()
         print('выход блока =', res)
-        time.sleep(2)
+        time.sleep(1)
 # exchang()
 
 # client = connect()
