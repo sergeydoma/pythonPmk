@@ -9,13 +9,13 @@ from ui_pmk20_001 import Ui_MainWindow
 from multiprocessing import Process
 from exchange import exchang as ex
 from PySide6.QtCore import QRunnable, Slot, QThreadPool
-
+white = 'QPushButton{font-size: 24pt; font-weight: bold; color: #000000; background-color: #FFFFFF}'
 yellow = 'QPushButton{font-size: 24pt; font-weight: bold; color: #3E0BC1; background-color: #E8FC03}'        #;  border: #000000
 green = 'QPushButton{font-size: 24pt; font-weight: bold; color: #19305D; background-color: #35A941}'
-root = 'QPushButton{font-size: 24pt; font-weight: bold; color: #FFFFFF; background-color: #E6643D}'
+root = 'QPushButton{font-size: 24pt; font-weight: bold; color: #FFFFFF; background-color: #FF0000}'            ##E6643D
 
-setColor = [yellow, yellow, yellow,yellow,yellow,yellow,yellow,yellow,yellow,yellow,yellow,yellow,yellow,yellow,yellow,
-            yellow,yellow,yellow,yellow,yellow]
+setColor = [white, white, white,white,white,white,white,white,white,white,white,white,white,white,white,
+            white,white,white,white,white]
 
 setColor[0] = yellow
 setColor[1] = green
@@ -86,14 +86,14 @@ class MainWindow(QMainWindow):
         self.pushButton_19 = QPushButton('2-10')
         self.pushButton_19.setStyleSheet(setColor[19])
 
-        layout1 = QVBoxLayout()
+        layout1 = QGridLayout()  #QVBoxLayout()
         layout2 = QHBoxLayout()
         layout3 = QHBoxLayout()
 
         # layout2.addWidget(Color('yellow'))
 
-        layout1.addLayout(layout2)
-        layout1.addLayout(layout3)
+        layout1.addLayout(layout2, 1, 1)
+        layout1.addLayout(layout3, 2,1)
 
         layout2.addWidget(self.pushButton_0)
         layout2.addWidget(self.pushButton_1)
