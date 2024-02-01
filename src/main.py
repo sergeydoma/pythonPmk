@@ -4,7 +4,7 @@ import sys
 
 from PySide6.QtGui import QPalette, QColor
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget, QGridLayout, \
-    QHBoxLayout
+    QHBoxLayout, QLineEdit
 from ui_pmk20_001 import Ui_MainWindow
 from multiprocessing import Process
 from exchange import exchang as ex
@@ -25,6 +25,20 @@ def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     # endregion
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+
+
+class lay:
+    def __init__ (self, delta_alarm, delta_warning, name):
+        self.delta_alarm = delta_alarm
+        self.delta_warning = delta_warning
+        self.name = name
+
+
+
+    def layout(self):
+        self.lineEdit_1 = QLineEdit('Диапазон Rz1 =')
+
+
 
 # region classes
 class Color(QWidget):
