@@ -8,7 +8,6 @@ class data_exchange:
     data_exchange:
     """
     def __init__(self):
-
         self.__alarm_riz1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.__warning_riz1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.__alarm_riz2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -202,49 +201,44 @@ class data_exchange:
         self.__mode_device = mdevice
 
 
-
 dat = data_exchange()
 
-# dat.set_delta_alarm([1,2,3,4,5,6,7,8,9,0])
-#
-# funct = dat.get_delta_alarm()
-# print('funct =', funct)
-class myModbus:
-    """
-    myModbus
-    """
 
-    def get_mode(self,address, baudrate):
-        self.address = address
-        self.baudrate = baudrate
+class myModbus:
+    def __init__(self, adress, baudrate):
+        self.__adress = adress
+        self.__baudrate = baudrate
+
+    def get_mode(self):
+
         try:
-            instrument = minimalmodbus.Instrument('/dev/ttyUSB0', address)
-            instrument.serial.baudrate = baudrate
+
+            instrument = minimalmodbus.Instrument('/dev/ttyUSB0', self.__adress)
+            instrument.serial.baudrate = self.__baudrate
             instrument.serial.timeout = 1.0
             instrument.mode = minimalmodbus.MODE_RTU
         except IOError:
-            print("Ошибка подключения по RS-485")
+            print("Ошибка подключения по RS-485_1")
+            # self.instrument.serial.close()
         else:
             try:
                 modeDev = instrument.read_register(144, 0)
                 dat.set_mode_device(modeDev)
 
-            except IOError:
-                print("нет связи с устройсвом по адресу", address)
 
-    def con(self, address, baudrate):
-        """
-        :type address: object
-        """
-        self.__address = address
-        self.baudrate = baudrate
+            except IOError:
+                print("нет связи с устройсвом по адресу", self.__adress)
+
+    def con(self):
+
         try:
-            instrument = minimalmodbus.Instrument('/dev/ttyUSB0', address)
-            instrument.serial.baudrate = baudrate
+            instrument = minimalmodbus.Instrument('/dev/ttyUSB0', self.__adress)
+            instrument.serial.baudrate = self.__baudrate
             instrument.serial.timeout = 1.0
             instrument.mode = minimalmodbus.MODE_RTU
         except IOError:
-            print("Ошибка подключения по RS-485")
+            print("Ошибка подключения по RS-485_2")
+            # instrument.serial.close()
         else:
             try:
                 alarmRz1 = instrument.read_bits(registeraddress=20, number_of_bits=10)
@@ -257,19 +251,27 @@ class myModbus:
                 warnRz2 = instrument.read_bits(registeraddress=120, number_of_bits=10)
                 dat.set_alarm_riz2(warnRz2)
 
+                alarmLoop = instrument.read_bits(registeraddress=40, number_of_bits=10)
+                dat.set_alarm_loop(alarmLoop)
+                warnLoop = instrument.read_bits(registeraddress=130, number_of_bits=10)
+                dat.set_warning_loop(warnLoop)
+
+                # instrument.serial.close()
+
             except IOError:
-                print("нет связи с устройсвом по адресу", address)
+                print("нет связи с устройсвом по адресу", self.__adress)
+                # instrument.serial.close()
 
 
 def exchang():
 
     while(1):
-        m_m = myModbus()
-        m_m.get_mode(2, 9600)
+        m_m = myModbus(2, 9600)
+        m_m.get_mode()
         res = dat.get_mode_device()
         print('выход блока =', res)
 
-        m_m.con(2, 9600)
+        m_m.con()
         res = dat.get_alarm_riz1()
         print('авария сопр. изляции 1 =', res)
         time.sleep(1)
