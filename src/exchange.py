@@ -1,12 +1,8 @@
-# import serial.tools.list_ports
-# from pymodbus.server.sync import StartSerialServer
-from time import sleep
 
-from pymodbus.client.sync import ModbusSerialClient as ModbusClient
-import sys
+import minimalmodbus
+
 import time
 
-import traceback
 class data_exchange:
     """
     data_exchange:
@@ -40,7 +36,7 @@ class data_exchange:
     def get_alarm_riz1(self):
         return self.__alarm_riz1
 
-    def set_a_alarm_riz1(self, ariz1):
+    def set_alarm_riz1(self, ariz1):
         self.__alarm_riz1 = ariz1
     """
     Сопротивление изоляции 1 выше заданного предупредительного значения boolArr 110 ... 119
@@ -48,7 +44,7 @@ class data_exchange:
     def get_warning_riz1(self):
         return self.__warning_riz1
 
-    def set_a_warning_riz1(self, wriz1):
+    def set_warning_riz1(self, wriz1):
         self.__warning_riz1 = wriz1
     """
     Сопротивление изоляции 2 выше заданного аварийного значения boolArr 30 ... 31
@@ -56,7 +52,7 @@ class data_exchange:
     def get_alarm_riz2(self):
         return self.__alarm_riz2
 
-    def set_a_alarm_riz2(self, ariz2):
+    def set_alarm_riz2(self, ariz2):
         self.__alarm_riz2 = ariz2
     """
     Сопротивление изоляции 2 выше заданного предупредительного значения boolArr 120 ... 129
@@ -217,91 +213,68 @@ class myModbus:
     """
     myModbus
     """
-    # def __init__(self):
-
-
-    # def __init__(self):
-        # self.__delta_Alarm = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        # self.__delta_Warning = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        #
-        # self.__alarm_riz1 = 0
-        # """
-        # Сопротивление изоляции 1 выше заданного аварийного значения boolArr 20 ... 29
-        # """
-        # self.__warnig_riz1 = 0
-        # """
-        # Сопротивление изоляции 1 выше заданного предупредительного значения boolArr 110 ... 119
-        # """
-        # self.__alarm_riz2 = 0
-        # """
-        # Сопротивление изоляции 2 выше заданного аварийного значения boolArr 30 ... 31
-        # """
-        # self.__warnig_riz2 = 0
-        # """
-        # Сопротивление изоляции 2 выше заданного предупредительного значения boolArr 120 ... 121
-        # """
-     # dat = data_exchange()
-    # def set_delta_Alarm(self, adelta):
-    #     self.__delta_Alarm = adelta
-    #
-    #
-    # def get_delta_Alarm(self):
-    #     return self.__delta_Alarm
-
-    global _client
 
     def get_mode(self,address, baudrate):
         self.address = address
         self.baudrate = baudrate
         try:
-            _client = ModbusClient(retries=0, method='rtu', port='/dev/ttyUSB0', baudrate=baudrate, stopbits=1, parity='N',
-                                   bytesize=8, timeout=1)
-            ress = _client.read_holding_registers(144, count=1, unit=0x02).registers
-            dat.set_mode_device(ress)
+            instrument = minimalmodbus.Instrument('/dev/ttyUSB0', address)
+            instrument.serial.baudrate = baudrate
+            instrument.serial.timeout = 1.0
+            instrument.mode = minimalmodbus.MODE_RTU
+        except IOError:
+            print("Ошибка подключения по RS-485")
+        else:
+            try:
+                modeDev = instrument.read_register(144, 0)
+                dat.set_mode_device(modeDev)
 
-            ress1 = _client.read_discrete_inputs(20, count=10, uint=0x02).registers
-            print('a', ress1)
-            dat.set_a_alarm_riz1(ress1)
-
-        except Exception as e:
-            print("Error while connecting client: \n" + e.__str__())
+            except IOError:
+                print("нет связи с устройсвом по адресу", address)
 
     def con(self, address, baudrate):
-        self.address = address
+        """
+        :type address: object
+        """
+        self.__address = address
         self.baudrate = baudrate
         try:
-            _client = ModbusClient(retries=0, method='rtu', port='/dev/ttyUSB0', baudrate=baudrate, stopbits=1, parity='N',
-                                   bytesize=8, timeout=1)
-            # con = _client.connect()
-            # _client.read_coils(address, count=1, unit=0x02)
-            # ress = _client.read_coil(144, count=1, unit=0x02).registers
+            instrument = minimalmodbus.Instrument('/dev/ttyUSB0', address)
+            instrument.serial.baudrate = baudrate
+            instrument.serial.timeout = 1.0
+            instrument.mode = minimalmodbus.MODE_RTU
+        except IOError:
+            print("Ошибка подключения по RS-485")
+        else:
+            try:
+                alarmRz1 = instrument.read_bits(registeraddress=20, number_of_bits=10)
+                dat.set_alarm_riz1(alarmRz1)
+                warnRz1 = instrument.read_bits(registeraddress=110, number_of_bits=10)
+                dat.set_warning_riz1(warnRz1)
 
+                alarmRz2 = instrument.read_bits(registeraddress=30, number_of_bits=10)
+                dat.set_alarm_riz2(alarmRz2)
+                warnRz2 = instrument.read_bits(registeraddress=120, number_of_bits=10)
+                dat.set_alarm_riz2(warnRz2)
 
-            ress = _client.read_holding_registers(144, count=1, unit=0x02).registers
-            dat.set_mode_device(ress)
+            except IOError:
+                print("нет связи с устройсвом по адресу", address)
 
-
-        except Exception as e:
-            print("Error while connecting client: \n" + e.__str__())
 
 def exchang():
-    # m_m = myModbus()
-    # m_m.con(1, 9600)
 
-    # client = m_m.con()
-    # if client == 'Error con':
-
-
-    #     raise Exception("Нет соединения с COM портом")
-    # print(m_m.connect())
     while(1):
         m_m = myModbus()
-        m_m.get_mode(1, 9600)
+        m_m.get_mode(2, 9600)
         res = dat.get_mode_device()
         print('выход блока =', res)
+
+        m_m.con(2, 9600)
         res = dat.get_alarm_riz1()
-        print('авания сопр. изляции 1 =', res)
+        print('авария сопр. изляции 1 =', res)
         time.sleep(1)
+
+
 exchang()
 
 # client = connect()
