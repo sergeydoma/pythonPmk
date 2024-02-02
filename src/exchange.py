@@ -1,4 +1,4 @@
-
+import multiprocessing
 import minimalmodbus
 
 import time
@@ -273,30 +273,21 @@ class myModbus:
                 # instrument.serial.close()
                 time.sleep(5)
 
-def exchang():
+class process_mb:
+    # def __init__(self, adress, baudrate):
+    def exchang():
 
-    while(1):
-        m_m = myModbus(2, 9600)
-        m_m.get_mode()
-        res = dat.get_mode_device()
-        print('выход блока =', res)
+        while(True):
+            m_m = myModbus(2, 9600)
+            m_m.get_mode()
+            res = dat.get_mode_device()
+            print('выход блока =', res)
 
-        m_m.con()
-        res = dat.get_alarm_riz1()
-        print('авария сопр. изляции 1 =', res)
-        time.sleep(3)
+            m_m.con()
+            res = dat.get_alarm_riz1()
+            print('авария сопр. изляции 1 =', res)
+            time.sleep(3)
 
 
-exchang()
 
-# client = connect()
-# print(client.read_coils(0x0001, count=1, unit=0x02))
-# print(client.read_holding_registers(0, count=10, unit=0x02))
-# if client.connect():
 
-# res = client.read_holding_registers(1, count=10, unit=0x02).registers
-# print(res)
-# client.close()
-
-# print (client)
-# change
