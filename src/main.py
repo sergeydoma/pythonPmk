@@ -7,7 +7,7 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QV
     QHBoxLayout, QLineEdit
 from ui_pmk20_001 import Ui_MainWindow
 from multiprocessing import Process
-from exchange import exchang as ex
+from exchange import process_mb as p_mb
 from PySide6.QtCore import QRunnable, Slot, QThreadPool
 white = 'QPushButton{font-size: 24pt; font-weight: bold; color: #000000; background-color: #FFFFFF}'
 yellow = 'QPushButton{font-size: 24pt; font-weight: bold; color: #3E0BC1; background-color: #E8FC03}'        #;  border: #000000
@@ -147,19 +147,17 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
 
-def appvisu():
-    app = QApplication(sys.argv)
+class process_visu:
+    def appvisu(self):
 
-    window = MainWindow()
-    window.show()
+        app = QApplication(sys.argv)
 
-    # time.sleep(1)
-    # th2 = Thread(target=appvisu())
-    # proc = Process(target=ex())
-    # proc.start()
-    # proc.join()
+        window = MainWindow()
+        window.show()
+        sys.exit(app.exec())
 
-    sys.exit(app.exec())
+
+visu = process_visu()
 
 # endregion
 
@@ -174,20 +172,21 @@ if __name__ == '__main__':
     # th = Thread(target=exchang())
     # th2 = Thread(target=appvisu())
 
-    p2 = Process(target=ex, daemon=True)
+    # dp2 = p_mb(2,9600).exchang()
+
+    p2 = Process(daemon=True, target=p_mb(2,9600).exchang())
+
+    p1 = Process(target=visu.appvisu(), daemon=True)
 
     p2.start()
-
-    p1 = Process(target=appvisu(), daemon=True)
-
     p1.start()
     # p1.start()
-    p2.join()
+    # p2.join()
     p1.join()
 
-    while True:
-        # ex()
-        pass
+    # while True:
+    #     # ex()
+    #     pass
 
 # appvisu()
 # proc = Process(target=ex())
