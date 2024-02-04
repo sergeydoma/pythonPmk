@@ -2,7 +2,8 @@ import multiprocessing
 import minimalmodbus
 
 import time
-
+import psycopg2
+from psycopg2 import Error
 class data_exchange:
     """
     data_exchange:
@@ -29,6 +30,7 @@ class data_exchange:
         self.__u1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.__u2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.__mode_device = 0
+        self.__id_serial = [0]
     """
     Сопротивление изоляции 1 выше заданного аварийного значения boolArr 20 ... 29
     """
@@ -200,20 +202,33 @@ class data_exchange:
     def set_mode_device(self, mdevice):
         self.__mode_device = mdevice
 
+    """
+    Адрес устройства на шине modbus
+    """
+
+    def get_id_serial(self):
+        return self.__id_serial
+
+    def set_id_serial(self, id_serial):
+        self.__id_serial = id_serial
+
 
 dat = data_exchange()
+dat.set_id_serial(2)
+dat.set_mode_device(0xFFFF)
+print("DAT =", dat.get_rz1())
 
 class myModbus:
-    def __init__(self, adress):
-        self.__adress = adress
+    # def __init__(self, adress):
+    #     self.__adress = adress
 
 
 
     def get_mode(self):
 
         try:
-
-            instrument = minimalmodbus.Instrument('/dev/ttyUSB0', self.__adress)
+            addr = dat.get_id_serial()
+            instrument = minimalmodbus.Instrument('/dev/ttyUSB0', dat.get_id_serial())
             instrument.serial.baudrate = 9600
             instrument.serial.timeout = 1.0
             instrument.mode = minimalmodbus.MODE_RTU
@@ -230,7 +245,7 @@ class myModbus:
 
 
             except IOError:
-                print("нет связи с устройсвом по адресу", self.__adress)
+                print("нет связи с устройсвом по адресу", dat.get_id_serial())
 
     def con(self):
 
@@ -238,7 +253,7 @@ class myModbus:
 
         try:
 
-            instrument = minimalmodbus.Instrument('/dev/ttyUSB0', self.__adress)
+            instrument = minimalmodbus.Instrument('/dev/ttyUSB0', dat.get_id_serial())
 
             instrument.serial.baudrate = 9600
             instrument.serial.timeout = 1.0
@@ -266,10 +281,52 @@ class myModbus:
                 warnLoop = instrument.read_bits(registeraddress=130, number_of_bits=10)
                 dat.set_warning_loop(warnLoop)
 
+                alarmU = instrument.read_bits(registeraddress=100, number_of_bits=10)
+                dat.set_alarmU(alarmU)
+                '''
+                Аналоговые сигналы
+                '''
+                delta_Alarm = instrument.read_registers(registeraddress=0,number_of_registers=10)
+                dat.set_delta_alarm(delta_Alarm)
+
+                delta_Warning = instrument.read_registers(registeraddress=250, number_of_registers=10)
+                dat.set_delta_warning(delta_Warning)
+
+                point_rz1 = instrument.read_registers(registeraddress=10, number_of_registers=10)
+                dat.set_point_rz1(point_rz1)
+
+                point_rz2 = instrument.read_registers(registeraddress=20, number_of_registers=10)
+                dat.set_point_rz2(point_rz2)
+
+                point_loop = instrument.read_registers(registeraddress=30, number_of_registers=10)
+                dat.set_point_loop(point_loop)
+
+                point_u = instrument.read_registers(registeraddress=200, number_of_registers=10)
+                dat.set_point_u(point_u)
+
+                mode_chanal = instrument.read_registers(registeraddress=40, number_of_registers=10)
+                dat.set_mode_chanel(mode_chanal)
+
+                rz1 = instrument.read_registers(registeraddress=50, number_of_registers=10)
+                dat.set_rz1(rz1)
+
+                rz2 = instrument.read_registers(registeraddress=60, number_of_registers=10)
+                dat.set_rz2(rz2)
+
+                rloop = instrument.read_registers(registeraddress=70, number_of_registers=10)
+                dat.set_rloop(rloop)
+
+                u1 = instrument.read_registers(registeraddress=190, number_of_registers=10)
+                dat.set_u1(u1)
+
+                u2 = instrument.read_registers(registeraddress=230, number_of_registers=10)
+                dat.set_u2(u2)
+
+
                 # instrument.serial.close()
 
             except IOError:
-                print("нет связи с устройсвом по адресу", self.__adress)
+                print("нет связи с устройсвом по адресу", dat.get_id_serial())
                 # instrument.serial.close()
                 time.sleep(5)
 
@@ -279,16 +336,108 @@ class process_mb:
     def exchang():
 
         while(True):
-            m_m = myModbus(adress=2)
+
+
+            m_m = myModbus()
             m_m.get_mode()
             res = dat.get_mode_device()
             print('выход блока =', res)
 
-            m_m.con()
-            res = dat.get_alarm_riz1()
-            print('авария сопр. изляции 1 =', res)
+            if (dat.get_mode_device() == 0xFFFF):
+
+                m_m.con()
+                res = dat.get_alarm_riz1()
+                print('авария сопр. изляции 1 =', res)
+                res = dat.get_delta_alarm()
+                print('аварийный диапазон = ', res)
+                res = dat.get_rz1()
+                print('Сопротивление изоляции 1 = ', res)
             time.sleep(3)
+pmb = process_mb()
+pmb.exchang()
+"""
+Работа с базой данных
+"""
+import datetime
+w = dat.get_rz1()
+
+val1 = w[0]
+val2 = w[1]
+val3 = w[2]
+val4 = w[3]
+val5 = w[4]
+val6 = w[5]
+val7 = w[6]
+val8 = w[7]
+val9 = w[8]
+val10 = w[9]
+
+print("val1 =", val1)
+try:
+    t = str(time.time())
+    print(t)
+    t = '2014-04-04 20:00:00'
+    # Подключиться к существующей базе данных
+    connection = psycopg2.connect(user="postgres",
+                                  # пароль, который указали при установке PostgreSQL
+                                  password="123",
+                                  host="127.0.0.1",
+                                  port="5432",
+                                  database="postgres_db")
 
 
 
+    cursor = connection.cursor()
+
+    print('val2 = ',val2)
+    # Выполнение SQL-запроса для вставки данных в таблицу
+    insert_query_db = """ INSERT INTO rz1_3 (
+                            SS              ,                                  
+                            CHANAL_1        ,
+                            CHANAL_2        ,
+                            CHANAL_3        ,
+                            CHANAL_4        ,
+                            CHANAL_5        ,
+                            CHANAL_6        ,
+                            CHANAL_7        ,
+                            CHANAL_8        ,
+                            CHANAL_9        ,
+                            CHANAL_10          
+                                )  
+                            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+    cursor.execute(insert_query_db, (val1, val1, val2, val3, val4, val5, val6, val7, val8, val9, val10))
+    connection.commit()
+    print("1 запись успешно вставлена")
+    # Получить результат
+    cursor.execute("SELECT * from pmk")
+    record = cursor.fetchall()
+    print("Результат", record)
+
+    # # Выполнение SQL-запроса для обновления таблицы
+    # update_query = """Update pmk set price = 1500 where id = 1"""
+    # cursor.execute(update_query)
+    # connection.commit()
+    # count = cursor.rowcount
+    # print(count, "Запись успешно удалена")
+    # # Получить результат
+    # cursor.execute("SELECT * from mobile")
+    # print("Результат", cursor.fetchall())
+    #
+    # # Выполнение SQL-запроса для удаления таблицы
+    # delete_query = """Delete from mobile where id = 1"""
+    # cursor.execute(delete_query)
+    # connection.commit()
+    # count = cursor.rowcount
+    # print(count, "Запись успешно удалена")
+    # # Получить результат
+    # cursor.execute("SELECT * from mobile")
+    # print("Результат", cursor.fetchall())
+
+except (Exception, Error) as error:
+    print("Ошибка при работе с PostgreSQL", error)
+finally:
+    if connection:
+        cursor.close()
+        connection.close()
+        print("Соединение с PostgreSQL закрыто")
 
