@@ -29,6 +29,7 @@ class data_exchange:
         self.__u1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.__u2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.__mode_device = 0
+        self.__id_device = [0]
     """
     Сопротивление изоляции 1 выше заданного аварийного значения boolArr 20 ... 29
     """
@@ -200,9 +201,19 @@ class data_exchange:
     def set_mode_device(self, mdevice):
         self.__mode_device = mdevice
 
+    """
+    ID устройства на шине modbus
+    """
+
+    def get_id(self):
+        return self.__id_device
+
+    def set_id(self, id_device):
+        self.__id_device = id_device
+
 
 dat = data_exchange()
-
+dat.set_id(2)
 class myModbus:
     def __init__(self, adress, baudrate):
         self.__adress = adress
@@ -275,10 +286,13 @@ class myModbus:
 
 class process_mb:
     # def __init__(self, adress, baudrate):
-    def exchang():
+
+    def exchang(self):
+
 
         while(True):
-            m_m = myModbus(2, 9600)
+
+            m_m = myModbus(dat.get_id(), 9600)
             m_m.get_mode()
             res = dat.get_mode_device()
             print('выход блока =', res)
@@ -289,5 +303,7 @@ class process_mb:
             time.sleep(3)
 
 
+tmb=process_mb()
 
+tmb.exchang()
 

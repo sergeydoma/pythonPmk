@@ -177,15 +177,17 @@ if __name__ == '__main__':
 
     # dp2 = p_mb(2,9600).exchang()
 
-    # th2.start()
-    th2 = Process(target=p_mb.exchang, args=(), daemon=True).start()
 
-    th1 = Process(target=visu.appvisu(), args=(), daemon=True).start()
+    # temp = p_mb.exchang()
 
-    # th2.start()
+    th2 = Process(target=p_mb.exchang, args=(), daemon=True).start
+
+    th1 = Process(target=visu.appvisu(), args=(), daemon=True).start
 
     # th1.start()
-
+    #
+    # th2.start()
+    #
     # th1.join()
     #
     # th2.join()
