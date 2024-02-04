@@ -303,7 +303,7 @@ class process_mb:
             time.sleep(3)
 
 
-tmb=process_mb()
-
-tmb.exchang()
+# tmb=process_mb()
+#
+# tmb.exchang()
 

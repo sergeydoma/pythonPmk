@@ -180,9 +180,9 @@ if __name__ == '__main__':
 
     # temp = p_mb.exchang()
 
-    th2 = Process(target=p_mb.exchang, args=(), daemon=True).start
+    th2 = Process(target=p_mb.exchang, args=(), daemon=True).start()
 
-    th1 = Process(target=visu.appvisu(), args=(), daemon=True).start
+    th1 = Process(target=visu.appvisu(), args=(), daemon=True).start()
 
     # th1.start()
     #
