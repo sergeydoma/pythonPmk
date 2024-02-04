@@ -204,9 +204,9 @@ class data_exchange:
 dat = data_exchange()
 
 class myModbus:
-    def __init__(self, adress, baudrate):
+    def __init__(self, adress):
         self.__adress = adress
-        self.__baudrate = baudrate
+
 
 
     def get_mode(self):
@@ -214,7 +214,7 @@ class myModbus:
         try:
 
             instrument = minimalmodbus.Instrument('/dev/ttyUSB0', self.__adress)
-            instrument.serial.baudrate = self.__baudrate
+            instrument.serial.baudrate = 9600
             instrument.serial.timeout = 1.0
             instrument.mode = minimalmodbus.MODE_RTU
             instrument.close_port_after_each_call = True
@@ -240,7 +240,7 @@ class myModbus:
 
             instrument = minimalmodbus.Instrument('/dev/ttyUSB0', self.__adress)
 
-            instrument.serial.baudrate = self.__baudrate
+            instrument.serial.baudrate = 9600
             instrument.serial.timeout = 1.0
             instrument.mode = minimalmodbus.MODE_RTU
 
@@ -275,10 +275,11 @@ class myModbus:
 
 class process_mb:
     # def __init__(self, adress, baudrate):
+    @staticmethod
     def exchang():
 
         while(True):
-            m_m = myModbus(2, 9600)
+            m_m = myModbus(adress=2)
             m_m.get_mode()
             res = dat.get_mode_device()
             print('выход блока =', res)
