@@ -217,7 +217,7 @@ class data_exchange:
 
 
 dat = data_exchange()
-dat.set_id_serial(2)
+dat.set_id_serial(1)
 dat.set_mode_device(0xFFFF)
 print("DAT =", dat.get_rz1())
 
@@ -338,15 +338,15 @@ class process_mb:
     @staticmethod
     def exchang():
 
-        # while(True):
-        for i in range (1,2):
+        while(True):
+        # for i in range(1, 2):
 
             m_m = myModbus()
             m_m.get_mode()
             res = dat.get_mode_device()
             print('выход блока =', res)
 
-            if (dat.get_mode_device() == 0xFFFF):
+            if (dat.get_mode_device() != 0xF00F):
 
                 m_m.con()
                 res = dat.get_alarm_riz1()
@@ -356,71 +356,83 @@ class process_mb:
                 res = dat.get_rz1()
                 print('Сопротивление изоляции 1 = ', res)
             time.sleep(3)
-pmb = process_mb()
-pmb.exchang()
+# pmb = process_mb()
+# pmb.exchang()
 """
 Работа с базой данных
 """
 import datetime
 w = dat.get_rz1()
 
-val1 = w[0]
-val2 = w[1]
-val3 = w[2]
-val4 = w[3]
-val5 = w[4]
-val6 = w[5]
-val7 = w[6]
-val8 = w[7]
-val9 = w[8]
-val10 = w[9]
 
-print("val1 =", val1)
-try:
-    t = str(time.time())
-    print(t)
-    t = '2014-04-04 20:00:00'
-    # Подключиться к существующей базе данных
-    connection = psycopg2.connect(user="postgres",
-                                  # пароль, который указали при установке PostgreSQL
-                                  password="123",
-                                  host="127.0.0.1",
-                                  port="5432",
-                                  database="postgres_db")
+class database:
+
+    # val1 = 0
+    # val2 = 0
+    # val3 = 0
+    # val4 = 0
+    # val5 = 0
+    # val6 = 0
+    # val7 = 0
+    # val8 = 0
+    # val9 = 0
+    # val10 = 0
+    def load_Rz1(self, value):
+
+        self._value = value
+    # print("val1 =", val1)
+        try:
+            t = str(time.time())
+            print(t)
+            t = '2014-04-04 20:00:00'
+            # Подключиться к существующей базе данных
+            connection = psycopg2.connect(user="postgres",
+                                          # пароль, который указали при установке PostgreSQL
+                                          password="123",
+                                          host="127.0.0.1",
+                                          port="5432",
+                                          database="postgres_db")
 
 
 
-    cursor = connection.cursor()
+            cursor = connection.cursor()
 
-    print('val2 = ',val2)
-    # Выполнение SQL-запроса для вставки данных в таблицу
-    insert_query_db = """ INSERT INTO rz1_3 (
-                            SS              ,
-                            CHANAL_1        ,
-                            CHANAL_2        ,
-                            CHANAL_3        ,
-                            CHANAL_4        ,
-                            CHANAL_5        ,
-                            CHANAL_6        ,
-                            CHANAL_7        ,
-                            CHANAL_8        ,
-                            CHANAL_9        ,
-                            CHANAL_10
-                                )
-                            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-    cursor.execute(insert_query_db, (val1, val1, val2, val3, val4, val5, val6, val7, val8, val9, val10))
-    connection.commit()
-    print("1 запись успешно вставлена")
-    # Получить результат
-    cursor.execute("SELECT * from pmk")
-    record = cursor.fetchall()
-    print("Результат", record)
+            # print('val2 = ',val2)
+            # Выполнение SQL-запроса для вставки данных в таблицу
+            insert_query_db = """ INSERT INTO rz1_4 (
+                                    TIME            ,
+                                    SS              ,
+                                    CHANAL_1        ,
+                                    CHANAL_2        ,
+                                    CHANAL_3        ,
+                                    CHANAL_4        ,
+                                    CHANAL_5        ,
+                                    CHANAL_6        ,
+                                    CHANAL_7        ,
+                                    CHANAL_8        ,
+                                    CHANAL_9        ,
+                                    CHANAL_10
+                                        )
+                                    VALUES (CURRENT_TIMESTAMP, 'RZ1', %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            cursor.execute(insert_query_db, (self._value[0], self._value[1], self._value[2],
+                                             self._value[3], self._value[4], self._value[5], self._value[6],
+                                             self._value[7], self._value[8], self._value[9]))
+            connection.commit()
+            print("1 запись успешно вставлена")
+            # Получить результат
+            cursor.execute("SELECT * from pmk")
+            record = cursor.fetchall()
+            print("Результат", record)
 
-except (Exception, Error) as error:
-    print("Ошибка при работе с PostgreSQL", error)
-finally:
-    if connection:
-        cursor.close()
-        connection.close()
-        print("Соединение с PostgreSQL закрыто")
+        except (Exception, Error) as error:
+            print("Ошибка при работе с PostgreSQL", error)
+        finally:
+            if connection:
+                cursor.close()
+                connection.close()
+                print("Соединение с PostgreSQL закрыто")
 
+
+dbc = database()
+
+dbc.load_Rz1(value=w)
