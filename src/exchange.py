@@ -32,6 +32,9 @@ class data_exchange:
         self.__u2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.__mode_device = 0
         self.__id_serial = [0]
+        self.__message = ''
+
+        #Выберите номер устройства на шине Modbus RTU \n и нажмите кнопку "Подключить"
     """
     Сопротивление изоляции 1 выше заданного аварийного значения boolArr 20 ... 29
     """
@@ -215,11 +218,22 @@ class data_exchange:
     def set_id_serial(self, id_serial):
         self.__id_serial = id_serial
 
+    """
+    Сообщения на главном экране
+    """
+    def get_message(self):
+        return self.__message
+
+    def set_message(self, message):
+        self.__message = message
+
+
 
 dat = data_exchange()
 dat.set_id_serial(1)
 dat.set_mode_device(0xFFFF)
 print("DAT =", dat.get_rz1())
+
 
 class myModbus:
     # def __init__(self, adress):
@@ -436,3 +450,5 @@ class database:
 dbc = database()
 
 dbc.load_Rz1(value=w)
+
+mMod = myModbus

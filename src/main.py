@@ -3,19 +3,15 @@
 import sys
 
 from PySide6.QtGui import QPalette, QColor
-from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget, QGridLayout, \
-    QHBoxLayout, QLineEdit
-from ui_pmk20_001 import Ui_MainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QLineEdit
 from multiprocessing import Process
-from threading import Thread
 from queue import Queue
-import multiprocessing
 from exchange import process_mb as p_mb
 
-from edit_dialog import Ui_MainWindow
-from visuPmk import visu_ui
+from exchange import data_exchange
 
-from PySide6.QtCore import QRunnable, Slot, QThreadPool
+from src.visuPmk import visu_ui
+
 white = 'QPushButton{font-size: 24pt; font-weight: bold; color: #000000; background-color: #FFFFFF}'
 yellow = 'QPushButton{font-size: 24pt; font-weight: bold; color: #3E0BC1; background-color: #E8FC03}'        #;  border: #000000
 green = 'QPushButton{font-size: 24pt; font-weight: bold; color: #19305D; background-color: #35A941}'
@@ -27,6 +23,9 @@ setColor = [white, white, white,white,white,white,white,white,white,white,white,
 setColor[0] = yellow
 setColor[1] = green
 setColor[2] = root
+
+datE = data_exchange()
+
 
 
 def print_hi(name):
@@ -41,8 +40,6 @@ class lay:
         self.delta_alarm = delta_alarm
         self.delta_warning = delta_warning
         self.name = name
-
-
 
     def layout(self):
         self.lineEdit_1 = QLineEdit('Диапазон Rz1 =')
@@ -67,6 +64,7 @@ class MainWindow(QMainWindow):
         self.ui = visu_ui()
         self.ui.setupUi(self)
         self.ui.writeTabl()
+
         
 
 
