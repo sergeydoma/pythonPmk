@@ -41,29 +41,25 @@ class visu_ui(Ui_MainWindow):
     def defAddMb(self):
 
         self.lineEdit_1.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+
+
+        tCombo1 = int(self.comboBox_1.currentText(), 16)
+        tCombo2 = int(self.comboBox_2.currentText(), 16)
+        intCombo = tCombo1 * 16 + tCombo2
+        dat.set_id_serial(intCombo)
+        print(dat.get_id_serial())
+
+        mMod.con
+
         addMb = self.lineEdit_1.text()
-        # h_addMb = int(addMb)
-        # h_addMb = addMb.encode('hex')
-        # h_addMb = addMb.encode("utf-8").hex()
-
-        try:
-
-            int_addMb = int(addMb,16)
-
-            h_addMb = hex(int_addMb)
-
-            dat.set_id_serial(h_addMb)
-
-            print(dat.get_id_serial())
-
-        except:
-            mess1 = "Ошибка формата ввода номера устройства\n на шине Modbus RTU!"
-            dat.set_message(mess1)
-            self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-            self.label_info.setText(dat.get_message())
-
-        else:
-            mMod.con
+        # except:
+        #     mess1 = "Ошибка формата вводимого номера устройства!\n(Допустимо - 00...FD)"
+        #     dat.set_message(mess1)
+        #     self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+        #     self.label_info.setText(dat.get_message())
+        #
+        # else:
+        #     mMod.con
 
 
    
