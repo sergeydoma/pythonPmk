@@ -12,7 +12,8 @@ from queue import Queue
 import multiprocessing
 from exchange import process_mb as p_mb
 
-from edit_dialog import  Ui_MainWindow
+from edit_dialog import Ui_MainWindow
+from visuPmk import visu_ui
 
 from PySide6.QtCore import QRunnable, Slot, QThreadPool
 white = 'QPushButton{font-size: 24pt; font-weight: bold; color: #000000; background-color: #FFFFFF}'
@@ -60,11 +61,14 @@ class Color(QWidget):
 
 
 class MainWindow(QMainWindow):
+
     def __init__(self):
         super().__init__()
-        self.ui = Ui_MainWindow()
+        self.ui = visu_ui()
         self.ui.setupUi(self)
         self.ui.writeTabl()
+        
+
 
 class process_visu:
     def appvisu(self):

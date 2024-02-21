@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from PySide6 import QtGui, QtCore
+
 ################################################################################
 ## Form generated from reading UI file 'pmk20_001.ui'
 ##
@@ -15,21 +15,22 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHeaderView, QMainWindow, QSizePolicy,
-    QStatusBar, QTabWidget, QTableWidget, QTableWidgetItem,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHeaderView,
+    QLabel, QLineEdit, QMainWindow, QPushButton,
+    QSizePolicy, QStatusBar, QTabWidget, QTableWidget,
+    QTableWidgetItem, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1415, 954)
+        MainWindow.resize(1416, 954)
         MainWindow.setStyleSheet(u"background-color: rgb(213, 213, 159);")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(0, 30, 1741, 911))
+        self.tabWidget.setGeometry(QRect(0, 20, 1741, 911))
         font = QFont()
         font.setFamilies([u"Sans Serif"])
         font.setPointSize(12)
@@ -40,6 +41,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setStyleSheet(u"font: 12pt \"Sans Serif\";\n"
 "background-color: rgb(234, 232, 220);\n"
 "color: rgb(0, 0, 0);")
+        self.tabWidget.setDocumentMode(False)
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
         self.tableWidget = QTableWidget(self.tab)
@@ -84,6 +86,34 @@ class Ui_MainWindow(object):
         self.tableWidget.setSortingEnabled(False)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(300)
+        self.label_info = QLabel(self.tab)
+        self.label_info.setObjectName(u"label_info")
+        self.label_info.setGeometry(QRect(72, 39, 431, 151))
+        self.label_info.setStyleSheet(u"border-color: rgb(170, 170, 0);")
+        self.label_info.setFrameShape(QFrame.Box)
+        self.label_info.setFrameShadow(QFrame.Plain)
+        self.label_info.setLineWidth(1)
+        self.layoutWidget = QWidget(self.tab)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(80, 240, 284, 60))
+        self.gridLayout = QGridLayout(self.layoutWidget)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.Button_con = QPushButton(self.layoutWidget)
+        self.Button_con.setObjectName(u"Button_con")
+
+        self.gridLayout.addWidget(self.Button_con, 1, 1, 1, 1)
+
+        self.lineEdit_1 = QLineEdit(self.layoutWidget)
+        self.lineEdit_1.setObjectName(u"lineEdit_1")
+
+        self.gridLayout.addWidget(self.lineEdit_1, 1, 0, 1, 1)
+
+        self.label = QLabel(self.layoutWidget)
+        self.label.setObjectName(u"label")
+
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 2)
+
         self.tabWidget.addTab(self.tab, "")
         self.widget = QWidget()
         self.widget.setObjectName(u"widget")
@@ -670,6 +700,9 @@ class Ui_MainWindow(object):
         self.tblitems_2.verticalHeader().setProperty("showSortIndicator", False)
         self.tblitems_2.verticalHeader().setStretchLastSection(False)
         self.tabWidget.addTab(self.tab_2, "")
+        self.tab_3 = QWidget()
+        self.tab_3.setObjectName(u"tab_3")
+        self.tabWidget.addTab(self.tab_3, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -677,8 +710,9 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
-
+        self.tabWidget.setCurrentIndex(1)
+        
+        
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
@@ -710,6 +744,12 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"\u0410\u0432\u0430\u0440\u0438\u044f +100 \u0412", None));
         ___qtablewidgetitem10 = self.tableWidget.verticalHeaderItem(9)
         ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"\u0410\u0432\u0430\u0440\u0438\u044f -100 \u0412", None));
+        self.label_info.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">\u0412\u044b\u0435\u0440\u0438\u0442\u0435 \u043d\u043e\u043c\u0435\u0440 \u0443\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432\u0430 \u043d\u0430 \u0448\u0438\u043d\u0435 Modbus </p><p align=\"center\">\u0438 \u043d\u0430\u0436\u043c\u0438\u0442\u0435 \u043a\u043d\u043e\u043f\u043a\u0443 &quot;\u041f\u043e\u0434\u043a\u043b\u044e\u0447\u0438\u0442\u044c&quot;</p><p align=\"center\"><br/></p></body></html>", None))
+        self.Button_con.setText(QCoreApplication.translate("MainWindow", u"\u041f\u043e\u0434\u043a\u043b\u044e\u0447\u0438\u0442\u044c", None))
+#if QT_CONFIG(tooltip)
+        self.lineEdit_1.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">\u041d\u043e\u043c\u0435\u0440 \u0432 \u0448\u0435\u0441\u0442\u043d\u0430\u0446\u0430\u0442\u0435\u0440\u0438\u0447\u043d\u043e\u043c</p><p align=\"center\">\u0444\u043e\u0440\u043c\u0430\u0442\u0435</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.label.setText(QCoreApplication.translate("MainWindow", u"\u041d\u043e\u043c\u0435\u0440 \u0443\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432\u0430 \u043d\u0430 \u0448\u0438\u043d\u0435 Modbus", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"\u041f\u041c\u041a-20", None))
         ___qtablewidgetitem11 = self.tblitems_1.horizontalHeaderItem(0)
         ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0430\u043d\u0430\u043b 1", None));
@@ -862,15 +902,7 @@ class Ui_MainWindow(object):
         self.tblitems_2.setSortingEnabled(__sortingEnabled1)
 
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"\u041f\u043b\u0430\u0442\u0430 2", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"\u0410\u0440\u0445\u0438\u0432", None))
     # retranslateUi
 
-    def writeTabl(self):
-        # tblitems.setItem(2,2, "Ура!")
-        self.tblitems_2.setItem(1, 1, QTableWidgetItem("Ура!!!!!", ))
-        self.tblitems_1.setItem(22, 0, QTableWidgetItem("П"))
-        self.tblitems_1.item(22, 0).setBackground(QtGui.QColor(255, 255, 0)) # желтый
-        self.tblitems_1.item(22, 0).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-        self.tblitems_1.setItem(23, 0, QTableWidgetItem("А"))
-        self.tblitems_1.item(23, 0).setBackground(QtGui.QColor(255, 0, 0))  # Красный
-        # self.tblitems_1.item(23, 0).setTextColor(QtGui.QColor(255, 255, 255))  # белый
-        self.tblitems_1.item(23, 0).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+    
