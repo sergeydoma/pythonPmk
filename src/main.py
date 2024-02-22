@@ -59,12 +59,13 @@ class Color(QWidget):
 
 
 class MainWindow(QMainWindow):
-
     def __init__(self):
         super().__init__()
         self.ui = visu_ui()
         self.ui.setupUi(self)
         self.ui.writeTabl()
+
+        self.show()
         # self.ui.add_rz1()
 
 
@@ -76,8 +77,8 @@ class process_visu:
         window.ui.add_rz1([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
         window.show()
-        for i in range(1,10000):
-            window.ui.chn_mode ( [i, 12, 13, 14, 15, 16, 71, 81, 91, 101] )
+        # for i in range(1,10000):
+        #     window.ui.chn_mode([i, 12, 13, 14, 15, 16, 71, 81, 91, 101] )
 
         sys.exit(app.exec())
 
@@ -90,8 +91,12 @@ visu = process_visu()
 
 
 if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    mw = MainWindow()
 
-    print_hi('PyCharm')
+    sys.exit(app.exec())
+
+
 
     # appvisu()
     # th = Thread(target=exchang())
@@ -99,15 +104,15 @@ if __name__ == '__main__':
 
     # dp2 = p_mb(2,9600).exchang()
 
-    q = Queue()
-    th2 = Process(target=p_mb.exchang, args=(), daemon=True)
-    th2.start()
-
-    th1 = Process(target=visu.appvisu(), args=(), daemon=True)
-    th1.start()
-
-    th1.join()
-    th2.join()
+    # q = Queue()
+    # th2 = Process(target=p_mb.exchang, args=(), daemon=True)
+    # th2.start()
+    #
+    # th1 = Process(target=visu.appvisu(), args=(), daemon=True)
+    # th1.start()
+    #
+    # th1.join()
+    # th2.join()
 
 
 
@@ -142,39 +147,7 @@ if __name__ == '__main__':
 #     client = Mod.con(1,9600)
 #     res = client.read_holding_registers(0, count=10, unit=0x02).registers
 #     # res2 = client.read_holding_registers(10, count=10, unit=0x02).registers
-#     res3 = Mod.get_delta_Alarm()
-#     print("Delta Alarm = ", res3)
-#     # print(res2)
-#     err = 0
-#
-# except Exception as e:
-# # except ConnectionError:
-#     print("Error33! " + str(e)+"FFFF!")
-#     dd = e
-#     print ('Number', e)
-#     # print ('Con Error')
-#     err = 1
 
-# try:
-#     res = client.read_holding_registers(0, count=10, unit=0x02).registers
-#     res2 = client.read_holding_registers(10, count=10, unit=0x02).registers
-#     print(res)
-#     print(res2)
-#     err = 0
-#     client.close()
-# except Exception as e:
-#     print("Error Modbus! " + str(e))
-#     dd = e
-#     print("по порядку", dd)
-#     err = 11
 
-# except Exception as e:
-# except ConnectionError:
-#     print("Error! ")
 
-# res = client.read_holding_registers(1, count=10, unit=0x02).registers
-#
-# print(res)
-# print (err)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
