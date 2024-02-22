@@ -1,6 +1,7 @@
 # This is a sample Python script.
 
 import sys
+import time
 
 from PySide6.QtGui import QPalette, QColor
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QLineEdit
@@ -64,17 +65,20 @@ class MainWindow(QMainWindow):
         self.ui = visu_ui()
         self.ui.setupUi(self)
         self.ui.writeTabl()
-
-        
+        # self.ui.add_rz1()
 
 
 class process_visu:
     def appvisu(self):
-
         app = QApplication(sys.argv)
 
         window = MainWindow()
+        window.ui.add_rz1([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
         window.show()
+        for i in range(1,10000):
+            window.ui.chn_mode ( [i, 12, 13, 14, 15, 16, 71, 81, 91, 101] )
+
         sys.exit(app.exec())
 
 
@@ -95,8 +99,6 @@ if __name__ == '__main__':
 
     # dp2 = p_mb(2,9600).exchang()
 
-
-    # temp = p_mb.exchang()
     q = Queue()
     th2 = Process(target=p_mb.exchang, args=(), daemon=True)
     th2.start()

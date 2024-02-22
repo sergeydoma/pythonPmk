@@ -8,11 +8,9 @@ from src.edit_dialog import Ui_MainWindow
 from exchange import dat
 from exchange import mMod
 
-class visu_ui(Ui_MainWindow):
-    
-    
 
-    
+class visu_ui(Ui_MainWindow):
+
     def writeTabl(self):
             # tblitems.setItem(2,2, "Ура!")
 
@@ -33,7 +31,13 @@ class visu_ui(Ui_MainWindow):
             self.label_info.setText('Выберите номер устройства на шине Modbus RTU \n и нажмите кнопку "Подключить"')
 
             self.lineEdit_1.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+    def chn_mode(self, modeCH):
+        for i in range(0, 10):
+            self.tblitems_1.setItem(1, i, QTableWidgetItem(str(modeCH[i])))
 
+    def add_rz1(self, rz1):
+        for i in range(0, 10):
+            self.tblitems_1.setItem(21, i, QTableWidgetItem(str(rz1[i])))
 
             # self.Button_con.clicked.connect(defAddMb)
 
