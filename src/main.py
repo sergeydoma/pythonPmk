@@ -15,19 +15,9 @@ from exchange import data_exchange
 
 from src.visuPmk import visu_ui
 
-white = 'QPushButton{font-size: 24pt; font-weight: bold; color: #000000; background-color: #FFFFFF}'
-yellow = 'QPushButton{font-size: 24pt; font-weight: bold; color: #3E0BC1; background-color: #E8FC03}'        #;  border: #000000
-green = 'QPushButton{font-size: 24pt; font-weight: bold; color: #19305D; background-color: #35A941}'
-root = 'QPushButton{font-size: 24pt; font-weight: bold; color: #FFFFFF; background-color: #FF0000}'            ##E6643D
 
-setColor = [white, white, white,white,white,white,white,white,white,white,white,white,white,white,white,
-            white,white,white,white,white]
 
-setColor[0] = yellow
-setColor[1] = green
-setColor[2] = root
 
-datE = data_exchange()
 
 class TodoModel(QtCore.QAbstractListModel):
     def __init__(self, *args, todos=None, **kwargs):
