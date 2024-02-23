@@ -46,16 +46,17 @@ class visu_ui(Ui_MainWindow):
 
         self.lineEdit_1.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 
-
         tCombo1 = int(self.comboBox_1.currentText(), 16)
         tCombo2 = int(self.comboBox_2.currentText(), 16)
         intCombo = tCombo1 * 16 + tCombo2
         dat.set_id_serial(intCombo)
         print(dat.get_id_serial())
 
-        mMod.con
+        # mMod.con
 
-        addMb = self.lineEdit_1.text()
+        # addMb = self.lineEdit_1.text()
+        return intCombo
+
         # except:
         #     mess1 = "Ошибка формата вводимого номера устройства!\n(Допустимо - 00...FD)"
         #     dat.set_message(mess1)

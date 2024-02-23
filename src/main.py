@@ -3,6 +3,8 @@
 import sys
 import time
 
+from PySide6 import QtCore, QtGui, QtWidgets, uic
+from PySide6.QtCore import Qt
 from PySide6.QtGui import QPalette, QColor
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QLineEdit
 from multiprocessing import Process
@@ -27,44 +29,41 @@ setColor[2] = root
 
 datE = data_exchange()
 
+class TodoModel(QtCore.QAbstractListModel):
+    def __init__(self, *args, todos=None, **kwargs):
+        super(TodoModel, self).__init__(*args, **kwargs)
+        self.todos = todos or []
+
+    def data(self, index, role):
+        if role == Qt.DisplayRole:
+            # See below for the data structure.
+            status, text = self.todos[index.row()]
+            # Return the todo text only.
+            return text
+
+    def rowCount(self, index):
+        return len(self.todos)
+
+todos = [(False, 'an item'), (False, 'another item')]
+model = TodoModel(todos)
 
 
-def print_hi(name):
 
-    # Use a breakpoint in the code line below to debug your script.
-    # endregion
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-class lay:
-    def __init__ (self, delta_alarm, delta_warning, name):
-        self.delta_alarm = delta_alarm
-        self.delta_warning = delta_warning
-        self.name = name
-
-    def layout(self):
-        self.lineEdit_1 = QLineEdit('Диапазон Rz1 =')
 
 
 
 # region classes
-class Color(QWidget):
-    def __init__(self, color):
-        super(Color, self).__init__()
-        self.setAutoFillBackground(True)
-
-        palette = self.palette()
-        palette.setColor(QPalette.Window, QColor(color))
-        self.setPalette(palette)
+qt_creator_file = "mainwindow.ui"
+Ui_MainWindow, QtBaseClass = uic.loadUiType(qt_creator_file)
 
 
-class MainWindow(QMainWindow):
+class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.ui = visu_ui()
         self.ui.setupUi(self)
         self.ui.writeTabl()
-
+        self.ui.defAddMb()
         self.show()
         # self.ui.add_rz1()
 
@@ -83,7 +82,7 @@ class process_visu:
         sys.exit(app.exec())
 
 
-visu = process_visu()
+# visu = process_visu()
 
 # endregion
 
@@ -129,7 +128,21 @@ if __name__ == '__main__':
 # appvisu()
 # proc = Process(target=ex())
 # proc.start()
+def print_hi(name):
 
+    # Use a breakpoint in the code line below to debug your script.
+    # endregion
+    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+
+
+class lay:
+    def __init__ (self, delta_alarm, delta_warning, name):
+        self.delta_alarm = delta_alarm
+        self.delta_warning = delta_warning
+        self.name = name
+
+    def layout(self):
+        self.lineEdit_1 = QLineEdit('Диапазон Rz1 =')
 
 # th.start()
 
@@ -149,5 +162,12 @@ if __name__ == '__main__':
 #     # res2 = client.read_holding_registers(10, count=10, unit=0x02).registers
 
 
+class Color(QWidget):
+    def __init__(self, color):
+        super(Color, self).__init__()
+        self.setAutoFillBackground(True)
 
+        palette = self.palette()
+        palette.setColor(QPalette.Window, QColor(color))
+        self.setPalette(palette)
 
