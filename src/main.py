@@ -9,6 +9,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QPalette, QColor
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QLineEdit, QTableView
 from visuPmk import Visu_ui
+import pandas as pd
 
 
 
@@ -19,22 +20,28 @@ class TableModel(QtCore.QAbstractTableModel):
 
     def data(self, index, role):
         if role == Qt.DisplayRole:
-
-            return self._data[index.row()][index.column()]
+            value = self._data.iloc[index.row (), index.column ()]
+            return str(value)
 
     def rowCount(self, index):
-        return len(self._data)
+        return self._data.shape[0]
 
     def columnCount(self, index):
+        return self._data.shape[1]
 
-        return len(self._data[0])
-# todos = [(False, 'an item'), (False, 'another item')]
-# model = TodoModel(todos)
+    def headerData(self, section, orientation, role):
+        # section is the index of the column/row.
+        if role == Qt.DisplayRole:
+            if orientation == Qt.Horizontal:
+                return str(self._data.columns[section])
+            if orientation == Qt.Vertical:
+                return str(self._data.index[section])
 
 
 class MainWindow(QtWidgets.QMainWindow, Visu_ui):
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
+        Visu_ui.__init__(self)
         self.setupUi(self)
         self.writeTabl()
         # self.table = self.tableView()
@@ -42,17 +49,50 @@ class MainWindow(QtWidgets.QMainWindow, Visu_ui):
         # self.tab_4
         self.tableView_Arhive
 
-        data = [
+
+        data = pd.DataFrame([
             [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        ]
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+
+
+        ], columns = ['Калал 1', 'Калал 2', 'Калал 3', 'Калал 4', 'Калал 5',
+                      'Калал 6', 'Калал 7', 'Калал 8', 'Калал 9', 'Калал 10'],
+            index = ['Режим работы:', 'Режим работы канала', 'Допустимые диапазоны:', 'Диапазон сопр. изоляции авар.',
+                     'Диапазон сопр. шлейфа авар.', 'Диапазон сопр. изоляции предупр.', 'Диапазон сопр. шлейфа предупр.',
+                     'Уставки:', 'Уставка напряжения на входе', 'Уставка сопр. изоляции 1', 'Уставка сопр. изоляции 2',
+                     'Уставка сопр. шлейфа', 'Текущие значения:', 'Сопр. изоляции 1', 'Сопр. изоляции 1',
+                     'Сопр. шлейфа', 'Напряжение на входе 1', 'Напряжение на входе 2',
+                     'Расчетное знач. объем. наряжение', 'Авария - "А", предупрежд. - "П"', 'Сопр. изоляции 1 ниже доп.',
+                     'Сопр. изоляции 2 ниже доп.', 'Сопр. шлейфа ниже доп.', 'Сопр. шлейфа выше доп.',
+                     'Напряжение на входе 1 выше доп.', 'Напряжение на входе 2 выше доп.'])
 
         self.model = TableModel(data)
         self.tableView_Arhive.setModel(self.model)
-
+        # self.setCentralWidget(self.tableView_Arhive)
 
 
         # self.ui.writeTabl()
