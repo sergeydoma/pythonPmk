@@ -46,7 +46,7 @@ background-color: rgb(234, 232, 220);
 color: rgb(0, 0, 0);</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <property name="documentMode">
      <bool>false</bool>
@@ -1779,6 +1779,29 @@ color: rgb(0, 0, 0);</string>
      <attribute name="title">
       <string>Архив</string>
      </attribute>
+     <widget class="QTableView" name="tableView_Arhive">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>241</y>
+        <width>1391</width>
+        <height>511</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 170, 0);
+background-color: rgb(85, 255, 127);</string>
+      </property>
+      <property name="lineWidth">
+       <number>3</number>
+      </property>
+      <property name="midLineWidth">
+       <number>2</number>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

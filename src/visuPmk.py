@@ -9,7 +9,7 @@ from exchange import dat
 from exchange import mMod
 
 
-class visu_ui(Ui_MainWindow):
+class Visu_ui(Ui_MainWindow):
 
     def writeTabl(self):
             # tblitems.setItem(2,2, "Ура!")

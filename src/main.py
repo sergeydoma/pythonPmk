@@ -3,74 +3,65 @@
 import sys
 import time
 
-from PySide6 import QtCore, QtGui, QtWidgets, uic
+from PySide6 import QtCore, QtGui, QtWidgets
 from PySide6.QtCore import Qt
+
 from PySide6.QtGui import QPalette, QColor
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QLineEdit
-from multiprocessing import Process
-from queue import Queue
-from exchange import process_mb as p_mb
-
-from exchange import data_exchange
-
-from src.visuPmk import visu_ui
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QLineEdit, QTableView
+from visuPmk import Visu_ui
 
 
 
-
-
-class TodoModel(QtCore.QAbstractListModel):
-    def __init__(self, *args, todos=None, **kwargs):
-        super(TodoModel, self).__init__(*args, **kwargs)
-        self.todos = todos or []
+class TableModel(QtCore.QAbstractTableModel):
+    def __init__(self, data):
+        super(TableModel, self).__init__()
+        self._data = data
 
     def data(self, index, role):
         if role == Qt.DisplayRole:
-            # See below for the data structure.
-            status, text = self.todos[index.row()]
-            # Return the todo text only.
-            return text
+
+            return self._data[index.row()][index.column()]
 
     def rowCount(self, index):
-        return len(self.todos)
+        return len(self._data)
 
-todos = [(False, 'an item'), (False, 'another item')]
-model = TodoModel(todos)
+    def columnCount(self, index):
 
-
-
-
-
-
-# region classes
-qt_creator_file = "mainwindow.ui"
-Ui_MainWindow, QtBaseClass = uic.loadUiType(qt_creator_file)
+        return len(self._data[0])
+# todos = [(False, 'an item'), (False, 'another item')]
+# model = TodoModel(todos)
 
 
-class MainWindow(QMainWindow, Ui_MainWindow):
+class MainWindow(QtWidgets.QMainWindow, Visu_ui):
     def __init__(self):
-        super().__init__()
-        self.ui = visu_ui()
-        self.ui.setupUi(self)
-        self.ui.writeTabl()
-        self.ui.defAddMb()
-        self.show()
+        QtWidgets.QMainWindow.__init__(self)
+        self.setupUi(self)
+        self.writeTabl()
+        # self.table = self.tableView()
+        # self.tableView_Arhive
+        # self.tab_4
+        self.tableView_Arhive
+
+        data = [
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        ]
+
+        self.model = TableModel(data)
+        self.tableView_Arhive.setModel(self.model)
+
+
+
+        # self.ui.writeTabl()
+        # self.ui.defAddMb()
+        # self.show()
         # self.ui.add_rz1()
 
 
-class process_visu:
-    def appvisu(self):
-        app = QApplication(sys.argv)
-
-        window = MainWindow()
-        window.ui.add_rz1([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-
-        window.show()
-        # for i in range(1,10000):
-        #     window.ui.chn_mode([i, 12, 13, 14, 15, 16, 71, 81, 91, 101] )
-
-        sys.exit(app.exec())
-
+#
 
 # visu = process_visu()
 
@@ -80,10 +71,11 @@ class process_visu:
 
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    mw = MainWindow()
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    app.exec()
 
-    sys.exit(app.exec())
 
 
 
@@ -118,11 +110,11 @@ if __name__ == '__main__':
 # appvisu()
 # proc = Process(target=ex())
 # proc.start()
-def print_hi(name):
-
-    # Use a breakpoint in the code line below to debug your script.
-    # endregion
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# def print_hi(name):
+#
+#     # Use a breakpoint in the code line below to debug your script.
+#     # endregion
+#     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
 
 class lay:
@@ -161,3 +153,15 @@ class Color(QWidget):
         palette.setColor(QPalette.Window, QColor(color))
         self.setPalette(palette)
 
+# class process_visu:
+#     def appvisu(self):
+#         app = QApplication(sys.argv)
+#
+#         window = MainWindow()
+#         window.ui.add_rz1([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+        # window.show()
+        # # for i in range(1,10000):
+        # #     window.ui.chn_mode([i, 12, 13, 14, 15, 16, 71, 81, 91, 101] )
+        #
+        # sys.exit(app.exec())
