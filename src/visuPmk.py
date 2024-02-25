@@ -14,8 +14,8 @@ class Visu_ui(Ui_MainWindow):
     def writeTabl(self):
             # tblitems.setItem(2,2, "Ура!")
 
-            self.lineEdit_1.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter) # начальная надпись
-            addMb = self.lineEdit_1.text()
+            # self.lineEdit_1.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter) # начальная надпись
+            # addMb = self.lineEdit_1.text()
             self.tblitems_2.setItem(1, 1, QTableWidgetItem("Ура!!!!!", ))
             self.tblitems_1.setItem(22, 0, QTableWidgetItem("П"))
             self.tblitems_1.item(22, 0).setBackground(QtGui.QColor(255, 255, 0))  # желтый
@@ -30,7 +30,7 @@ class Visu_ui(Ui_MainWindow):
             self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
             self.label_info.setText('Выберите номер устройства на шине Modbus RTU \n и нажмите кнопку "Подключить"')
 
-            self.lineEdit_1.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+            # self.lineEdit_1.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
     def chn_mode(self, modeCH):
         for i in range(0, 10):
             self.tblitems_1.setItem(1, i, QTableWidgetItem(str(modeCH[i])))
@@ -44,7 +44,7 @@ class Visu_ui(Ui_MainWindow):
     # def one_click(self):
     def defAddMb(self):
 
-        self.lineEdit_1.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+        # self.lineEdit_1.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 
         tCombo1 = int(self.comboBox_1.currentText(), 16)
         tCombo2 = int(self.comboBox_2.currentText(), 16)
