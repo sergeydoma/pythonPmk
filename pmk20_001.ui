@@ -1783,9 +1783,9 @@ color: rgb(0, 0, 0);</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>241</y>
+        <y>91</y>
         <width>1391</width>
-        <height>511</height>
+        <height>661</height>
        </rect>
       </property>
       <property name="styleSheet">
