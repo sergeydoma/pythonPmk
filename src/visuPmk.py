@@ -1,14 +1,14 @@
 import binascii
 
 from PySide6 import QtGui
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QRunnable, QThreadPool
 from PySide6.QtWidgets import QTableWidgetItem
 
 from src.edit_dialog import Ui_MainWindow
 from exchange import dat
 from exchange import mMod
-
-
+# from main import wo
+import time
 class Visu_ui(Ui_MainWindow):
 
     def writeTabl(self):
@@ -16,6 +16,9 @@ class Visu_ui(Ui_MainWindow):
 
             # self.lineEdit_1.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter) # начальная надпись
             # addMb = self.lineEdit_1.text()
+            self.threadpool = QThreadPool()
+
+            print ( "Multithreading with maximum %d threads" % self.threadpool.maxThreadCount () )
             self.tblitems_2.setItem(1, 1, QTableWidgetItem("Ура!!!!!", ))
             self.tblitems_1.setItem(22, 0, QTableWidgetItem("П"))
             self.tblitems_1.item(22, 0).setBackground(QtGui.QColor(255, 255, 0))  # желтый
@@ -50,8 +53,9 @@ class Visu_ui(Ui_MainWindow):
         tCombo2 = int(self.comboBox_2.currentText(), 16)
         intCombo = tCombo1 * 16 + tCombo2
         dat.set_id_serial(intCombo)
-        print(dat.get_id_serial())
-
+        print('ВВеден номер = ',dat.get_id_serial())
+        worker = Worker ()
+        self.threadpool.start ( worker )
         # mMod.con
 
         # addMb = self.lineEdit_1.text()
@@ -70,6 +74,21 @@ class Visu_ui(Ui_MainWindow):
    
     # def readTabl(selfs):
         # self.Button_con.c
-    
-            
-    
+
+
+class Worker ( QRunnable ):
+    """
+    Worker thread
+    """
+
+
+    # @pyqtSlot()
+    def run(self):
+        '''
+        Your code goes in this function
+        '''
+        # while (1):
+        #     print("Thread start")
+        #     time.sleep ( 5 )
+        #     print ("Thread complete")
+

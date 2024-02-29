@@ -9,227 +9,317 @@ class data_exchange:
     data_exchange:
     """
 
-    def __init__(self):
-        self.__alarm_riz1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__warning_riz1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__alarm_riz2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__warnig_riz2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__alarm_loop = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__warning_loop = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__alarmU = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __alarm_riz1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __warning_riz1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __alarm_riz2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __warnig_riz2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __alarm_loop = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __warning_loop = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __alarmU = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-        self.__delta_Alarm = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__delta_Warning = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__point_rz1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__point_rz2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__point_loop = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__point_u = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__mode_chanel = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__rz1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__rz2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__rloop = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__u1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__u2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__mode_device = 0
-        self.__id_serial = [0]
-        self.__message = ''
+    __delta_Alarm = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __delta_Warning = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __point_rz1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __point_rz2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __point_loop = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __point_u = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __mode_chanel = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __rz1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __rz2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __rloop = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __u1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __u2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    __mode_device = 0
+    __id_serial = [0]
+    __message = ''
+    # def __init__(cls):
+        # cls.__alarm_riz1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__warning_riz1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__alarm_riz2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__warnig_riz2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__alarm_loop = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__warning_loop = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__alarmU = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        #
+        # self.__delta_Alarm = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__delta_Warning = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__point_rz1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__point_rz2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__point_loop = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__point_u = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__mode_chanel = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__rz1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__rz2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__rloop = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__u1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__u2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # self.__mode_device = 0
+        # self.__id_serial = [0]
+        # self.__message = ''
 
         #Выберите номер устройства на шине Modbus RTU \n и нажмите кнопку "Подключить"
     """
     Сопротивление изоляции 1 выше заданного аварийного значения boolArr 20 ... 29
     """
-    # @staticmethod
-    def get_alarm_riz1(self):
-        return self.__alarm_riz1
+    @classmethod
+    def get_alarm_riz1(cls):
+        return cls.__alarm_riz1
 
-    # @staticmethod
-    def set_alarm_riz1(self, ariz1):
-        self.__alarm_riz1 = ariz1
+    @classmethod
+    def set_alarm_riz1(cls, ariz1):
+        cls.__alarm_riz1 = ariz1
     """
     Сопротивление изоляции 1 выше заданного предупредительного значения boolArr 110 ... 119
     """
-    def get_warning_riz1(self):
-        return self.__warning_riz1
 
-    def set_warning_riz1(self, wriz1):
-        self.__warning_riz1 = wriz1
+    @classmethod
+    def get_warning_riz1(cls
+):
+        return cls.__warning_riz1
+
+    @classmethod
+    def set_warning_riz1(cls
+, wriz1):
+        cls.__warning_riz1 = wriz1
     """
     Сопротивление изоляции 2 выше заданного аварийного значения boolArr 30 ... 31
     """
-    def get_alarm_riz2(self):
-        return self.__alarm_riz2
 
-    def set_alarm_riz2(self, ariz2):
-        self.__alarm_riz2 = ariz2
+    @classmethod
+    def get_alarm_riz2(cls):
+        return cls.__alarm_riz2
+
+    @classmethod
+    def set_alarm_riz2(cls
+, ariz2):
+        cls.__alarm_riz2 = ariz2
     """
     Сопротивление изоляции 2 выше заданного предупредительного значения boolArr 120 ... 129
     """
-    def get_warning_riz2(self):
-        return self.__warning_riz2
 
-    def set_warning_riz2(self, wriz2):
-        self.__warning_riz2 = wriz2
+    @classmethod
+    def get_warning_riz2(cls):
+        return cls.__warning_riz2
+
+    @classmethod
+    def set_warning_riz2(cls, wriz2):
+        cls.__warning_riz2 = wriz2
     """
     Сопротивление изоляции шлейфа выше заданного аварийного значения boolArr 140 ... 149
     """
-    def get_alarm_loop(self):
-        return self.__alarm_loop
 
-    def set_alarm_loop(self, aloop):
-        self.__alarm_loop = aloop
+    @classmethod
+    def get_alarm_loop(cls):
+        return cls.__alarm_loop
+
+    @classmethod
+    def set_alarm_loop(cls
+, aloop):
+        cls.__alarm_loop = aloop
     """
     Сопротивление изоляции шлейфа выше заданного аварийного значения boolArr 140 ... 149
     """
-    def get_warning_loop(self):
-        return self.__warning_loop
 
-    def set_warning_loop(self, wloop):
-        self.__warning_loop = wloop
+    @classmethod
+    def get_warning_loop(cls):
+        return cls.__warning_loop
+
+    @classmethod
+    def set_warning_loop(cls, wloop):
+        cls.__warning_loop = wloop
 
     """
     Постоянная состовляющая напряжения в измеряемом кабеле выше допустимого занчения boolArr 100 ... 109
     """
-    def get_alarmU(self):
-        return self.__alarmU
 
-    def set_alarmU(self, aU):
-        self.__alarmU = aU
+    @classmethod
+    def get_alarmU(cls):
+        return cls.__alarmU
+
+    @classmethod
+    def set_alarmU(cls, aU):
+        cls.__alarmU = aU
 
     """
     Допустимое  аварийное отклонение значений сопротивлений wordArr 0 ... 9
     """
-    def get_delta_alarm(self):
-        return self.__delta_Alarm
 
-    def set_delta_alarm(self, adelta):
-        self.__delta_Alarm = adelta
+    @classmethod
+    def get_delta_alarm(cls):
+        return cls.__delta_Alarm
+
+    @classmethod
+    def set_delta_alarm(cls, adelta):
+        cls.__delta_Alarm = adelta
     """
     Допустимое  предупредительное отклонение значений сопротивлений wordArr 250 ... 259
     """
-    def get_delta_warning(self):
-        return self.__delta_Warning
 
-    def set_delta_warning(self, wdelta):
-        self.__delta_Warning = wdelta
+    @classmethod
+    def get_delta_warning(cls):
+        return cls.__delta_Warning
+
+    @classmethod
+    def set_delta_warning(cls, wdelta):
+        cls.__delta_Warning = wdelta
 
     """
     Уставка сопротивления изоляции 1 wordArr 10 ... 19
     """
 
-    def get_point_rz1(self):
-        return self.__point_rz1
+    @classmethod
+    def get_point_rz1(cls):
+        return cls.__point_rz1
 
-    def set_point_rz1(self, prz1):
-        self.__point_rz1 = prz1
+    @classmethod
+    def set_point_rz1(cls, prz1):
+        cls.__point_rz1 = prz1
 
     """
     Уставка сопротивления изоляции 2 wordArr 20 ... 29
     """
-    def get_point_rz2(self):
-        return self.__point_rz2
 
-    def set_point_rz2(self, prz2):
-        self.__point_rz1 = prz2
+    @classmethod
+    def get_point_rz2(cls):
+        return cls.__point_rz2
+
+    @classmethod
+    def set_point_rz2(cls, prz2):
+        cls.__point_rz1 = prz2
 
     """
     Уставка сопротивления шлейфа 30 ... 39
     """
-    def get_point_loop(self):
-        return self.__point_loop
 
-    def set_point_loop(self, ploop):
-        self.__point_loop = ploop
+    @classmethod
+    def get_point_loop(cls):
+        return cls.__point_loop
+
+    @classmethod
+    def set_point_loop(cls, ploop):
+        cls.__point_loop = ploop
 
     """
    Уставка уставки постоянной состовляющей напряжения в измеряемом кабеле  200 ... 209
    """
-    def get_point_u(self):
-        return self.__point_u
 
-    def set_point_u(self, pu):
-        self.__point_u = pu
+    @classmethod
+    def get_point_u(cls):
+        return cls.__point_u
+
+    @classmethod
+    def set_point_u(cls, pu):
+        cls.__point_u = pu
     """
     Режим работы канала 40 ... 49
     """
-    def get_mode_chanel(self):
-        return self.__mode_chanel
 
-    def set_mode_chanel(self, modeC):
-        self.__mode_chanel = modeC
+    @classmethod
+    def get_mode_chanel(cls):
+        return cls.__mode_chanel
+
+    @classmethod
+    def set_mode_chanel(cls, modeC):
+        cls.__mode_chanel = modeC
     """
     Текущие значения сопротивления изоляции 1  50 ... 59
     """
-    def get_rz1(self):
-        return self.__rz1
 
-    def set_rz1(self, rz1):
-        self.__rz1 = rz1
+    @classmethod
+    def get_rz1(cls):
+        return cls.__rz1
+
+    @classmethod
+    def set_rz1(cls, rz1):
+        cls.__rz1 = rz1
 
     """
     Текущие значения сопротивления изоляции 2  60 ... 69
     """
-    def get_rz2(self):
-        return self.__rz2
 
-    def set_rz2(self, rz2):
-        self.__rz2 = rz2
+    @classmethod
+    def get_rz2(cls):
+        return cls.__rz2
+
+    @classmethod
+    def set_rz2(cls, rz2):
+        cls.__rz2 = rz2
     """
     Текущие значения сопротивления шлейфа 70 ... 79
     """
-    def get_rloop(self):
-        return self.__rloop
 
-    def set_rloop(self, rloop):
-        self.__rloop = rloop
+    @classmethod
+    def get_rloop(cls):
+        return cls.__rloop
+
+    @classmethod
+    def set_rloop(cls, rloop):
+        cls.__rloop = rloop
 
     """
     Наряжение утечки 1 190 ... 199
     """
-    def get_u1(self):
-        return self.__u1
 
-    def set_u1(self, u1):
-        self.__u1 = u1
+    @classmethod
+    def get_u1(cls):
+        return cls.__u1
+
+    @classmethod
+
+    def set_u1(cls, u1):
+        cls.__u1 = u1
     """
     Наряжение утечки 2 230 ... 239
     """
-    def get_u2(self):
-        return self.__u2
 
-    def set_u2(self, u2):
-        self.__u2 = u2
+    @classmethod
+    def get_u2(cls):
+        return cls.__u2
+
+    @classmethod
+    def set_u2(cls, u2):
+        cls.__u2 = u2
 
     """
     Режим работы устройтва 144
     """
-    def get_mode_device(self):
-        return self.__mode_device
 
-    def set_mode_device(self, mdevice):
-        self.__mode_device = mdevice
+    @classmethod
+    def get_mode_device(cls):
+        return cls.__mode_device
+
+    @classmethod
+    def set_mode_device(cls, mdevice):
+        cls.__mode_device = mdevice
 
     """
     Адрес устройства на шине modbus
     """
 
-    def get_id_serial(self):
-        return self.__id_serial
+    @classmethod
+    def get_id_serial(cls):
+        return cls.__id_serial
 
-    def set_id_serial(self, id_serial):
-        self.__id_serial = id_serial
+    @classmethod
+    def set_id_serial(cls, id_serial):
+        cls.__id_serial = id_serial
 
     """
     Сообщения на главном экране
     """
-    def get_message(self):
-        return self.__message
 
-    def set_message(self, message):
-        self.__message = message
+    @classmethod
+    def get_message(cls):
+        return cls.__message
+
+    @classmethod
+    def set_message(cls, message):
+        cls.__message = message
 
 
 
 dat = data_exchange()
+
 dat.set_id_serial(1)
 dat.set_mode_device(0xFFFF)
 print("DAT =", dat.get_rz1())
@@ -349,7 +439,7 @@ class myModbus:
 
 class process_mb:
     # def __init__(self, adress, baudrate):
-    @staticmethod
+    # @staticmethod
     def exchang():
 
         while(True):
@@ -369,7 +459,7 @@ class process_mb:
                 print('аварийный диапазон = ', res)
                 res = dat.get_rz1()
                 print('Сопротивление изоляции 1 = ', res)
-            time.sleep(3)
+            time.sleep(1)
 # pmb = process_mb()
 # pmb.exchang()
 """
