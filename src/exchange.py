@@ -318,24 +318,23 @@ class data_exchange:
 
 
 
-dat = data_exchange()
+dataw = data_exchange()
 
-dat.set_id_serial(1)
-dat.set_mode_device(0xFFFF)
-print("DAT =", dat.get_rz1())
-
-
-class myModbus:
-    # def __init__(self, adress):
-    #     self.__adress = adress
+dataw.set_id_serial(1)
+dataw.set_mode_device(0xFFFF)
+print("DAT =", dataw.get_rz1())
 
 
+class myModbus(data_exchange):
+    def __init__(self):
+        data_exchange.__init__(self)
+        self.dat = data_exchange
 
     def get_mode(self):
 
         try:
-            addr = dat.get_id_serial()
-            instrument = minimalmodbus.Instrument('/dev/ttyUSB0', dat.get_id_serial())
+            addr = self.dat.get_id_serial()
+            instrument = minimalmodbus.Instrument('/dev/ttyUSB0', self.dat.get_id_serial())
             instrument.serial.baudrate = 9600
             instrument.serial.timeout = 1.0
             instrument.mode = minimalmodbus.MODE_RTU
@@ -348,19 +347,17 @@ class myModbus:
         else:
             try:
                 modeDev = instrument.read_register(144, 0)
-                dat.set_mode_device(modeDev)
+                self.dat.set_mode_device(modeDev)
 
 
             except IOError:
-                print("нет связи с устройсвом по адресу", dat.get_id_serial())
+                print("нет связи с устройсвом по адресу", self.dat.get_id_serial())
 
     def con(self):
 
-
-
         try:
 
-            instrument = minimalmodbus.Instrument('/dev/ttyUSB0', dat.get_id_serial())
+            instrument = minimalmodbus.Instrument('/dev/ttyUSB0', self.dat.get_id_serial())
 
             instrument.serial.baudrate = 9600
             instrument.serial.timeout = 1.0
@@ -374,99 +371,107 @@ class myModbus:
         else:
             try:
                 alarmRz1 = instrument.read_bits(registeraddress=20, number_of_bits=10)
-                dat.set_alarm_riz1(alarmRz1)
+                self.dat.set_alarm_riz1(alarmRz1)
                 warnRz1 = instrument.read_bits(registeraddress=110, number_of_bits=10)
-                dat.set_warning_riz1(warnRz1)
+                self.dat.set_warning_riz1(warnRz1)
 
                 alarmRz2 = instrument.read_bits(registeraddress=30, number_of_bits=10)
-                dat.set_alarm_riz2(alarmRz2)
+                self.dat.set_alarm_riz2(alarmRz2)
                 warnRz2 = instrument.read_bits(registeraddress=120, number_of_bits=10)
-                dat.set_alarm_riz2(warnRz2)
+                self.dat.set_alarm_riz2(warnRz2)
 
                 alarmLoop = instrument.read_bits(registeraddress=40, number_of_bits=10)
-                dat.set_alarm_loop(alarmLoop)
+                self.dat.set_alarm_loop(alarmLoop)
                 warnLoop = instrument.read_bits(registeraddress=130, number_of_bits=10)
-                dat.set_warning_loop(warnLoop)
+                self.dat.set_warning_loop(warnLoop)
 
                 alarmU = instrument.read_bits(registeraddress=100, number_of_bits=10)
-                dat.set_alarmU(alarmU)
+                self.dat.set_alarmU(alarmU)
                 '''
                 Аналоговые сигналы
                 '''
                 delta_Alarm = instrument.read_registers(registeraddress=0,number_of_registers=10)
-                dat.set_delta_alarm(delta_Alarm)
+                self.dat.set_delta_alarm(delta_Alarm)
 
                 delta_Warning = instrument.read_registers(registeraddress=250, number_of_registers=10)
-                dat.set_delta_warning(delta_Warning)
+                self.dat.set_delta_warning(delta_Warning)
 
                 point_rz1 = instrument.read_registers(registeraddress=10, number_of_registers=10)
-                dat.set_point_rz1(point_rz1)
+                self.dat.set_point_rz1(point_rz1)
 
                 point_rz2 = instrument.read_registers(registeraddress=20, number_of_registers=10)
-                dat.set_point_rz2(point_rz2)
+                self.dat.set_point_rz2(point_rz2)
 
                 point_loop = instrument.read_registers(registeraddress=30, number_of_registers=10)
-                dat.set_point_loop(point_loop)
+                self.dat.set_point_loop(point_loop)
 
                 point_u = instrument.read_registers(registeraddress=200, number_of_registers=10)
-                dat.set_point_u(point_u)
+                self.dat.set_point_u(point_u)
 
                 mode_chanal = instrument.read_registers(registeraddress=40, number_of_registers=10)
-                dat.set_mode_chanel(mode_chanal)
+                self.dat.set_mode_chanel(mode_chanal)
 
                 rz1 = instrument.read_registers(registeraddress=50, number_of_registers=10)
-                dat.set_rz1(rz1)
+                self.dat.set_rz1(rz1)
 
                 rz2 = instrument.read_registers(registeraddress=60, number_of_registers=10)
-                dat.set_rz2(rz2)
+                self.dat.set_rz2(rz2)
 
                 rloop = instrument.read_registers(registeraddress=70, number_of_registers=10)
-                dat.set_rloop(rloop)
+                self.dat.set_rloop(rloop)
 
                 u1 = instrument.read_registers(registeraddress=190, number_of_registers=10)
-                dat.set_u1(u1)
+                self.dat.set_u1(u1)
 
                 u2 = instrument.read_registers(registeraddress=230, number_of_registers=10)
-                dat.set_u2(u2)
+                self.dat.set_u2(u2)
 
 
-                # instrument.serial.close()
+                    # instrument.serial.close()
 
             except IOError:
                 print("нет связи с устройсвом по адресу", dat.get_id_serial())
                 # instrument.serial.close()
                 time.sleep(5)
 
-class process_mb:
-    # def __init__(self, adress, baudrate):
-    # @staticmethod
-    def exchang():
 
-        while(True):
-        # for i in range(1, 2):
+class process_mb(myModbus):
 
-            m_m = myModbus()
-            m_m.get_mode()
-            res = dat.get_mode_device()
-            print('выход блока =', res)
+    def __init__(self):
+        myModbus.__init__(self)
+        self.dat = data_exchange()
+        self.m_m = myModbus()
 
-            if (dat.get_mode_device() != 0xF00F):
 
-                m_m.con()
-                res = dat.get_alarm_riz1()
-                print('авария сопр. изляции 1 =', res)
-                res = dat.get_delta_alarm()
-                print('аварийный диапазон = ', res)
-                res = dat.get_rz1()
-                print('Сопротивление изоляции 1 = ', res)
-            time.sleep(1)
+
+    # @classmethod
+
+    # def exchang(self):
+    #
+    #     while(True):
+    #     # for i in range(1, 2):
+    #         self.m_m.get_mode()
+    #         res = self.dat.get_mode_device()
+    #         print('выход блока =', res)
+    #
+    #         if (self.dat.get_mode_device() != 0xF00F):
+    #
+    #             self.m_m.con()
+    #
+    #             res = self.dat.get_alarm_riz1()
+    #             print('авария сопр. изляции 1 =', res)
+    #             res = self.dat.get_delta_alarm()
+    #             print('аварийный диапазон = ', res)
+    #             res = self.dat.get_rz1()
+    #             print('Сопротивление изоляции 1 = ', res)
+    #         time.sleep(1)
 # pmb = process_mb()
 # pmb.exchang()
 """
 Работа с базой данных
 """
 import datetime
-w = dat.get_rz1()
+w = dataw.get_rz1()
 
 
 class database:

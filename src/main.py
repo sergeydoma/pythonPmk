@@ -13,7 +13,12 @@ from visuPmk import Visu_ui
 import pandas as pd
 from multiprocessing import Process
 from exchange import process_mb as p_mb
+
+from exchange import myModbus, data_exchange
 from queue import Queue
+
+
+
 class Worker(QRunnable):
     '''
     Worker thread
@@ -29,7 +34,7 @@ class TableModel(QtCore.QAbstractTableModel):
 
     def data(self, index, role):
         if role == Qt.DisplayRole:
-            value = self._data.iloc[index.row (), index.column ()]
+            value = self._data.iloc[index.row(), index.column ()]
             return str(value)
 
     def rowCount(self, index):
@@ -89,6 +94,7 @@ class MainWindow(QtWidgets.QMainWindow, Visu_ui):
         QtWidgets.QMainWindow.__init__(self)
         Visu_ui.__init__(self)
         self.setupUi(self)
+
         self.writeTabl()
         self.threadpool = QThreadPool ()
         print ( "Multithreading with maximum %d threads" % self.threadpool.maxThreadCount () )
@@ -171,7 +177,26 @@ def appvisu():
     # window.model.data([1][1], 1 )
     app.exec()
 
+def exchang():
+    m_m = myModbus()
+    dat = data_exchange()
+    while(True):
+    # for i in range(1, 2):
+        m_m.get_mode()
+        res = dat.get_mode_device()
+        print('выход блока =', res)
 
+        if (dat.get_mode_device() != 0xF00F):
+
+            m_m.con()
+
+            res = dat.get_alarm_riz1()
+            print('авария сопр. изляции 1 =', res)
+            res = dat.get_delta_alarm()
+            print('аварийный диапазон = ', res)
+            res = dat.get_rz1()
+            print('Сопротивление изоляции 1 = ', res)
+        time.sleep(1)
 
     # appvisu()
     # th = Thread(target=exchang())
@@ -193,7 +218,7 @@ if __name__ == '__main__':
     th1.start()
 
 
-    th2 = Process(target=p_mb.exchang, args=(), daemon=True)
+    th2 = Process(target=exchang, args=(), daemon=True)
     th2.start()
 
 
