@@ -12,6 +12,7 @@ from PySide6.QtWidgets import QTableView, QMainWindow, QApplication, QTableWidge
 from numpy import frombuffer
 from numpy import double
 from edit_dialog import Ui_MainWindow
+from myModbus import myModbus
 
 
 # region Absract Model
@@ -149,16 +150,27 @@ def task(array):
 	dataP3 = dataSumm[2]
 	dataP4 = dataSumm[3]
 	# check the contents
-	print ( f'Child\n{dataP2}' )
+	print ( f'Child\n{dataP2}')
+
+	mB = myModbus()
 	# increment the data
 	while (True):
-		dataP1[:] += 1
-		dataP1[1][1] = str ( 300 )
-		dataP2[:] += 20
+		# dataP1[:] += 1
+		# dataP1[1][1] = str ( 300 )
+		# dataP2[:] += 20
 		# confirm change
 		print ( f'Child\n{dataP4}' )
 		time.sleep ( 1 )
 		print ( 'P4 00 = ', dataP4[0][0] )
+		mB.setDataP4(dataP1)
+		mB.setDataP4(dataP2)
+		mB.setDataP4(dataP3)
+		mB.setDataP4(dataP4)
+		mB.con()
+		mB.getDataP1()
+		mB.getDataP2()
+		mB.getDataP3()
+		mB.getDataP4()
 
 
 # endregion
@@ -175,8 +187,8 @@ def visu(array):
 	dataP3 = dataSumm[2]
 	dataP4 = dataSumm[3]
 
-	dataP1[1][2] = 25
-	dataP2[1][2] = 500 + 1
+	# dataP1[1][2] = 25
+	# dataP2[1][2] = 500 + 1
 	app = QApplication ( sys.argv )
 	window = MainWindow ()
 	window.show ()
