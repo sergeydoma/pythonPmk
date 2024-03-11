@@ -1,3 +1,5 @@
+import ctypes
+
 import minimalmodbus
 
 
@@ -7,8 +9,10 @@ class myModbus():
 		self._dataP2 = None
 		self._dataP3 = None
 		self._dataP4 = None
+
 	def setDataP1(self, dataP1):
 		self._dataP1 = dataP1
+
 	def getDataP1(self):
 		return self._dataP1
 
@@ -89,10 +93,9 @@ class myModbus():
 			#
 			# 	mode_chanal = instrument.read_registers(registeraddress=40, number_of_registers=10)
 			# 	self.dat.set_mode_chanel(mode_chanal)
-				for i in range (10):
-					Rz1 = instrument.read_registers(registeraddress=(50+i), number_of_registers=1)
-					self._dataP1[2][i] = Rz1
-			#
+			# 	for i in range (10):
+
+				# arr = (ctypes.c_int *len(Rz1)) (*Rz1)
 			# 	rz2 = instrument.read_registers(registeraddress=60, number_of_registers=10)
 			# 	self.dat.set_rz2(rz2)
 			#
@@ -114,7 +117,18 @@ class myModbus():
 			# 	time.sleep(5)
 				instrument.close_port_after_each_call = True
 			else:
+				Rz1 = instrument.read_registers (registeraddress = 50, number_of_registers = 10)
+				print ("DATA Line", self._dataP4[5][2])
+				print ('QWERT=', Rz1[0])
+				self._dataP1[5][1] = 222
+				for i in range (10):
+					self._dataP1[13][i] = (Rz1[i]*16)/100
+				a = Rz1[0]
+				self._dataP1[6][1] = a
+				print ("AAAAA = ", a)
+				print ("The type of a", type (Rz1))
+				print ("The type of B", type (self._dataP1))
 				print ("Подключение по Modbus RTU выполнено")
-				print ('RZ1 = ', alarmRz1)
+				print ('RZ1 = ', Rz1)
 				instrument.close_port_after_each_call = True
 

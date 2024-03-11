@@ -1,4 +1,5 @@
 # share 2d numpy array via a shared array
+import ctypes
 import sys
 import time
 from multiprocessing import Process
@@ -162,9 +163,9 @@ def task(array):
 		print ( f'Child\n{dataP4}' )
 		time.sleep ( 1 )
 		print ( 'P4 00 = ', dataP4[0][0] )
-		mB.setDataP4(dataP1)
-		mB.setDataP4(dataP2)
-		mB.setDataP4(dataP3)
+		mB.setDataP1(dataP1)
+		mB.setDataP2(dataP2)
+		mB.setDataP3(dataP3)
 		mB.setDataP4(dataP4)
 		mB.con()
 		mB.getDataP1()
@@ -203,7 +204,7 @@ if 1 == 1:
 	# define the size of the numpy array
 	n = 26 * 40
 	# create the shared array
-	array = RawArray ( 'd', n )
+	array = RawArray('d', n )
 	# create a new numpy array backed by the raw array
 
 	dataAll = frombuffer ( array, dtype=double, count=len ( array ) )
@@ -218,7 +219,7 @@ if 1 == 1:
 	dataP3 = dataSumm[2]
 	dataP4 = dataSumm[3]
 
-	dataP1 = pd.DataFrame ( dataP1,
+	dataP1 = pd.DataFrame(dataP1,
 							columns=['Калал 1', 'Калал 2', 'Калал 3', 'Калал 4', 'Калал 5',
 									 'Калал 6', 'Калал 7', 'Калал 8', 'Калал 9', 'Калал 10'],
 							index=['Режим работы:', 'Режим работы канала', 'Допустимые диапазоны:',
