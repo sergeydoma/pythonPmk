@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QAbstractTableModel, Qt, QTimer
-from PySide6.QtWidgets import QTableView, QMainWindow, QApplication
+from PySide6.QtWidgets import QTableView, QMainWindow, QApplication, QTableWidgetItem
 from numpy import frombuffer
 from numpy import double
 from edit_dialog import Ui_MainWindow
@@ -102,7 +102,8 @@ class MainWindow ( QMainWindow, Ui_MainWindow ):
 		# self.setCentralWidget(self.table)
 		self.model1.dataChanged.emit ( QtCore.QModelIndex (), QtCore.QModelIndex () )
 		self.model2.dataChanged.emit ( QtCore.QModelIndex (), QtCore.QModelIndex () )
-
+		self.tableWidget.setItem (1, 1, QTableWidgetItem (str (dataP4[0][0])))
+		# self.tableWidget.setItem (1, 1, QTableWidgetItem ("УКККФ"))		#(dataP4[0][0]))
 	# self.table.close()
 	# self.table.show()
 	# self.endResetModel()
@@ -116,9 +117,13 @@ class MainWindow ( QMainWindow, Ui_MainWindow ):
 		tCombo2 = int ( self.comboBox_2.currentText (), 16 )
 		intCombo = tCombo1 * 16 + tCombo2
 		# dat.set_id_serial (intCombo)
-		print ( 'ВВеден номер = ', intCombo )
+		print('ВВеден номер = ', intCombo )
 		dataP4[0][0] = intCombo
-		self.label_info.setText ( str ( hex ( intCombo ) ) )
+		self.label_info.setText(str(hex(intCombo)))
+		# self.tblitems_2.setItem (1, 1, QTableWidgetItem ("Ура!!!!!", ))
+
+
+
 
 
 # endregion
@@ -151,7 +156,7 @@ def task(array):
 		dataP1[1][1] = str ( 300 )
 		dataP2[:] += 20
 		# confirm change
-		print ( f'Child\n{data}' )
+		print ( f'Child\n{dataP4}' )
 		time.sleep ( 1 )
 		print ( 'P4 00 = ', dataP4[0][0] )
 

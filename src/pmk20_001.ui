@@ -46,7 +46,7 @@ background-color: rgb(234, 232, 220);
 color: rgb(0, 0, 0);</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="documentMode">
      <bool>false</bool>
@@ -144,6 +144,16 @@ color: rgb(0, 0, 0);</string>
         <string>Значение</string>
        </property>
       </column>
+      <item row="0" column="0">
+       <property name="text">
+        <string>AA22</string>
+       </property>
+      </item>
+      <item row="1" column="0">
+       <property name="text">
+        <string/>
+       </property>
+      </item>
      </widget>
      <widget class="QLabel" name="label_info">
       <property name="geometry">

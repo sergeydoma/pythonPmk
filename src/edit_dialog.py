@@ -72,6 +72,10 @@ class Ui_MainWindow(object):
         self.tableWidget.setVerticalHeaderItem(8, __qtablewidgetitem9)
         __qtablewidgetitem10 = QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(9, __qtablewidgetitem10)
+        __qtablewidgetitem11 = QTableWidgetItem()
+        self.tableWidget.setItem(0, 0, __qtablewidgetitem11)
+        __qtablewidgetitem12 = QTableWidgetItem()
+        self.tableWidget.setItem(1, 0, __qtablewidgetitem12)
         self.tableWidget.setObjectName(u"tableWidget")
         self.tableWidget.setGeometry(QRect(870, 10, 521, 331))
         font1 = QFont()
@@ -184,7 +188,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -217,6 +221,13 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"\u0410\u0432\u0430\u0440\u0438\u044f +100 \u0412", None));
         ___qtablewidgetitem10 = self.tableWidget.verticalHeaderItem(9)
         ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"\u0410\u0432\u0430\u0440\u0438\u044f -100 \u0412", None));
+
+        __sortingEnabled = self.tableWidget.isSortingEnabled()
+        self.tableWidget.setSortingEnabled(False)
+        ___qtablewidgetitem11 = self.tableWidget.item(0, 0)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"AA22", None));
+        self.tableWidget.setSortingEnabled(__sortingEnabled)
+
         self.label_info.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><br/></p></body></html>", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u041d\u043e\u043c\u0435\u0440 \u0443\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432\u0430 \u043d\u0430 \u0448\u0438\u043d\u0435 Modbus", None))
         self.comboBox_1.setItemText(0, QCoreApplication.translate("MainWindow", u"0", None))
