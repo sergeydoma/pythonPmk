@@ -46,7 +46,7 @@ background-color: rgb(234, 232, 220);
 color: rgb(0, 0, 0);</string>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <property name="documentMode">
      <bool>false</bool>

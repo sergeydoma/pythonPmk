@@ -47,7 +47,7 @@ class myModbus():
 			# instrument.close_port_after_each_call = True
 		except IOError:
 			print("Ошибка подключения по RS-485_2")
-			instrument.close_port_after_each_call = True
+			# instrument.close_port_after_each_call = True
 			# instrument.serial.close()
 		else:
 			print("Подключение по RS - 485 выполнено")
@@ -115,7 +115,7 @@ class myModbus():
 				print("нет связи с устройсвом по адресу", str(self._dataP4[0][0]))
 			# 	# instrument.serial.close()
 			# 	time.sleep(5)
-				instrument.close_port_after_each_call = True
+			# 	instrument.close_port_after_each_call = True
 			else:
 				Rz1 = instrument.read_registers (registeraddress = 50, number_of_registers = 10)
 				print ("DATA Line", self._dataP4[5][2])
@@ -125,10 +125,59 @@ class myModbus():
 					self._dataP1[13][i] = (Rz1[i]*16)/100
 				a = Rz1[0]
 				self._dataP1[6][1] = a
+				# self._dataP1[0] = ' '
 				print ("AAAAA = ", a)
 				print ("The type of a", type (Rz1))
 				print ("The type of B", type (self._dataP1))
 				print ("Подключение по Modbus RTU выполнено")
 				print ('RZ1 = ', Rz1)
-				instrument.close_port_after_each_call = True
+				""""
+				режим ПМК
+				"""
+				modePmk = instrument.read_register (registeraddress = 145)
+				self._dataP4[1][1] = modePmk
+				""""
+				Номер версии ПО
+				"""
+				Nversion = instrument.read_registers (registeraddress = 90, number_of_registers = 2)
+				self._dataP4[1][2] = (Nversion[0]*65536 + Nversion[1])
 
+				print('NVERSION = ', self._dataP4[1][2])
+				instrument.close_port_after_each_call = True
+				""""
+				ID шасси
+				"""
+				IDpmk = instrument.read_registers (registeraddress = 110, number_of_registers = 2)
+				self._dataP4[1][3] = (IDpmk[0] * 65536 + IDpmk[1])
+				""""
+				ID платы измерения 1
+				"""
+				IDpi1 = instrument.read_registers (registeraddress = 100, number_of_registers = 6)
+				self._dataP4[1][4] = IDpi1[0]
+				self._dataP4[1][5] = IDpi1[1]
+				self._dataP4[1][6] = IDpi1[2]
+				self._dataP4[1][7] = IDpi1[3]
+				self._dataP4[1][8] = IDpi1[4]
+				self._dataP4[1][9] = IDpi1[5]
+				""""
+				Контрольная сумма ПО md5
+				"""
+				md5 = instrument.read_registers (registeraddress = 120, number_of_registers = 8)
+				self._dataP4[2][0] = md5[0]
+				self._dataP4[2][1] = md5[1]
+				self._dataP4[2][2] = md5[2]
+				self._dataP4[2][3] = md5[3]
+				self._dataP4[2][4] = md5[4]
+				self._dataP4[2][5] = md5[5]
+				self._dataP4[2][6] = md5[6]
+				self._dataP4[2][7] = md5[7]
+				""""
+				Плата 1 режим работы канала
+				"""
+				modeCh = instrument.read_registers (registeraddress = 40, number_of_registers = 10)
+				self._dataP1[0] = modeCh
+				""""
+				Плата 1 Диапазон сопротивления изоляции 
+				"""
+				deltaAV = instrument.read_registers (registeraddress = 0, number_of_registers = 10)
+				self._dataP1[1][0] = deltaAV[0]>>8
