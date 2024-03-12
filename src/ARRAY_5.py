@@ -172,10 +172,41 @@ class MainWindow (QMainWindow, Ui_MainWindow):
 		for i in range(10):
 			modeCh1ch = str(int(dataP1[0][i]))
 			self.tblitems_1.setItem(1, i, QTableWidgetItem (modeCh1ch)) # режим работы канала платы 1
-			self.tblitems_1.item (1, i).setTextAlignment (Qt.AlignVCenter | Qt.AlignHCenter)
+			self.tblitems_1.item(1, i).setTextAlignment (Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range (10):
+			deltaAlarm1ch = str(int(dataP1[1][i]))+' %'
+			self.tblitems_1.setItem(3, i, QTableWidgetItem (deltaAlarm1ch))  # допустимое авар. отклонение сопр. изоляции 1
+			self.tblitems_1.item(3, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range (10):
+			deltaAlarm1ch = str(int(dataP1[2][i]))+' %'
+			self.tblitems_1.setItem(4, i, QTableWidgetItem (deltaAlarm1ch))  # допустимое авар. отклонение сопр. шлеййфа 1
+			self.tblitems_1.item(4, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range (10):
+			deltaWorn1ch = str(int(dataP1[3][i]))+' %'
+			self.tblitems_1.setItem(5, i, QTableWidgetItem (deltaWorn1ch))  # допустимое прдедупр. отклонение сопр. изоляции 1
+			self.tblitems_1.item(5, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range (10):
+			deltaWorn1ch = str(int(dataP1[4][i]))+' %'
+			self.tblitems_1.setItem(6, i, QTableWidgetItem (deltaWorn1ch))  # допустимое предупр. отклонение сопр. шлеййфа 1
+			self.tblitems_1.item(6, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range (10):
+			setUch1 = str(int(dataP1[5][i]))+' В'
+			self.tblitems_1.setItem(8, i, QTableWidgetItem (setUch1))  # допустимое значение напряжения на входе
+			self.tblitems_1.item(8, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range (10):
+			setRZ1 = str(dataP1[6][i])+' MОм'
+			self.tblitems_1.setItem(9, i, QTableWidgetItem (setRZ1))  # уставка сопр. изоляции 1
+			self.tblitems_1.item(9, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range (10):
+			setRZ2 = str (dataP1[7][i]) + ' MОм'
+			self.tblitems_1.setItem (10, i, QTableWidgetItem (setRZ2))  # уставка сопр. изоляции 2
+			self.tblitems_1.item (10, i).setTextAlignment (Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range (10):
+			setRloop = str (dataP1[8][i]) + ' кОм'
+			self.tblitems_1.setItem(11, i, QTableWidgetItem (setRloop))  # уставка сопр. шлеййфа
+			self.tblitems_1.item (11, i).setTextAlignment (Qt.AlignVCenter | Qt.AlignHCenter)
 
-		deltaAlarm1ch = str(int(dataP1[1][0]))
-		self.tblitems_1.setItem (3, 0, QTableWidgetItem (deltaAlarm1ch))  # режим работы канала платы 1
+
 
 	# self.tableWidget.setItem (1, 1, QTableWidgetItem ("УКККФ"))		#(dataP4[0][0]))
 	# self.table.close()

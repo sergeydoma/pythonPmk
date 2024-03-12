@@ -120,11 +120,11 @@ class myModbus():
 				Rz1 = instrument.read_registers (registeraddress = 50, number_of_registers = 10)
 				print ("DATA Line", self._dataP4[5][2])
 				print ('QWERT=', Rz1[0])
-				self._dataP1[5][1] = 222
+
 				for i in range (10):
 					self._dataP1[13][i] = (Rz1[i]*16)/100
 				a = Rz1[0]
-				self._dataP1[6][1] = a
+
 				# self._dataP1[0] = ' '
 				print ("AAAAA = ", a)
 				print ("The type of a", type (Rz1))
@@ -177,7 +177,47 @@ class myModbus():
 				modeCh = instrument.read_registers (registeraddress = 40, number_of_registers = 10)
 				self._dataP1[0] = modeCh
 				""""
-				Плата 1 Диапазон сопротивления изоляции 
+				Плата 1 Диапазон сопротивления изоляции аварийный
 				"""
 				deltaAV = instrument.read_registers (registeraddress = 0, number_of_registers = 10)
-				self._dataP1[1][0] = deltaAV[0]>>8
+				for i in range(10):
+					self._dataP1[1][i] = deltaAV[i]>>8
+				""""
+				Плата 1 Диапазон сопротивления шлейфа аварийный
+				"""
+				for i in range(10):
+					self._dataP1[2][i] = deltaAV[i] & 0x00FF
+				""""
+				Плата 1 Диапазон сопротивления изоляции предупредительный
+				"""
+				deltaAV = instrument.read_registers (registeraddress = 250, number_of_registers = 10)
+				for i in range(10):
+					self._dataP1[3][i] = deltaAV[i] >> 8
+				""""
+				Плата 1 Диапазон сопротивления шлейфа предупредительный
+				"""
+				for i in range(10):
+					self._dataP1[4][i] = deltaAV[i] & 0x00FF
+				""""
+				Плата 1 Допустимое значение напряжения на входе В.
+				"""
+				deltaAV = instrument.read_registers(registeraddress = 200, number_of_registers = 10)
+				self._dataP1[5] = deltaAV
+				""""
+				Плата 1 Уставка сопротивления изоляции 1 (MОм).
+				"""
+				deltaAV = instrument.read_registers (registeraddress = 10, number_of_registers = 10)
+				for i in range (10):
+					self._dataP1[6][i] = round((deltaAV[i]*16/1000), 2)
+				"""
+				Плата 1 Уставка сопротивления изоляции 2 (MОм).
+				"""
+				deltaAV = instrument.read_registers (registeraddress = 20, number_of_registers = 10)
+				for i in range(10):
+					self._dataP1[7][i] = round ((deltaAV[i] * 16 / 1000), 2)
+				"""
+				Плата 1 Уставка сопротивления шлейфа (кОм).
+				"""
+				deltaAV = instrument.read_registers(registeraddress = 30, number_of_registers = 10)
+				for i in range (10):
+					self._dataP1[8][i] = round((deltaAV[i]/1000),3)
