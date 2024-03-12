@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1416</width>
+    <width>1459</width>
     <height>954</height>
    </rect>
   </property>
@@ -22,7 +22,7 @@
      <rect>
       <x>0</x>
       <y>10</y>
-      <width>1421</width>
+      <width>1441</width>
       <height>871</height>
      </rect>
     </property>
@@ -327,8 +327,8 @@ color: rgb(0, 0, 0);</string>
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>1411</width>
-        <height>881</height>
+        <width>1431</width>
+        <height>851</height>
        </rect>
       </property>
       <property name="font">
@@ -419,7 +419,7 @@ color: rgb(0, 0, 0);</string>
       </row>
       <row>
        <property name="text">
-        <string>Диапазон сопр. изоляции авар.</string>
+        <string>Диапазон сопр. изоляции авар. </string>
        </property>
       </row>
       <row>
@@ -450,17 +450,17 @@ color: rgb(0, 0, 0);</string>
       </row>
       <row>
        <property name="text">
-        <string>Уставка напряжения на входе</string>
+        <string>Уставка напряжения на входе (В)</string>
        </property>
       </row>
       <row>
        <property name="text">
-        <string>Уставка сопр. изоляции 1</string>
+        <string>Уставка сопр. изоляции 1 (МОм)</string>
        </property>
       </row>
       <row>
        <property name="text">
-        <string notr="true">Уставка сопр. изоляции 2</string>
+        <string notr="true">Уставка сопр. изоляции 2 (МОм)</string>
        </property>
        <property name="toolTip">
         <string notr="true"/>
@@ -474,7 +474,7 @@ color: rgb(0, 0, 0);</string>
       </row>
       <row>
        <property name="text">
-        <string>Уставка сопр. шлейфа</string>
+        <string>Уставка сопр. шлейфа (кОм)</string>
        </property>
       </row>
       <row>
@@ -490,32 +490,32 @@ color: rgb(0, 0, 0);</string>
       </row>
       <row>
        <property name="text">
-        <string>Сопр. изоляции 1</string>
+        <string>Сопр. изоляции 1 (МОм)</string>
        </property>
       </row>
       <row>
        <property name="text">
-        <string>Сопр. изоляции 2</string>
+        <string>Сопр. изоляции 2 (МОм)</string>
        </property>
       </row>
       <row>
        <property name="text">
-        <string>Сопр. шлейфа</string>
+        <string>Сопр. шлейфа (кОм)</string>
        </property>
       </row>
       <row>
        <property name="text">
-        <string>Напряжение на входе 1</string>
+        <string>Напряжение на входе 1 (В)</string>
        </property>
       </row>
       <row>
        <property name="text">
-        <string>Напряжение на входе 2</string>
+        <string>Напряжение на входе 2 (В)</string>
        </property>
       </row>
       <row>
        <property name="text">
-        <string>Расчетное знач. объем. напряжения</string>
+        <string>Расчетное знач. объем. напряжения (В)</string>
        </property>
       </row>
       <row>

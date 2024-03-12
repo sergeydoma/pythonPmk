@@ -117,20 +117,20 @@ class myModbus():
 			# 	time.sleep(5)
 			# 	instrument.close_port_after_each_call = True
 			else:
-				Rz1 = instrument.read_registers (registeraddress = 50, number_of_registers = 10)
-				print ("DATA Line", self._dataP4[5][2])
-				print ('QWERT=', Rz1[0])
+				# Rz1 = instrument.read_registers (registeraddress = 50, number_of_registers = 10)
+				# print ("DATA Line", self._dataP4[5][2])
+				# print ('QWERT=', Rz1[0])
 
-				for i in range (10):
-					self._dataP1[13][i] = (Rz1[i]*16)/100
-				a = Rz1[0]
+				# for i in range (10):
+				# 	self._dataP1[13][i] = (Rz1[i]*16)/100
+				# a = Rz1[0]
 
 				# self._dataP1[0] = ' '
-				print ("AAAAA = ", a)
-				print ("The type of a", type (Rz1))
-				print ("The type of B", type (self._dataP1))
-				print ("Подключение по Modbus RTU выполнено")
-				print ('RZ1 = ', Rz1)
+				# print ("AAAAA = ", a)
+				# print ("The type of a", type (Rz1))
+				# print ("The type of B", type (self._dataP1))
+				# print ("Подключение по Modbus RTU выполнено")
+				# print ('RZ1 = ', Rz1)
 				""""
 				режим ПМК
 				"""
@@ -221,3 +221,45 @@ class myModbus():
 				deltaAV = instrument.read_registers(registeraddress = 30, number_of_registers = 10)
 				for i in range (10):
 					self._dataP1[8][i] = round((deltaAV[i]/1000),3)
+				"""
+				Плата 1 Сопротивление изоляции 1 (MОм).
+				"""
+				RZ1 = instrument.read_registers(registeraddress = 50, number_of_registers = 10)
+				for i in range(10):
+					self._dataP1[9][i] = round((RZ1[i]*16/1000), 2)
+				"""
+				Плата 1 Сопротивление изоляции 2 (MОм).
+				"""
+				RZ1 = instrument.read_registers (registeraddress = 60, number_of_registers = 10)
+				for i in range (10):
+					self._dataP1[10][i] = round ((RZ1[i] * 16 / 1000), 2)
+				"""
+				Плата 1 Cопротивление шлейфа (кОм).
+				"""
+				deltaAV = instrument.read_registers (registeraddress = 70, number_of_registers = 10)
+				for i in range (10):
+					self._dataP1[11][i] = round ((deltaAV[i] / 1000), 3)
+				"""
+				Плата 1 Значение напряжения на входе 1  В.
+				"""
+				Uin1 = instrument.read_registers (registeraddress = 190, number_of_registers = 10)
+				self._dataP1[12] = Uin1
+				"""
+				Плата 1 Значение напряжения на входе 2  В.
+				"""
+				Uin2 = instrument.read_registers (registeraddress = 230, number_of_registers = 10)
+				self._dataP1[13] = Uin2
+				"""
+				Плата 1 Значение сопротивления изоляции 1 выше заданного диапазона (авария предупреждение)
+				"""
+				alarmRz1 = instrument.read_bits(registeraddress = 20, number_of_bits = 10)
+				warnRz1 = instrument.read_bits(registeraddress = 110, number_of_bits = 10)
+				for i in range(10):
+					if alarmRz1[i] == 0:
+						self._dataP1[14][i] = 2
+					elif warnRz1[i] == 0:
+						self._dataP1[14][i] = 1
+					else:
+						self._dataP1[14][i] = 0
+
+				print ("alarm rz1", self._dataP1[14][0])

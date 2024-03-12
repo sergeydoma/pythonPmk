@@ -190,22 +190,56 @@ class MainWindow (QMainWindow, Ui_MainWindow):
 			self.tblitems_1.setItem(6, i, QTableWidgetItem (deltaWorn1ch))  # допустимое предупр. отклонение сопр. шлеййфа 1
 			self.tblitems_1.item(6, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range (10):
-			setUch1 = str(int(dataP1[5][i]))+' В'
+			setUch1 = str(int(dataP1[5][i])) #+' В'
 			self.tblitems_1.setItem(8, i, QTableWidgetItem (setUch1))  # допустимое значение напряжения на входе
 			self.tblitems_1.item(8, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range (10):
-			setRZ1 = str(dataP1[6][i])+' MОм'
+			setRZ1 = str(dataP1[6][i]) #+' MОм'
 			self.tblitems_1.setItem(9, i, QTableWidgetItem (setRZ1))  # уставка сопр. изоляции 1
 			self.tblitems_1.item(9, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range (10):
-			setRZ2 = str (dataP1[7][i]) + ' MОм'
+			setRZ2 = str (dataP1[7][i]) #+ ' MОм'
 			self.tblitems_1.setItem (10, i, QTableWidgetItem (setRZ2))  # уставка сопр. изоляции 2
 			self.tblitems_1.item (10, i).setTextAlignment (Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range (10):
-			setRloop = str (dataP1[8][i]) + ' кОм'
+			setRloop = str (dataP1[8][i]) #+ ' кОм'
 			self.tblitems_1.setItem(11, i, QTableWidgetItem (setRloop))  # уставка сопр. шлеййфа
 			self.tblitems_1.item (11, i).setTextAlignment (Qt.AlignVCenter | Qt.AlignHCenter)
-
+		for i in range (10):
+			RZ1 = str(dataP1[9][i]) #+' MОм'
+			self.tblitems_1.setItem(13, i, QTableWidgetItem(RZ1))  # Cопр. изоляции 1
+			self.tblitems_1.item(13, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range (10):
+			RZ2 = str(dataP1[10][i]) #+' MОм'
+			self.tblitems_1.setItem(14, i, QTableWidgetItem(RZ2))  # Cопр. изоляции 2
+			self.tblitems_1.item(14, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range (10):
+			Rloop = str (dataP1[11][i])# + ' кОм'
+			self.tblitems_1.setItem(15, i, QTableWidgetItem(Rloop))  # Сопр. шлеййфа
+			self.tblitems_1.item (15, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range (10):
+			Uin1 = str(int(dataP1[12][i])) #+' В'
+			self.tblitems_1.setItem(16, i, QTableWidgetItem(Uin1))  # значение напряжения на входе1
+			self.tblitems_1.item(16, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range (10):
+			Uin2 = str(int(dataP1[13][i])) #+' В'
+			self.tblitems_1.setItem(17, i, QTableWidgetItem(Uin2))  # значение напряжения на входе1
+			self.tblitems_1.item(17, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			for i in range(10):
+				AlarmRz1 = int(dataP1[14][i])
+				if AlarmRz1 == 2:
+					self.tblitems_1.setItem(20, i, QTableWidgetItem('A'))  # значение напряжения на входе1
+					self.tblitems_1.item(20, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_1.item (20, i).setBackground (QtGui.QColor (255, 0, 0))  # Красный
+					self.tblitems_1.item (20, i,).setForeground(QtGui.QColor (255, 255, 255))
+				elif AlarmRz1 == 1:
+					self.tblitems_1.setItem (20, i, QTableWidgetItem ('П'))  # значение напряжения на входе1
+					self.tblitems_1.item (20, i).setTextAlignment (Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_1.item (20, i).setBackground (QtGui.QColor (255, 255, 0))  # желтый
+				else:
+					self.tblitems_1.setItem (20, i, QTableWidgetItem ('Норма'))  # значение напряжения на входе1
+					self.tblitems_1.item (20, i).setTextAlignment (Qt.AlignVCenter | Qt.AlignHCenter)
 
 
 	# self.tableWidget.setItem (1, 1, QTableWidgetItem ("УКККФ"))		#(dataP4[0][0]))

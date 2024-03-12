@@ -24,13 +24,13 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1416, 954)
+        MainWindow.resize(1459, 954)
         MainWindow.setStyleSheet(u"background-color: rgb(213, 213, 159);")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(0, 10, 1421, 871))
+        self.tabWidget.setGeometry(QRect(0, 10, 1441, 871))
         font = QFont()
         font.setFamilies([u"Sans Serif"])
         font.setPointSize(12)
@@ -200,7 +200,7 @@ class Ui_MainWindow(object):
         self.tblitems_1.setVerticalHeaderItem(9, __qtablewidgetitem32)
         icon = QIcon(QIcon.fromTheme(u"accessories-calculator"))
         __qtablewidgetitem33 = QTableWidgetItem()
-        __qtablewidgetitem33.setText(u"\u0423\u0441\u0442\u0430\u0432\u043a\u0430 \u0441\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 2");
+        __qtablewidgetitem33.setText(u"\u0423\u0441\u0442\u0430\u0432\u043a\u0430 \u0441\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 2 (\u041c\u041e\u043c)");
         __qtablewidgetitem33.setIcon(icon);
         self.tblitems_1.setVerticalHeaderItem(10, __qtablewidgetitem33)
         __qtablewidgetitem34 = QTableWidgetItem()
@@ -419,7 +419,7 @@ class Ui_MainWindow(object):
         __qtablewidgetitem109.setTextAlignment(Qt.AlignCenter);
         self.tblitems_1.setItem(25, 9, __qtablewidgetitem109)
         self.tblitems_1.setObjectName(u"tblitems_1")
-        self.tblitems_1.setGeometry(QRect(0, 0, 1411, 881))
+        self.tblitems_1.setGeometry(QRect(0, 0, 1431, 851))
         self.tblitems_1.setFont(font)
         self.tblitems_1.setLayoutDirection(Qt.LeftToRight)
         self.tblitems_1.setShowGrid(True)
@@ -563,7 +563,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem24 = self.tblitems_1.verticalHeaderItem(2)
         ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u043f\u0443\u0441\u0442\u0438\u043c\u044b\u0435 \u0434\u0438\u0430\u043f\u0430\u0437\u043e\u043d\u044b:", None));
         ___qtablewidgetitem25 = self.tblitems_1.verticalHeaderItem(3)
-        ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0438\u0430\u043f\u0430\u0437\u043e\u043d \u0441\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 \u0430\u0432\u0430\u0440.", None));
+        ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0438\u0430\u043f\u0430\u0437\u043e\u043d \u0441\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 \u0430\u0432\u0430\u0440. ", None));
         ___qtablewidgetitem26 = self.tblitems_1.verticalHeaderItem(4)
         ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0438\u0430\u043f\u0430\u0437\u043e\u043d \u0441\u043e\u043f\u0440. \u0448\u043b\u0435\u0439\u0444\u0430 \u0430\u0432\u0430\u0440.", None));
         ___qtablewidgetitem27 = self.tblitems_1.verticalHeaderItem(5)
@@ -573,25 +573,25 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem29 = self.tblitems_1.verticalHeaderItem(7)
         ___qtablewidgetitem29.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0441\u0442\u0430\u0432\u043a\u0438:", None));
         ___qtablewidgetitem30 = self.tblitems_1.verticalHeaderItem(8)
-        ___qtablewidgetitem30.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0441\u0442\u0430\u0432\u043a\u0430 \u043d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u044f \u043d\u0430 \u0432\u0445\u043e\u0434\u0435", None));
+        ___qtablewidgetitem30.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0441\u0442\u0430\u0432\u043a\u0430 \u043d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u044f \u043d\u0430 \u0432\u0445\u043e\u0434\u0435 (\u0412)", None));
         ___qtablewidgetitem31 = self.tblitems_1.verticalHeaderItem(9)
-        ___qtablewidgetitem31.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0441\u0442\u0430\u0432\u043a\u0430 \u0441\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 1", None));
+        ___qtablewidgetitem31.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0441\u0442\u0430\u0432\u043a\u0430 \u0441\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 1 (\u041c\u041e\u043c)", None));
         ___qtablewidgetitem32 = self.tblitems_1.verticalHeaderItem(11)
-        ___qtablewidgetitem32.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0441\u0442\u0430\u0432\u043a\u0430 \u0441\u043e\u043f\u0440. \u0448\u043b\u0435\u0439\u0444\u0430", None));
+        ___qtablewidgetitem32.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0441\u0442\u0430\u0432\u043a\u0430 \u0441\u043e\u043f\u0440. \u0448\u043b\u0435\u0439\u0444\u0430 (\u043a\u041e\u043c)", None));
         ___qtablewidgetitem33 = self.tblitems_1.verticalHeaderItem(12)
         ___qtablewidgetitem33.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043a\u0443\u0449\u0438\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u044f:", None));
         ___qtablewidgetitem34 = self.tblitems_1.verticalHeaderItem(13)
-        ___qtablewidgetitem34.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 1", None));
+        ___qtablewidgetitem34.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 1 (\u041c\u041e\u043c)", None));
         ___qtablewidgetitem35 = self.tblitems_1.verticalHeaderItem(14)
-        ___qtablewidgetitem35.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 2", None));
+        ___qtablewidgetitem35.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 2 (\u041c\u041e\u043c)", None));
         ___qtablewidgetitem36 = self.tblitems_1.verticalHeaderItem(15)
-        ___qtablewidgetitem36.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u043f\u0440. \u0448\u043b\u0435\u0439\u0444\u0430", None));
+        ___qtablewidgetitem36.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u043f\u0440. \u0448\u043b\u0435\u0439\u0444\u0430 (\u043a\u041e\u043c)", None));
         ___qtablewidgetitem37 = self.tblitems_1.verticalHeaderItem(16)
-        ___qtablewidgetitem37.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u0435 \u043d\u0430 \u0432\u0445\u043e\u0434\u0435 1", None));
+        ___qtablewidgetitem37.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u0435 \u043d\u0430 \u0432\u0445\u043e\u0434\u0435 1 (\u0412)", None));
         ___qtablewidgetitem38 = self.tblitems_1.verticalHeaderItem(17)
-        ___qtablewidgetitem38.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u0435 \u043d\u0430 \u0432\u0445\u043e\u0434\u0435 2", None));
+        ___qtablewidgetitem38.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u0435 \u043d\u0430 \u0432\u0445\u043e\u0434\u0435 2 (\u0412)", None));
         ___qtablewidgetitem39 = self.tblitems_1.verticalHeaderItem(18)
-        ___qtablewidgetitem39.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0430\u0441\u0447\u0435\u0442\u043d\u043e\u0435 \u0437\u043d\u0430\u0447. \u043e\u0431\u044a\u0435\u043c. \u043d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u044f", None));
+        ___qtablewidgetitem39.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0430\u0441\u0447\u0435\u0442\u043d\u043e\u0435 \u0437\u043d\u0430\u0447. \u043e\u0431\u044a\u0435\u043c. \u043d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u044f (\u0412)", None));
         ___qtablewidgetitem40 = self.tblitems_1.verticalHeaderItem(19)
         ___qtablewidgetitem40.setText(QCoreApplication.translate("MainWindow", u"\u0410\u0432\u0430\u0440\u0438\u044f - \"\u0410\", \u043f\u0440\u0435\u0434\u0443\u043f\u0440\u0436\u0434. - \"\u041f\":", None));
         ___qtablewidgetitem41 = self.tblitems_1.verticalHeaderItem(20)
