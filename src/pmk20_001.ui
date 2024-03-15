@@ -14,7 +14,8 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(213, 213, 159);</string>
+   <string notr="true">background-color: rgb(189, 192, 144);
+border-color: rgb(29, 30, 17);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
@@ -40,7 +41,7 @@ background-color: rgb(234, 232, 220);
 color: rgb(0, 0, 0);</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <property name="documentMode">
        <bool>false</bool>
@@ -600,7 +601,7 @@ color: rgb(0, 0, 0);</string>
         </row>
         <row>
          <property name="text">
-          <string>Режим работы канала</string>
+          <string>Мониторинг кабеля</string>
          </property>
         </row>
         <row>

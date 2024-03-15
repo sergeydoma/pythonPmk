@@ -25,7 +25,8 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1549, 1000)
-        MainWindow.setStyleSheet(u"background-color: rgb(213, 213, 159);")
+        MainWindow.setStyleSheet(u"background-color: rgb(189, 192, 144);\n"
+"border-color: rgb(29, 30, 17);")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout_2 = QGridLayout(self.centralwidget)
@@ -545,7 +546,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -668,7 +669,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem36 = self.tblitems_1.verticalHeaderItem(0)
         ___qtablewidgetitem36.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0435\u0436\u0438\u043c\u044b \u0440\u0430\u0431\u043e\u0442\u044b:", None));
         ___qtablewidgetitem37 = self.tblitems_1.verticalHeaderItem(1)
-        ___qtablewidgetitem37.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0435\u0436\u0438\u043c \u0440\u0430\u0431\u043e\u0442\u044b \u043a\u0430\u043d\u0430\u043b\u0430", None));
+        ___qtablewidgetitem37.setText(QCoreApplication.translate("MainWindow", u"\u041c\u043e\u043d\u0438\u0442\u043e\u0440\u0438\u043d\u0433 \u043a\u0430\u0431\u0435\u043b\u044f", None));
         ___qtablewidgetitem38 = self.tblitems_1.verticalHeaderItem(2)
         ___qtablewidgetitem38.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u043f\u0443\u0441\u0442\u0438\u043c\u044b\u0435 \u0434\u0438\u0430\u043f\u0430\u0437\u043e\u043d\u044b:", None));
         ___qtablewidgetitem39 = self.tblitems_1.verticalHeaderItem(3)

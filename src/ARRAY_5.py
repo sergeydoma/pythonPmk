@@ -17,9 +17,6 @@ from edit_dialog import Ui_MainWindow
 from myModbus import myModbus
 
 
-
-
-
 # region Absract Model
 class PandasModel(QAbstractTableModel):
 	def __init__(self, data):
@@ -110,10 +107,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		# self.model1.dataChanged.emit ( QtCore.QModelIndex (), QtCore.QModelIndex () )
 		# self.model.setData(self, 1, 1)
 		# self.tableView_plat_1.setModel ( self.model1 )
-		self.tableView_plat_2.setModel(self.model2)
+		self.tableView_Arhive.setModel(self.model2)
 		# self.setCentralWidget(self.table)
 		# self.model1.dataChanged.emit ( QtCore.QModelIndex (), QtCore.QModelIndex () )
 		self.model2.dataChanged.emit(QtCore.QModelIndex(), QtCore.QModelIndex())
+		"""
+		Состояние сети 
+		"""
+		if dataP4[4][0] == 1:
+			self.label_info.setText('Ошибка подключения по RS-485')
+			self.label_info.setStyleSheet('font-weight: bold; color: red')
+			self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		elif dataP4[5][0] == 1:
+			numID = int(self._dataP4[0][0])
+			numID = str(hex(numID))
+			self.label_info.setText("нет связи с устройсвом по адресу " + numID)
+			self.label_info.setStyleSheet('font-weight: bold; color: black')
+			self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		else:
+			self.label_info.setText('Подключение по RS-485 выполнено')
+			self.label_info.setStyleSheet('font-weight: bold; color: black')
+			self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 
 		"""
 		TableWidgt Окно ПМК20
@@ -165,9 +179,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		tblitems_1 окно Плата 1
 		"""
 		for i in range(10):
-			modeCh1ch = str(int(dataP1[0][i]))
-			self.tblitems_1.setItem(1, i, QTableWidgetItem(modeCh1ch))  # режим работы канала платы 1
-			self.tblitems_1.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+			modeCh1 = int(dataP1[0][i])  # режим работы канала платы 1
+			modeStart = int(dataP4[3][0])
+			block_1 = 0
+			if modeStart == 0:
+				self.tblitems_1.setItem(1, i, QTableWidgetItem('ОТКЛ.'))
+				self.tblitems_1.item(1, i).setBackground(QtGui.QColor(0, 0, 255))  # Зеленый
+				self.tblitems_1.item(1, i, ).setForeground(QtGui.QColor(255, 255, 255))
+				self.tblitems_1.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				block_1 = 1  # блокировка отображения в момент старта
+			elif ((modeCh1 == 0) | (modeCh1 == 1) | (modeCh1 == 3) | (modeCh1 == 4) | (modeCh1 == 5)):
+				block_1 = 0
+				self.tblitems_1.setItem(1, i, QTableWidgetItem('ОТКЛ.'))
+				self.tblitems_1.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+			else:
+				block_1 = 0
+				self.tblitems_1.setItem(1, i, QTableWidgetItem('ВКЛ.'))
+				self.tblitems_1.item(1, i).setBackground(QtGui.QColor(0, 255, 0))  # Зеленый
+				self.tblitems_1.item(1, i, ).setForeground(QtGui.QColor(0, 0, 0))
+				self.tblitems_1.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range(10):
 			deltaAlarm1ch = str(int(dataP1[1][i])) + ' %'
 			self.tblitems_1.setItem(3, i,
@@ -338,9 +368,51 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 				else:
 					self.tblitems_d.setItem(3, i, QTableWidgetItem('Норма'))
 					self.tblitems_d.item(3, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+			"""
+			Блокировка отображения 
+			"""
+			if block_1 == 1:
+				for k in range(13, 20):
+					for i in range(10):
+						self.tblitems_1.setItem(k, i, QTableWidgetItem('Н/Д'))  # # Авария - предупреждение сопр. шлейфа
+						self.tblitems_1.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+						self.tblitems_1.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+						self.tblitems_1.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+				for k in range(21, 27):
+					for i in range(10):
+						self.tblitems_1.setItem(k, i, QTableWidgetItem('Н/Д'))  # # Авария - предупреждение сопр. шлейфа
+						self.tblitems_1.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+						self.tblitems_1.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+						self.tblitems_1.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+				for k in [1,2,3]:
+					for i in range(10):
+						self.tblitems_d.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
+						self.tblitems_d.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+						self.tblitems_d.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+						self.tblitems_d.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+			blok_RS = dataP4[4][0]
+			if blok_RS == 1:
+				for k in [1, 3, 4, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26]:
+					for i in range(10):
+						self.tblitems_1.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
+						self.tblitems_1.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+						self.tblitems_1.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+						self.tblitems_1.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+				for k in range(7):
+					for i in range(1):
+						self.tableWidget.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS устр - во
+						self.tableWidget.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+						self.tableWidget.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+						self.tableWidget.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+				for k in [1,2,3,5,6,7]:
+					for i in range(10):
+						self.tblitems_d.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
+						self.tblitems_d.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+						self.tblitems_d.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+						self.tblitems_d.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
 
 
-	# self.tableWidget.setItem (1, 1, QTableWidgetItem ("УКККФ"))		#(dataP4[0][0]))
+					# self.tableWidget.setItem (1, 1, QTableWidgetItem ("УКККФ"))		#(dataP4[0][0]))
 	# self.table.close()
 	# self.table.show()
 	# self.endResetModel()
@@ -357,7 +429,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		print('ВВеден номер = ', intCombo)
 		dataP4[0][0] = intCombo
 
-		self.label_info.setText(str(hex(intCombo)))  # self.tblitems_2.setItem (1, 1, QTableWidgetItem ("Ура!!!!!", ))
+		# self.tblitems_2.setItem (1, 1, QTableWidgetItem ("Ура!!!!!", ))
 
 
 # endregion
@@ -393,7 +465,7 @@ def task(array):
 		mB.setDataP2(dataP2)
 		mB.setDataP3(dataP3)
 		mB.setDataP4(dataP4)
-		mB.con()
+		mB.con_1()
 		mB.getDataP1()
 		mB.getDataP2()
 		mB.getDataP3()
@@ -486,6 +558,3 @@ if 1 == 1:
 	# check some data in the shared array
 
 	print(f'Parent\n{data}')
-
-
-

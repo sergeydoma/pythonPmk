@@ -39,7 +39,7 @@ class myModbus():
 	def getDataP4(self):
 		return self._dataP4
 
-	def con(self):
+	def con_1(self):
 
 		try:
 			instrument = minimalmodbus.Instrument('/dev/ttyUSB0', int(self._dataP4[0][0]))
@@ -53,6 +53,7 @@ class myModbus():
 			# errorcounter = errorcounter + 1
 			print("Ошибка подключения по RS-485_2 IOError ")
 			# instrument.close_port_after_each_call = True
+			self._dataP4[4][0] = 1 # Ошибка подключения по RS-485
 			time.sleep(5)
 		# except (FileNotFoundError, IOError, RuntimeError, TypeError, NameError, IndexError):
 		# 	print("Ошибка подключения по RS-485_2 - File Not Found")
@@ -62,11 +63,12 @@ class myModbus():
 		# 	instrument.close_port_after_each_call = True
 		# instrument.serial.close()
 		else:
+			self._dataP4[4][0] = 0
 			print("Подключение по RS - 485 выполнено")
 			try:
 				""""
-								режим ПМК
-								"""
+				режим ПМК
+				"""
 				modePmk = instrument.read_register(registeraddress = 145)
 				self._dataP4[1][1] = modePmk
 				""""
@@ -92,7 +94,7 @@ class myModbus():
 				self._dataP4[1][7] = IDpi1[3]
 				self._dataP4[1][8] = IDpi1[4]
 				self._dataP4[1][9] = IDpi1[5]
-				""""
+				"""
 				Контрольная сумма ПО md5
 				"""
 				md5 = instrument.read_registers(registeraddress = 120, number_of_registers = 8)
@@ -104,6 +106,11 @@ class myModbus():
 				self._dataP4[2][5] = md5[5]
 				self._dataP4[2][6] = md5[6]
 				self._dataP4[2][7] = md5[7]
+				"""
+				Режим старта
+				"""
+				modeStart = instrument.read_bit(registeraddress = 200)
+				self._dataP4[3][0] = modeStart
 				""""
 				Плата 1 режим работы канала
 				"""
@@ -309,10 +316,12 @@ class myModbus():
 
 			except IOError:
 				print("нет связи с устройсвом по адресу", str(self._dataP4[0][0]))
+				self._dataP4[5][0] = 1
 			# 	# instrument.serial.close()
 			# 	time.sleep(5)
 			# 	instrument.close_port_after_each_call = True
 			else:
+				self._dataP4[5][0] = 0
 				# Rz1 = instrument.read_registers (registeraddress = 50, number_of_registers = 10)
 				# print ("DATA Line", self._dataP4[5][2])
 				# print ('QWERT=', Rz1[0])
