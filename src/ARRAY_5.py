@@ -95,85 +95,139 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		self._dataP3 = None
 		self._dataP4 = None
 
+
+
 	# self.update_table()
 	# self.model.select()
 	def update_table(self):
 		# self.beginResetModel()
 		# self.model1 = PandasModel ( dataP1 )
-		self.model2 = PandasModel(dataP2)
+		self._dataP2 = dataP2
 		self._dataP4 = dataP4
-		self._dataP3 = dataP3
+		# self.model = PandasModel(dataP3)
 		self._dataP1 = dataP1
 		# self.model1.dataChanged.emit ( QtCore.QModelIndex (), QtCore.QModelIndex () )
 		# self.model.setData(self, 1, 1)
 		# self.tableView_plat_1.setModel ( self.model1 )
-		self.tableView_Arhive.setModel(self.model2)
+		# self.tableView_Arhive.setModel(self.model2)
 		# self.setCentralWidget(self.table)
 		# self.model1.dataChanged.emit ( QtCore.QModelIndex (), QtCore.QModelIndex () )
-		self.model2.dataChanged.emit(QtCore.QModelIndex(), QtCore.QModelIndex())
+		# self.model2.dataChanged.emit(QtCore.QModelIndex(), QtCore.QModelIndex())
 		"""
 		Состояние сети 
 		"""
-		if dataP4[4][0] == 1:
-			self.label_info.setText('Ошибка подключения по RS-485')
-			self.label_info.setStyleSheet('font-weight: bold; color: red')
-			self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-		elif dataP4[5][0] == 1:
-			numID = int(self._dataP4[0][0])
-			numID = str(hex(numID))
-			self.label_info.setText("нет связи с устройсвом по адресу " + numID)
+
+		if (dataP4[14][0] == 1) & (dataP4[14][1] == 1) & (dataP4[15][0] == 1) & (dataP4[15][1] == 1):
+			self.label_info.setText('Нет подключения по RS-485')
 			self.label_info.setStyleSheet('font-weight: bold; color: black')
 			self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-		else:
+		elif (dataP4[15][0] == 1) & (dataP4[15][1] == 1):
+			numID1 = int(self._dataP4[0][0])
+			numID1 = str(hex(numID1))
+			numID2 = int(self._dataP4[0][0]) + 1
+			numID2 = str(hex(numID2))
+			self.label_info.setText("Нет связи с устройсвами по адресу " + numID1 + ' и ' + numID2)
+			self.label_info.setStyleSheet('font-weight: bold; color: red')
+			self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		elif dataP4[15][0] == 1:
+			numID1 = int(self._dataP4[0][0])
+			numID1 = str(hex(numID1))
+			self.label_info.setText("Нет связи с устройсвами по адресу " + numID1)
+			self.label_info.setStyleSheet('font-weight: bold; color: red')
+			self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		elif dataP4[15][1] == 1:
+			numID2 = int(self._dataP4[0][0]) + 1
+			numID2 = str(hex(numID2))
+			self.label_info.setText("Нет связи с устройсвами по адресу " + numID2)
+			self.label_info.setStyleSheet('font-weight: bold; color: red')
+			self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		elif ((dataP4[4][0] == 0) |
+			  (dataP4[4][1] == 0)):
 			self.label_info.setText('Подключение по RS-485 выполнено')
 			self.label_info.setStyleSheet('font-weight: bold; color: black')
 			self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 
 		"""
-		TableWidgt Окно ПМК20
+		TableWidgt Окно ПМК20 1
 		"""
-		self.tableWidget.setItem(2, 0, QTableWidgetItem(str(int(dataP4[0][0]))))
-		var = int(dataP4[1][1])
-		if var == 0:
-			msg = 'Пауза перед измерением наряжения (Р-0)'
-		elif var == 1:
-			msg = 'Измерение напряжения (Р-1)'
-		elif var == 2:
-			msg = 'Пауза перед подачей напряжения U = -100 V (Р-2)'
-		elif var == 3:
-			msg = 'Пауза после подачи напряжения U = -100 V (Р-3)'
-		elif var == 4:
-			msg = 'Измерение сопротивления при U = -100 V (Р-4)'
-		elif var == 5:
-			msg = 'Пауза после измерения сопротивления U = -100 V (Р-5)'
-		elif var == 6:
-			msg = 'Пауза после снятия нпряжения U = -100 V (Р-6)'
-		elif var == 7:
-			msg = 'Пауза после подачи напряжения U = +100 V (Р-7)'
-		elif var == 8:
-			msg = 'Измерение сопротивления при U = +100 V (Р-8)'
-		elif var == 9:
-			msg = 'Пауза после измерения сопротивления U = +100 V (Р-9)'
-		else:
-			msg = 'Пауза после снятия напряжения U = +100 V (Р-10)'
+		dataP4[4][0] = 0
+		if (dataP4[5][0]==0):
+			self.tableWidget.setItem(2, 0, QTableWidgetItem(str(int(dataP4[0][0]))))
+			var = int(dataP4[1][1])
+			if var == 0:
+				msg = 'Пауза перед измерением наряжения (Р-0)'
+			elif var == 1:
+				msg = 'Измерение напряжения (Р-1)'
+			elif var == 2:
+				msg = 'Пауза перед подачей напряжения U = -100 V (Р-2)'
+			elif var == 3:
+				msg = 'Пауза после подачи напряжения U = -100 V (Р-3)'
+			elif var == 4:
+				msg = 'Измерение сопротивления при U = -100 V (Р-4)'
+			elif var == 5:
+				msg = 'Пауза после измерения сопротивления U = -100 V (Р-5)'
+			elif var == 6:
+				msg = 'Пауза после снятия нпряжения U = -100 V (Р-6)'
+			elif var == 7:
+				msg = 'Пауза после подачи напряжения U = +100 V (Р-7)'
+			elif var == 8:
+				msg = 'Измерение сопротивления при U = +100 V (Р-8)'
+			elif var == 9:
+				msg = 'Пауза после измерения сопротивления U = +100 V (Р-9)'
+			else:
+				msg = 'Пауза после снятия напряжения U = +100 V (Р-10)'
 
-		self.tableWidget.setItem(0, 0, QTableWidgetItem(msg))  # Num ID Modbus RTU
-		numVersion = str(int(dataP4[1][2]))
-		self.tableWidget.setItem(0, 1, QTableWidgetItem(numVersion))  # Номер версии
-		idPMK = str(hex(int(dataP4[1][3])))
-		self.tableWidget.setItem(0, 2, QTableWidgetItem(idPMK))  # Номер шасси ПМК
+			self.tableWidget.setItem(0, 0, QTableWidgetItem(msg))  # режим ПМК
+			numVersion = str(int(dataP4[1][2]))
+			self.tableWidget.setItem(0, 1, QTableWidgetItem(numVersion))  # Номер версии
+			idPMK = str(hex(int(dataP4[1][3])))
+			self.tableWidget.setItem(0, 2, QTableWidgetItem(idPMK))  # Номер шасси ПМК
 
-		idPi1 = (str(hex(int(dataP4[1][4]))) + ' ' + str(hex(int(dataP4[1][5]))) + ' ' + str(
-			hex(int(dataP4[1][6]))) + ' ' + str(hex(int(dataP4[1][7]))) + ' ' + str(hex(int(dataP4[1][8]))) + ' ' + str(
-			hex(int(dataP4[1][9]))))
+			md5 = (str(hex(int(dataP4[2][0]))) + ' ' + str(hex(int(dataP4[2][1]))) + ' ' + str(
+				hex(int(dataP4[2][2]))) + ' ' + str(hex(int(dataP4[2][3]))) + ' ' + str(hex(int(dataP4[2][4]))) + ' ' + str(
+				hex(int(dataP4[2][5]))) + ' ' + str(hex(int(dataP4[2][6]))) + ' ' + str(hex(int(dataP4[2][7]))))
+			self.tableWidget.setItem(0, 5, QTableWidgetItem(md5))  # md5
+		if (dataP4[5][1]==0):
+			self.tableWidget.setItem(2, 0, QTableWidgetItem(str(int(dataP4[0][0]))))
+			var = int(dataP4[10][1])
+			if var == 0:
+				msg = 'Пауза перед измерением наряжения (Р-0)'
+			elif var == 1:
+				msg = 'Измерение напряжения (Р-1)'
+			elif var == 2:
+				msg = 'Пауза перед подачей напряжения U = -100 V (Р-2)'
+			elif var == 3:
+				msg = 'Пауза после подачи напряжения U = -100 V (Р-3)'
+			elif var == 4:
+				msg = 'Измерение сопротивления при U = -100 V (Р-4)'
+			elif var == 5:
+				msg = 'Пауза после измерения сопротивления U = -100 V (Р-5)'
+			elif var == 6:
+				msg = 'Пауза после снятия нпряжения U = -100 V (Р-6)'
+			elif var == 7:
+				msg = 'Пауза после подачи напряжения U = +100 V (Р-7)'
+			elif var == 8:
+				msg = 'Измерение сопротивления при U = +100 V (Р-8)'
+			elif var == 9:
+				msg = 'Пауза после измерения сопротивления U = +100 V (Р-9)'
+			else:
+				msg = 'Пауза после снятия напряжения U = +100 V (Р-10)'
 
+			self.tableWidget.setItem(0, 0, QTableWidgetItem(msg))  # режим ПМК
+			numVersion = str(int(dataP4[10][2]))
+			self.tableWidget.setItem(0, 1, QTableWidgetItem(numVersion))  # Номер версии
+			idPMK = str(hex(int(dataP4[10][3])))
+			self.tableWidget.setItem(0, 2, QTableWidgetItem(idPMK))  # Номер шасси ПМК
+
+			md5 = (str(hex(int(dataP4[12][0]))) + ' ' + str(hex(int(dataP4[2][1]))) + ' ' + str(
+				hex(int(dataP4[12][2]))) + ' ' + str(hex(int(dataP4[2][3]))) + ' ' + str(hex(int(dataP4[2][4]))) + ' ' + str(
+				hex(int(dataP4[12][5]))) + ' ' + str(hex(int(dataP4[2][6]))) + ' ' + str(hex(int(dataP4[2][7]))))
+			self.tableWidget.setItem(0, 5, QTableWidgetItem(md5))  # md5
+
+
+		idPi1 = (str(hex(int(dataP4[1][4]))) + ' ' + str(hex(int(dataP4[1][5]))) + ' ' + str(hex(int(dataP4[1][6]))) + ' ' +
+				 str(hex(int(dataP4[1][7]))) + ' ' + str(hex(int(dataP4[1][8]))) + ' ' + str(hex(int(dataP4[1][9]))))
 		self.tableWidget.setItem(0, 3, QTableWidgetItem(idPi1))  # Номер платы измерения 1
-
-		md5 = (str(hex(int(dataP4[2][0]))) + ' ' + str(hex(int(dataP4[2][1]))) + ' ' + str(
-			hex(int(dataP4[2][2]))) + ' ' + str(hex(int(dataP4[2][3]))) + ' ' + str(hex(int(dataP4[2][4]))) + ' ' + str(
-			hex(int(dataP4[2][5]))) + ' ' + str(hex(int(dataP4[2][6]))) + ' ' + str(hex(int(dataP4[2][7]))))
-
-		self.tableWidget.setItem(0, 5, QTableWidgetItem(md5))  # Номер платы измерения 1
 
 		"""""
 		tblitems_1 окно Плата 1
@@ -181,19 +235,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		for i in range(10):
 			modeCh1 = int(dataP1[0][i])  # режим работы канала платы 1
 			modeStart = int(dataP4[3][0])
-			block_1 = 0
+			block_start = 0
 			if modeStart == 0:
 				self.tblitems_1.setItem(1, i, QTableWidgetItem('ОТКЛ.'))
 				self.tblitems_1.item(1, i).setBackground(QtGui.QColor(0, 0, 255))  # Зеленый
 				self.tblitems_1.item(1, i, ).setForeground(QtGui.QColor(255, 255, 255))
 				self.tblitems_1.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-				block_1 = 1  # блокировка отображения в момент старта
+				block_start = 1  # блокировка отображения в момент старта
 			elif ((modeCh1 == 0) | (modeCh1 == 1) | (modeCh1 == 3) | (modeCh1 == 4) | (modeCh1 == 5)):
-				block_1 = 0
+				block_start = 0
 				self.tblitems_1.setItem(1, i, QTableWidgetItem('ОТКЛ.'))
 				self.tblitems_1.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 			else:
-				block_1 = 0
+				block_start = 0
 				self.tblitems_1.setItem(1, i, QTableWidgetItem('ВКЛ.'))
 				self.tblitems_1.item(1, i).setBackground(QtGui.QColor(0, 255, 0))  # Зеленый
 				self.tblitems_1.item(1, i, ).setForeground(QtGui.QColor(0, 0, 0))
@@ -290,108 +344,128 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 			else:
 				self.tblitems_1.setItem(22, i, QTableWidgetItem('Норма'))
 				self.tblitems_1.item(22, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-			for i in range(10):
-				AlarmRloop = int(dataP1[18][i])
-				if AlarmRloop == 2:
-					self.tblitems_1.setItem(23, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
-					self.tblitems_1.item(23, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-					self.tblitems_1.item(23, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
-					self.tblitems_1.item(23, i, ).setForeground(QtGui.QColor(255, 255, 255))
-				elif AlarmRloop == 1:
-					self.tblitems_1.setItem(23, i, QTableWidgetItem('ПРЕДУП.'))
-					self.tblitems_1.item(23, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-					self.tblitems_1.item(23, i).setBackground(QtGui.QColor(255, 255, 0))  # желтый
-				else:
-					self.tblitems_1.setItem(23, i, QTableWidgetItem('Норма'))
-					self.tblitems_1.item(23, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-			for i in range(10):
-				AlarmRloopH = int(dataP1[19][i])
-				if AlarmRloopH == 2:
-					self.tblitems_1.setItem(24, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
-					self.tblitems_1.item(24, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-					self.tblitems_1.item(24, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
-					self.tblitems_1.item(24, i, ).setForeground(QtGui.QColor(255, 255, 255))
-				elif AlarmRloopH == 1:
-					self.tblitems_1.setItem(24, i, QTableWidgetItem('ПРЕДУП.'))
-					self.tblitems_1.item(24, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-					self.tblitems_1.item(24, i).setBackground(QtGui.QColor(255, 255, 0))  # желтый
-				else:
-					self.tblitems_1.setItem(24, i, QTableWidgetItem('Норма'))
-					self.tblitems_1.item(24, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-			for i in range(10):
-				AlarmU1 = int(dataP1[20][i])
-				if AlarmU1 == 0:
-					self.tblitems_1.setItem(25, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
-					self.tblitems_1.item(25, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-					self.tblitems_1.item(25, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
-					self.tblitems_1.item(25, i, ).setForeground(QtGui.QColor(255, 255, 255))
-				else:
-					self.tblitems_1.setItem(25, i, QTableWidgetItem('Норма'))
-					self.tblitems_1.item(25, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-			for i in range(10):
-				AlarmU2 = int(dataP1[21][i])
-				if AlarmU2 == 0:
-					self.tblitems_1.setItem(26, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
-					self.tblitems_1.item(26, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-					self.tblitems_1.item(26, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
-					self.tblitems_1.item(26, i, ).setForeground(QtGui.QColor(255, 255, 255))
-				else:
-					self.tblitems_1.setItem(26, i, QTableWidgetItem('Норма'))
-					self.tblitems_1.item(26, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-			for i in range(10):
-				alarmDAC1 = dataP1[22][i]
-				if (alarmDAC1 == 1):
-					self.tblitems_d.setItem(1, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
-					self.tblitems_d.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-					self.tblitems_d.item(1, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
-					self.tblitems_d.item(1, i, ).setForeground(QtGui.QColor(255, 255, 255))
-				else:
-					self.tblitems_d.setItem(1, i, QTableWidgetItem('Норма'))
-					self.tblitems_d.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-			for i in range(10):
-				alarmP100V = dataP1[23][i]
-				if (alarmP100V == 1):
-					self.tblitems_d.setItem(2, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
-					self.tblitems_d.item(2, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-					self.tblitems_d.item(2, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
-					self.tblitems_d.item(2, i, ).setForeground(QtGui.QColor(255, 255, 255))
-				else:
-					self.tblitems_d.setItem(2, i, QTableWidgetItem('Норма'))
-					self.tblitems_d.item(2, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-			for i in range(10):
-				alarmP100V = dataP1[24][i]
-				if (alarmP100V == 1):
-					self.tblitems_d.setItem(3, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
-					self.tblitems_d.item(3, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-					self.tblitems_d.item(3, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
-					self.tblitems_d.item(3, i, ).setForeground(QtGui.QColor(255, 255, 255))
-				else:
-					self.tblitems_d.setItem(3, i, QTableWidgetItem('Норма'))
-					self.tblitems_d.item(3, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-			"""
-			Блокировка отображения 
-			"""
-			if block_1 == 1:
-				for k in range(13, 20):
-					for i in range(10):
-						self.tblitems_1.setItem(k, i, QTableWidgetItem('Н/Д'))  # # Авария - предупреждение сопр. шлейфа
-						self.tblitems_1.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-						self.tblitems_1.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
-						self.tblitems_1.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
-				for k in range(21, 27):
-					for i in range(10):
-						self.tblitems_1.setItem(k, i, QTableWidgetItem('Н/Д'))  # # Авария - предупреждение сопр. шлейфа
-						self.tblitems_1.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-						self.tblitems_1.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
-						self.tblitems_1.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
-				for k in [1,2,3]:
-					for i in range(10):
-						self.tblitems_d.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
-						self.tblitems_d.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-						self.tblitems_d.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
-						self.tblitems_d.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
-			blok_RS = dataP4[4][0]
-			if blok_RS == 1:
+		for i in range(10):
+			AlarmRloop = int(dataP1[18][i])
+			if AlarmRloop == 2:
+				self.tblitems_1.setItem(23, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
+				self.tblitems_1.item(23, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_1.item(23, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_1.item(23, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			elif AlarmRloop == 1:
+				self.tblitems_1.setItem(23, i, QTableWidgetItem('ПРЕДУП.'))
+				self.tblitems_1.item(23, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_1.item(23, i).setBackground(QtGui.QColor(255, 255, 0))  # желтый
+			else:
+				self.tblitems_1.setItem(23, i, QTableWidgetItem('Норма'))
+				self.tblitems_1.item(23, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			AlarmRloopH = int(dataP1[19][i])
+			if AlarmRloopH == 2:
+				self.tblitems_1.setItem(24, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
+				self.tblitems_1.item(24, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_1.item(24, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_1.item(24, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			elif AlarmRloopH == 1:
+				self.tblitems_1.setItem(24, i, QTableWidgetItem('ПРЕДУП.'))
+				self.tblitems_1.item(24, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_1.item(24, i).setBackground(QtGui.QColor(255, 255, 0))  # желтый
+			else:
+				self.tblitems_1.setItem(24, i, QTableWidgetItem('Норма'))
+				self.tblitems_1.item(24, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			AlarmU1 = int(dataP1[20][i])
+			if AlarmU1 == 0:
+				self.tblitems_1.setItem(25, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
+				self.tblitems_1.item(25, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_1.item(25, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_1.item(25, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			else:
+				self.tblitems_1.setItem(25, i, QTableWidgetItem('Норма'))
+				self.tblitems_1.item(25, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			AlarmU2 = int(dataP1[21][i])
+			if AlarmU2 == 0:
+				self.tblitems_1.setItem(26, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
+				self.tblitems_1.item(26, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_1.item(26, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_1.item(26, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			else:
+				self.tblitems_1.setItem(26, i, QTableWidgetItem('Норма'))
+				self.tblitems_1.item(26, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			alarmDAC1 = dataP1[22][i]
+			if (alarmDAC1 == 1):
+				self.tblitems_d.setItem(1, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
+				self.tblitems_d.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_d.item(1, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_d.item(1, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			else:
+				self.tblitems_d.setItem(1, i, QTableWidgetItem('Норма'))
+				self.tblitems_d.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			alarmP100V = dataP1[23][i]
+			if (alarmP100V == 1):
+				self.tblitems_d.setItem(2, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
+				self.tblitems_d.item(2, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_d.item(2, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_d.item(2, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			else:
+				self.tblitems_d.setItem(2, i, QTableWidgetItem('Норма'))
+				self.tblitems_d.item(2, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			alarmP100V = dataP1[24][i]
+			if (alarmP100V == 1):
+				self.tblitems_d.setItem(3, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
+				self.tblitems_d.item(3, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_d.item(3, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_d.item(3, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			else:
+				self.tblitems_d.setItem(3, i, QTableWidgetItem('Норма'))
+				self.tblitems_d.item(3, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		"""
+		Блокировка отображения 
+		"""
+		if block_start == 1:
+			for k in range(13, 20):
+				for i in range(10):
+					self.tblitems_1.setItem(k, i, QTableWidgetItem('Н/Д'))  # # Авария - предупреждение сопр. шлейфа
+					self.tblitems_1.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_1.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tblitems_1.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+			for k in range(21, 27):
+				for i in range(10):
+					self.tblitems_1.setItem(k, i, QTableWidgetItem('Н/Д'))  # # Авария - предупреждение сопр. шлейфа
+					self.tblitems_1.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_1.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tblitems_1.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+			for k in [1, 2, 3]:
+				for i in range(10):
+					self.tblitems_d.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
+					self.tblitems_d.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_d.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tblitems_d.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+		blok_RS = int(dataP4[4][0])
+		if blok_RS == 1:
+			for k in [1, 3, 4, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26]:
+				for i in range(10):
+					self.tblitems_1.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
+					self.tblitems_1.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_1.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tblitems_1.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+			for k in range(7):
+				for i in range(1):
+					self.tableWidget.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS устр - во
+					self.tableWidget.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tableWidget.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tableWidget.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+			for k in [1, 2, 3, 5, 6, 7]:
+				for i in range(10):
+					self.tblitems_d.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
+					self.tblitems_d.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_d.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tblitems_d.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+			blok_ID = int(dataP4[5][0])
+			if blok_ID == 1:
 				for k in [1, 3, 4, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26]:
 					for i in range(10):
 						self.tblitems_1.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
@@ -404,15 +478,315 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 						self.tableWidget.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 						self.tableWidget.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
 						self.tableWidget.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
-				for k in [1,2,3,5,6,7]:
+				for k in [1, 2, 3, 5, 6, 7]:
 					for i in range(10):
 						self.tblitems_d.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
 						self.tblitems_d.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 						self.tblitems_d.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
 						self.tblitems_d.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+		"""
+		Состояние сети 2
+		"""
+		# if dataP4[4][1] == 1:
+		# 	self.label_info.setText('Ошибка подключения по RS-485')
+		# 	self.label_info.setStyleSheet('font-weight: bold; color: red')
+		# 	self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		# elif dataP4[5][1] == 1:
+		# 	numID = int(self._dataP4[0][0])
+		# 	numID = str(hex(numID))
+		# 	self.label_info.setText("нет связи с устройсвом по адресу " + numID)
+		# 	self.label_info.setStyleSheet('font-weight: bold; color: black')
+		# 	self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		# else:
+		# 	self.label_info.setText('Подключение по RS-485 выполнено')
+		# 	self.label_info.setStyleSheet('font-weight: bold; color: black')
+		# 	self.label_info.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 
+		"""
+		TableWidgt Окно ПМК20 2
+		"""
+		dataP4[4][1] = 0
+		self.tableWidget.setItem(2, 0, QTableWidgetItem(str(int(dataP4[10][0]))))
+		var = int(dataP4[10][1])
+		if var == 0:
+			msg = 'Пауза перед измерением наряжения (Р-0)'
+		elif var == 1:
+			msg = 'Измерение напряжения (Р-1)'
+		elif var == 2:
+			msg = 'Пауза перед подачей напряжения U = -100 V (Р-2)'
+		elif var == 3:
+			msg = 'Пауза после подачи напряжения U = -100 V (Р-3)'
+		elif var == 4:
+			msg = 'Измерение сопротивления при U = -100 V (Р-4)'
+		elif var == 5:
+			msg = 'Пауза после измерения сопротивления U = -100 V (Р-5)'
+		elif var == 6:
+			msg = 'Пауза после снятия нпряжения U = -100 V (Р-6)'
+		elif var == 7:
+			msg = 'Пауза после подачи напряжения U = +100 V (Р-7)'
+		elif var == 8:
+			msg = 'Измерение сопротивления при U = +100 V (Р-8)'
+		elif var == 9:
+			msg = 'Пауза после измерения сопротивления U = +100 V (Р-9)'
+		else:
+			msg = 'Пауза после снятия напряжения U = +100 V (Р-10)'
 
-					# self.tableWidget.setItem (1, 1, QTableWidgetItem ("УКККФ"))		#(dataP4[0][0]))
+		# self.tableWidget.setItem(0, 0, QTableWidgetItem(msg))  # Num ID Modbus RTU
+		# numVersion = str(int(dataP4[1][2]))
+		# self.tableWidget.setItem(0, 1, QTableWidgetItem(numVersion))  # Номер версии
+		# idPMK = str(hex(int(dataP4[1][3])))
+		# self.tableWidget.setItem(0, 2, QTableWidgetItem(idPMK))  # Номер шасси ПМК
+
+		idPi1 = (str(hex(int(dataP4[10][4]))) + ' ' + str(hex(int(dataP4[10][5]))) + ' ' + str(
+			hex(int(dataP4[10][6]))) + ' ' + str(hex(int(dataP4[10][7]))) + ' ' + str(
+			hex(int(dataP4[10][8]))) + ' ' + str(hex(int(dataP4[10][9]))))
+
+		self.tableWidget.setItem(0, 4, QTableWidgetItem(idPi1))  # Номер платы измерения 1
+
+		# md5 = (str(hex(int(dataP4[2][0]))) + ' ' + str(hex(int(dataP4[2][1]))) + ' ' + str(
+		# 	hex(int(dataP4[2][2]))) + ' ' + str(hex(int(dataP4[2][3]))) + ' ' + str(
+		# 	hex(int(dataP4[2][4]))) + ' ' + str(hex(int(dataP4[2][5]))) + ' ' + str(
+		# 	hex(int(dataP4[2][6]))) + ' ' + str(hex(int(dataP4[2][7]))))
+
+		# self.tableWidget.setItem(0, 5, QTableWidgetItem(md5))  # Номер платы измерения 1
+
+		"""""
+		tblitems_2 окно Плата 2
+		"""
+		for i in range(10):
+			modeCh1 = int(dataP2[0][i])  # режим работы канала платы 1
+			modeStart = int(dataP4[13][0])
+			block_start = 0
+			if modeStart == 0:
+				self.tblitems_2.setItem(1, i, QTableWidgetItem('ОТКЛ.'))
+				self.tblitems_2.item(1, i).setBackground(QtGui.QColor(0, 0, 255))  # Зеленый
+				self.tblitems_2.item(1, i, ).setForeground(QtGui.QColor(255, 255, 255))
+				self.tblitems_2.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				block_start = 1  # блокировка отображения в момент старта
+			elif ((modeCh1 == 0) | (modeCh1 == 1) | (modeCh1 == 3) | (modeCh1 == 4) | (modeCh1 == 5)):
+				block_start = 0
+				self.tblitems_2.setItem(1, i, QTableWidgetItem('ОТКЛ.'))
+				self.tblitems_2.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+			else:
+				block_start = 0
+				self.tblitems_2.setItem(1, i, QTableWidgetItem('ВКЛ.'))
+				self.tblitems_2.item(1, i).setBackground(QtGui.QColor(0, 255, 0))  # Зеленый
+				self.tblitems_2.item(1, i, ).setForeground(QtGui.QColor(0, 0, 0))
+				self.tblitems_2.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			deltaAlarm1ch = str(int(dataP2[1][i])) + ' %'
+			self.tblitems_2.setItem(3, i,QTableWidgetItem(deltaAlarm1ch))  # допустимое авар. отклонение сопр. изоляции 1
+			self.tblitems_2.item(3, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			deltaAlarm1ch = str(int(dataP2[2][i])) + ' %'
+			self.tblitems_2.setItem(4, i,
+				QTableWidgetItem(deltaAlarm1ch))  # допустимое авар. отклонение сопр. шлеййфа 1
+			self.tblitems_2.item(4, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			deltaWorn1ch = str(int(dataP2[3][i])) + ' %'
+			self.tblitems_2.setItem(5, i,
+				QTableWidgetItem(deltaWorn1ch))  # допустимое прдедупр. отклонение сопр. изоляции 1
+			self.tblitems_2.item(5, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			deltaWorn1ch = str(int(dataP2[4][i])) + ' %'
+			self.tblitems_2.setItem(6, i,
+				QTableWidgetItem(deltaWorn1ch))  # допустимое предупр. отклонение сопр. шлеййфа 1
+			self.tblitems_2.item(6, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			setUch1 = str(int(dataP2[5][i]))  # +' В'
+			self.tblitems_2.setItem(8, i, QTableWidgetItem(setUch1))  # допустимое значение напряжения на входе
+			self.tblitems_2.item(8, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			setRZ1 = str(dataP2[6][i])  # +' MОм'
+			self.tblitems_2.setItem(9, i, QTableWidgetItem(setRZ1))  # уставка сопр. изоляции 1
+			self.tblitems_2.item(9, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			setRZ2 = str(dataP2[7][i])  # + ' MОм'
+			self.tblitems_2.setItem(10, i, QTableWidgetItem(setRZ2))  # уставка сопр. изоляции 2
+			self.tblitems_2.item(10, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			setRloop = str(dataP2[8][i])  # + ' кОм'
+			self.tblitems_2.setItem(11, i, QTableWidgetItem(setRloop))  # уставка сопр. шлеййфа
+			self.tblitems_2.item(11, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			RZ1 = str(dataP2[9][i])  # +' MОм'
+			self.tblitems_2.setItem(13, i, QTableWidgetItem(RZ1))  # Cопр. изоляции 1
+			self.tblitems_2.item(13, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			RZ2 = str(dataP2[10][i])  # +' MОм'
+			self.tblitems_2.setItem(14, i, QTableWidgetItem(RZ2))  # Cопр. изоляции 2
+			self.tblitems_2.item(14, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			Rloop = str(dataP2[11][i])  # + ' кОм'
+			self.tblitems_2.setItem(15, i, QTableWidgetItem(Rloop))  # Сопр. шлеййфа
+			self.tblitems_2.item(15, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			Uin1 = str(int(dataP2[12][i]))  # +' В'
+			self.tblitems_2.setItem(16, i, QTableWidgetItem(Uin1))  # значение напряжения на входе1
+			self.tblitems_2.item(16, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			Uin2 = str(int(dataP2[13][i]))  # +' В'
+			self.tblitems_2.setItem(17, i, QTableWidgetItem(Uin2))  # значение напряжения на входе1
+			self.tblitems_2.item(17, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			Ux1 = str(int(dataP2[14][i]))  # +' В'
+			self.tblitems_2.setItem(18, i, QTableWidgetItem(Ux1))  # значение объемного напряжения на входе1
+			self.tblitems_2.item(18, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			Ux2 = str(int(dataP2[15][i]))  # +' В'
+			self.tblitems_2.setItem(19, i, QTableWidgetItem(Ux2))  # значение объемного напряжения на входе1
+			self.tblitems_2.item(19, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			AlarmRz1 = int(dataP2[16][i])
+			if AlarmRz1 == 2:
+				self.tblitems_2.setItem(21, i, QTableWidgetItem('AВАРИЯ'))  # Авария - предупреждение сопр. изол. 1
+				self.tblitems_2.item(21, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_2.item(21, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_2.item(21, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			elif AlarmRz1 == 1:
+				self.tblitems_2.setItem(21, i, QTableWidgetItem('ПРЕДУП.'))
+				self.tblitems_2.item(21, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_2.item(21, i).setBackground(QtGui.QColor(255, 255, 0))  # желтый
+			else:
+				self.tblitems_2.setItem(21, i, QTableWidgetItem('Норма'))
+				self.tblitems_2.item(21, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			AlarmRz2 = int(dataP2[17][i])
+			if AlarmRz2 == 2:
+				self.tblitems_2.setItem(22, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. изол. 2
+				self.tblitems_2.item(22, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_2.item(22, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_2.item(22, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			elif AlarmRz2 == 1:
+				self.tblitems_2.setItem(22, i, QTableWidgetItem('ПРЕДУП.'))
+				self.tblitems_2.item(22, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_2.item(22, i).setBackground(QtGui.QColor(255, 255, 0))  # желтый
+			else:
+				self.tblitems_2.setItem(22, i, QTableWidgetItem('Норма'))
+				self.tblitems_2.item(22, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			AlarmRloop = int(dataP2[18][i])
+			if AlarmRloop == 2:
+				self.tblitems_2.setItem(23, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
+				self.tblitems_2.item(23, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_2.item(23, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_2.item(23, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			elif AlarmRloop == 1:
+				self.tblitems_2.setItem(23, i, QTableWidgetItem('ПРЕДУП.'))
+				self.tblitems_2.item(23, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_2.item(23, i).setBackground(QtGui.QColor(255, 255, 0))  # желтый
+			else:
+				self.tblitems_2.setItem(23, i, QTableWidgetItem('Норма'))
+				self.tblitems_2.item(23, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			AlarmRloopH = int(dataP2[19][i])
+			if AlarmRloopH == 2:
+				self.tblitems_2.setItem(24, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
+				self.tblitems_2.item(24, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_2.item(24, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_2.item(24, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			elif AlarmRloopH == 1:
+				self.tblitems_2.setItem(24, i, QTableWidgetItem('ПРЕДУП.'))
+				self.tblitems_2.item(24, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_2.item(24, i).setBackground(QtGui.QColor(255, 255, 0))  # желтый
+			else:
+				self.tblitems_2.setItem(24, i, QTableWidgetItem('Норма'))
+				self.tblitems_2.item(24, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			AlarmU1 = int(dataP2[20][i])
+			if AlarmU1 == 0:
+				self.tblitems_2.setItem(25, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
+				self.tblitems_2.item(25, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_2.item(25, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_2.item(25, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			else:
+				self.tblitems_2.setItem(25, i, QTableWidgetItem('Норма'))
+				self.tblitems_2.item(25, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			AlarmU2 = int(dataP2[21][i])
+			if AlarmU2 == 0:
+				self.tblitems_2.setItem(26, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
+				self.tblitems_2.item(26, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_2.item(26, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_2.item(26, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			else:
+				self.tblitems_2.setItem(26, i, QTableWidgetItem('Норма'))
+				self.tblitems_2.item(26, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			alarmDAC1 = dataP2[22][i]
+			if (alarmDAC1 == 1):
+				self.tblitems_d.setItem(5, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
+				self.tblitems_d.item(5, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_d.item(5, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_d.item(5, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			else:
+				self.tblitems_d.setItem(5, i, QTableWidgetItem('Норма'))
+				self.tblitems_d.item(5, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			alarmP100V = dataP2[23][i]
+			if (alarmP100V == 1):
+				self.tblitems_d.setItem(6, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
+				self.tblitems_d.item(6, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_d.item(6, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_d.item(6, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			else:
+				self.tblitems_d.setItem(6, i, QTableWidgetItem('Норма'))
+				self.tblitems_d.item(6, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		for i in range(10):
+			alarmP100V = dataP2[24][i]
+			if (alarmP100V == 1):
+				self.tblitems_d.setItem(7, i, QTableWidgetItem('AВАРИЯ'))  # # Авария - предупреждение сопр. шлейфа
+				self.tblitems_d.item(7, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tblitems_d.item(7, i).setBackground(QtGui.QColor(255, 0, 0))  # Красный
+				self.tblitems_d.item(7, i, ).setForeground(QtGui.QColor(255, 255, 255))
+			else:
+				self.tblitems_d.setItem(7, i, QTableWidgetItem('Норма'))
+				self.tblitems_d.item(7, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+		"""
+		Блокировка отображения 
+		"""
+		if block_start == 1:
+			for k in range(13, 20):
+				for i in range(10):
+					self.tblitems_1.setItem(k, i, QTableWidgetItem('Н/Д'))  # # Авария - предупреждение сопр. шлейфа
+					self.tblitems_1.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_1.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tblitems_1.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+			for k in range(21, 27):
+				for i in range(10):
+					self.tblitems_1.setItem(k, i, QTableWidgetItem('Н/Д'))  # # Авария - предупреждение сопр. шлейфа
+					self.tblitems_1.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_1.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tblitems_1.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+			for k in [1, 2, 3]:
+				for i in range(10):
+					self.tblitems_d.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
+					self.tblitems_d.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_d.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tblitems_d.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+		blok_RS = dataP4[4][1]
+		if blok_RS == 1:
+			for k in [1, 3, 4, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26]:
+				for i in range(10):
+					self.tblitems_2.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
+					self.tblitems_2.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_2.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tblitems_2.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+			for k in range(7):
+				for i in range(1):
+					self.tableWidget.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS устр - во
+					self.tableWidget.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tableWidget.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tableWidget.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+			for k in [1, 2, 3, 5, 6, 7]:
+				for i in range(10):
+					self.tblitems_d.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
+					self.tblitems_d.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_d.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tblitems_d.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+
+			# self.tableWidget.setItem (1, 1, QTableWidgetItem ("УКККФ"))		#(dataP4[0][0]))
+
 	# self.table.close()
 	# self.table.show()
 	# self.endResetModel()
@@ -429,7 +803,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		print('ВВеден номер = ', intCombo)
 		dataP4[0][0] = intCombo
 
-		# self.tblitems_2.setItem (1, 1, QTableWidgetItem ("Ура!!!!!", ))
+	# self.tblitems_2.setItem (1, 1, QTableWidgetItem ("Ура!!!!!", ))
 
 
 # endregion
@@ -448,6 +822,7 @@ def task(array):
 	dataP2 = dataSumm[1]
 	dataP3 = dataSumm[2]
 	dataP4 = dataSumm[3]
+
 	# check the contents
 	print(f'Child\n{dataP2}')
 
@@ -466,6 +841,7 @@ def task(array):
 		mB.setDataP3(dataP3)
 		mB.setDataP4(dataP4)
 		mB.con_1()
+		mB.con_2()
 		mB.getDataP1()
 		mB.getDataP2()
 		mB.getDataP3()
@@ -484,6 +860,7 @@ def visu(array):
 	dataP1 = dataSumm[0]
 	dataP2 = dataSumm[1]
 	dataP3 = dataSumm[2]
+
 	dataP4 = dataSumm[3]
 
 	# dataP1[1][2] = 25
@@ -533,7 +910,7 @@ if 1 == 1:
 	# 			 'Сопр. изоляции 2 ниже доп.', 'Сопр. шлейфа ниже доп.', 'Сопр. шлейфа выше доп.',
 	# 			 'Напряжение на входе 1 выше доп.', 'Напряжение на входе 2 выше доп.'])
 
-	dataP2 = pd.DataFrame(dataP2,
+	dataP3 = pd.DataFrame(dataP3,
 		columns = ['Калал 1', 'Калал 2', 'Калал 3', 'Калал 4', 'Калал 5', 'Калал 6', 'Калал 7', 'Калал 8', 'Калал 9',
 			'Калал 10'],
 		index = ['Режим работы:', 'Режим работы канала', 'Допустимые диапазоны:', 'Диапазон сопр. изоляции авар.',

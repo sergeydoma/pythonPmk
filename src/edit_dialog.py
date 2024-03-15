@@ -523,6 +523,295 @@ class Ui_MainWindow(object):
         self.tableView_plat_2.setLineWidth(3)
         self.tableView_plat_2.setMidLineWidth(2)
         self.tableView_plat_2.setSortingEnabled(True)
+        self.tblitems_2 = QTableWidget(self.tab_3)
+        if (self.tblitems_2.columnCount() < 10):
+            self.tblitems_2.setColumnCount(10)
+        __qtablewidgetitem127 = QTableWidgetItem()
+        self.tblitems_2.setHorizontalHeaderItem(0, __qtablewidgetitem127)
+        __qtablewidgetitem128 = QTableWidgetItem()
+        self.tblitems_2.setHorizontalHeaderItem(1, __qtablewidgetitem128)
+        __qtablewidgetitem129 = QTableWidgetItem()
+        self.tblitems_2.setHorizontalHeaderItem(2, __qtablewidgetitem129)
+        __qtablewidgetitem130 = QTableWidgetItem()
+        self.tblitems_2.setHorizontalHeaderItem(3, __qtablewidgetitem130)
+        __qtablewidgetitem131 = QTableWidgetItem()
+        self.tblitems_2.setHorizontalHeaderItem(4, __qtablewidgetitem131)
+        __qtablewidgetitem132 = QTableWidgetItem()
+        self.tblitems_2.setHorizontalHeaderItem(5, __qtablewidgetitem132)
+        __qtablewidgetitem133 = QTableWidgetItem()
+        self.tblitems_2.setHorizontalHeaderItem(6, __qtablewidgetitem133)
+        __qtablewidgetitem134 = QTableWidgetItem()
+        self.tblitems_2.setHorizontalHeaderItem(7, __qtablewidgetitem134)
+        __qtablewidgetitem135 = QTableWidgetItem()
+        self.tblitems_2.setHorizontalHeaderItem(8, __qtablewidgetitem135)
+        __qtablewidgetitem136 = QTableWidgetItem()
+        self.tblitems_2.setHorizontalHeaderItem(9, __qtablewidgetitem136)
+        if (self.tblitems_2.rowCount() < 27):
+            self.tblitems_2.setRowCount(27)
+        __qtablewidgetitem137 = QTableWidgetItem()
+        __qtablewidgetitem137.setFont(font2);
+        self.tblitems_2.setVerticalHeaderItem(0, __qtablewidgetitem137)
+        __qtablewidgetitem138 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(1, __qtablewidgetitem138)
+        __qtablewidgetitem139 = QTableWidgetItem()
+        __qtablewidgetitem139.setFont(font2);
+        self.tblitems_2.setVerticalHeaderItem(2, __qtablewidgetitem139)
+        __qtablewidgetitem140 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(3, __qtablewidgetitem140)
+        __qtablewidgetitem141 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(4, __qtablewidgetitem141)
+        __qtablewidgetitem142 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(5, __qtablewidgetitem142)
+        __qtablewidgetitem143 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(6, __qtablewidgetitem143)
+        __qtablewidgetitem144 = QTableWidgetItem()
+        __qtablewidgetitem144.setFont(font2);
+        self.tblitems_2.setVerticalHeaderItem(7, __qtablewidgetitem144)
+        __qtablewidgetitem145 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(8, __qtablewidgetitem145)
+        __qtablewidgetitem146 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(9, __qtablewidgetitem146)
+        __qtablewidgetitem147 = QTableWidgetItem()
+        __qtablewidgetitem147.setText(u"\u0423\u0441\u0442\u0430\u0432\u043a\u0430 \u0441\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 2 (\u041c\u041e\u043c)");
+        __qtablewidgetitem147.setIcon(icon);
+        self.tblitems_2.setVerticalHeaderItem(10, __qtablewidgetitem147)
+        __qtablewidgetitem148 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(11, __qtablewidgetitem148)
+        __qtablewidgetitem149 = QTableWidgetItem()
+        __qtablewidgetitem149.setFont(font2);
+        self.tblitems_2.setVerticalHeaderItem(12, __qtablewidgetitem149)
+        __qtablewidgetitem150 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(13, __qtablewidgetitem150)
+        __qtablewidgetitem151 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(14, __qtablewidgetitem151)
+        __qtablewidgetitem152 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(15, __qtablewidgetitem152)
+        __qtablewidgetitem153 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(16, __qtablewidgetitem153)
+        __qtablewidgetitem154 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(17, __qtablewidgetitem154)
+        __qtablewidgetitem155 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(18, __qtablewidgetitem155)
+        __qtablewidgetitem156 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(19, __qtablewidgetitem156)
+        __qtablewidgetitem157 = QTableWidgetItem()
+        __qtablewidgetitem157.setFont(font2);
+        self.tblitems_2.setVerticalHeaderItem(20, __qtablewidgetitem157)
+        __qtablewidgetitem158 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(21, __qtablewidgetitem158)
+        __qtablewidgetitem159 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(22, __qtablewidgetitem159)
+        __qtablewidgetitem160 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(23, __qtablewidgetitem160)
+        __qtablewidgetitem161 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(24, __qtablewidgetitem161)
+        __qtablewidgetitem162 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(25, __qtablewidgetitem162)
+        __qtablewidgetitem163 = QTableWidgetItem()
+        self.tblitems_2.setVerticalHeaderItem(26, __qtablewidgetitem163)
+        __qtablewidgetitem164 = QTableWidgetItem()
+        __qtablewidgetitem164.setFlags(Qt.ItemIsSelectable|Qt.ItemIsEditable|Qt.ItemIsDragEnabled|Qt.ItemIsDropEnabled|Qt.ItemIsUserCheckable|Qt.ItemIsEnabled|Qt.ItemIsAutoTristate);
+        self.tblitems_2.setItem(9, 0, __qtablewidgetitem164)
+        __qtablewidgetitem165 = QTableWidgetItem()
+        __qtablewidgetitem165.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(21, 0, __qtablewidgetitem165)
+        __qtablewidgetitem166 = QTableWidgetItem()
+        __qtablewidgetitem166.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(21, 1, __qtablewidgetitem166)
+        __qtablewidgetitem167 = QTableWidgetItem()
+        __qtablewidgetitem167.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(21, 2, __qtablewidgetitem167)
+        __qtablewidgetitem168 = QTableWidgetItem()
+        __qtablewidgetitem168.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(21, 3, __qtablewidgetitem168)
+        __qtablewidgetitem169 = QTableWidgetItem()
+        __qtablewidgetitem169.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(21, 4, __qtablewidgetitem169)
+        __qtablewidgetitem170 = QTableWidgetItem()
+        __qtablewidgetitem170.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(21, 5, __qtablewidgetitem170)
+        __qtablewidgetitem171 = QTableWidgetItem()
+        __qtablewidgetitem171.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(21, 6, __qtablewidgetitem171)
+        __qtablewidgetitem172 = QTableWidgetItem()
+        __qtablewidgetitem172.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(21, 7, __qtablewidgetitem172)
+        __qtablewidgetitem173 = QTableWidgetItem()
+        __qtablewidgetitem173.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(21, 8, __qtablewidgetitem173)
+        __qtablewidgetitem174 = QTableWidgetItem()
+        __qtablewidgetitem174.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(21, 9, __qtablewidgetitem174)
+        __qtablewidgetitem175 = QTableWidgetItem()
+        __qtablewidgetitem175.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(22, 0, __qtablewidgetitem175)
+        __qtablewidgetitem176 = QTableWidgetItem()
+        __qtablewidgetitem176.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(22, 1, __qtablewidgetitem176)
+        __qtablewidgetitem177 = QTableWidgetItem()
+        __qtablewidgetitem177.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(22, 2, __qtablewidgetitem177)
+        __qtablewidgetitem178 = QTableWidgetItem()
+        __qtablewidgetitem178.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(22, 3, __qtablewidgetitem178)
+        __qtablewidgetitem179 = QTableWidgetItem()
+        __qtablewidgetitem179.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(22, 4, __qtablewidgetitem179)
+        __qtablewidgetitem180 = QTableWidgetItem()
+        __qtablewidgetitem180.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(22, 5, __qtablewidgetitem180)
+        __qtablewidgetitem181 = QTableWidgetItem()
+        __qtablewidgetitem181.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(22, 6, __qtablewidgetitem181)
+        __qtablewidgetitem182 = QTableWidgetItem()
+        __qtablewidgetitem182.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(22, 7, __qtablewidgetitem182)
+        __qtablewidgetitem183 = QTableWidgetItem()
+        __qtablewidgetitem183.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(22, 8, __qtablewidgetitem183)
+        __qtablewidgetitem184 = QTableWidgetItem()
+        __qtablewidgetitem184.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(22, 9, __qtablewidgetitem184)
+        __qtablewidgetitem185 = QTableWidgetItem()
+        __qtablewidgetitem185.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(23, 0, __qtablewidgetitem185)
+        __qtablewidgetitem186 = QTableWidgetItem()
+        __qtablewidgetitem186.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(23, 1, __qtablewidgetitem186)
+        __qtablewidgetitem187 = QTableWidgetItem()
+        __qtablewidgetitem187.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(23, 2, __qtablewidgetitem187)
+        __qtablewidgetitem188 = QTableWidgetItem()
+        __qtablewidgetitem188.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(23, 3, __qtablewidgetitem188)
+        __qtablewidgetitem189 = QTableWidgetItem()
+        __qtablewidgetitem189.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(23, 4, __qtablewidgetitem189)
+        __qtablewidgetitem190 = QTableWidgetItem()
+        __qtablewidgetitem190.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(23, 5, __qtablewidgetitem190)
+        __qtablewidgetitem191 = QTableWidgetItem()
+        __qtablewidgetitem191.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(23, 6, __qtablewidgetitem191)
+        __qtablewidgetitem192 = QTableWidgetItem()
+        __qtablewidgetitem192.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(23, 7, __qtablewidgetitem192)
+        __qtablewidgetitem193 = QTableWidgetItem()
+        __qtablewidgetitem193.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(23, 8, __qtablewidgetitem193)
+        __qtablewidgetitem194 = QTableWidgetItem()
+        __qtablewidgetitem194.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(23, 9, __qtablewidgetitem194)
+        __qtablewidgetitem195 = QTableWidgetItem()
+        __qtablewidgetitem195.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(24, 0, __qtablewidgetitem195)
+        __qtablewidgetitem196 = QTableWidgetItem()
+        __qtablewidgetitem196.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(24, 1, __qtablewidgetitem196)
+        __qtablewidgetitem197 = QTableWidgetItem()
+        __qtablewidgetitem197.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(24, 2, __qtablewidgetitem197)
+        __qtablewidgetitem198 = QTableWidgetItem()
+        __qtablewidgetitem198.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(24, 3, __qtablewidgetitem198)
+        __qtablewidgetitem199 = QTableWidgetItem()
+        __qtablewidgetitem199.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(24, 4, __qtablewidgetitem199)
+        __qtablewidgetitem200 = QTableWidgetItem()
+        __qtablewidgetitem200.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(24, 5, __qtablewidgetitem200)
+        __qtablewidgetitem201 = QTableWidgetItem()
+        __qtablewidgetitem201.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(24, 6, __qtablewidgetitem201)
+        __qtablewidgetitem202 = QTableWidgetItem()
+        __qtablewidgetitem202.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(24, 7, __qtablewidgetitem202)
+        __qtablewidgetitem203 = QTableWidgetItem()
+        __qtablewidgetitem203.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(24, 8, __qtablewidgetitem203)
+        __qtablewidgetitem204 = QTableWidgetItem()
+        __qtablewidgetitem204.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(24, 9, __qtablewidgetitem204)
+        __qtablewidgetitem205 = QTableWidgetItem()
+        __qtablewidgetitem205.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(25, 0, __qtablewidgetitem205)
+        __qtablewidgetitem206 = QTableWidgetItem()
+        __qtablewidgetitem206.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(25, 1, __qtablewidgetitem206)
+        __qtablewidgetitem207 = QTableWidgetItem()
+        __qtablewidgetitem207.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(25, 2, __qtablewidgetitem207)
+        __qtablewidgetitem208 = QTableWidgetItem()
+        __qtablewidgetitem208.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(25, 3, __qtablewidgetitem208)
+        __qtablewidgetitem209 = QTableWidgetItem()
+        __qtablewidgetitem209.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(25, 4, __qtablewidgetitem209)
+        __qtablewidgetitem210 = QTableWidgetItem()
+        __qtablewidgetitem210.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(25, 5, __qtablewidgetitem210)
+        __qtablewidgetitem211 = QTableWidgetItem()
+        __qtablewidgetitem211.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(25, 6, __qtablewidgetitem211)
+        __qtablewidgetitem212 = QTableWidgetItem()
+        __qtablewidgetitem212.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(25, 7, __qtablewidgetitem212)
+        __qtablewidgetitem213 = QTableWidgetItem()
+        __qtablewidgetitem213.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(25, 8, __qtablewidgetitem213)
+        __qtablewidgetitem214 = QTableWidgetItem()
+        __qtablewidgetitem214.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(25, 9, __qtablewidgetitem214)
+        __qtablewidgetitem215 = QTableWidgetItem()
+        __qtablewidgetitem215.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(26, 0, __qtablewidgetitem215)
+        __qtablewidgetitem216 = QTableWidgetItem()
+        __qtablewidgetitem216.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(26, 1, __qtablewidgetitem216)
+        __qtablewidgetitem217 = QTableWidgetItem()
+        __qtablewidgetitem217.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(26, 2, __qtablewidgetitem217)
+        __qtablewidgetitem218 = QTableWidgetItem()
+        __qtablewidgetitem218.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(26, 3, __qtablewidgetitem218)
+        __qtablewidgetitem219 = QTableWidgetItem()
+        __qtablewidgetitem219.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(26, 4, __qtablewidgetitem219)
+        __qtablewidgetitem220 = QTableWidgetItem()
+        __qtablewidgetitem220.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(26, 5, __qtablewidgetitem220)
+        __qtablewidgetitem221 = QTableWidgetItem()
+        __qtablewidgetitem221.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(26, 6, __qtablewidgetitem221)
+        __qtablewidgetitem222 = QTableWidgetItem()
+        __qtablewidgetitem222.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(26, 7, __qtablewidgetitem222)
+        __qtablewidgetitem223 = QTableWidgetItem()
+        __qtablewidgetitem223.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(26, 8, __qtablewidgetitem223)
+        __qtablewidgetitem224 = QTableWidgetItem()
+        __qtablewidgetitem224.setTextAlignment(Qt.AlignCenter);
+        self.tblitems_2.setItem(26, 9, __qtablewidgetitem224)
+        self.tblitems_2.setObjectName(u"tblitems_2")
+        self.tblitems_2.setGeometry(QRect(0, 0, 1481, 841))
+        self.tblitems_2.setFont(font)
+        self.tblitems_2.setLayoutDirection(Qt.LeftToRight)
+        self.tblitems_2.setShowGrid(True)
+        self.tblitems_2.setGridStyle(Qt.SolidLine)
+        self.tblitems_2.setSortingEnabled(False)
+        self.tblitems_2.setRowCount(27)
+        self.tblitems_2.horizontalHeader().setVisible(True)
+        self.tblitems_2.horizontalHeader().setCascadingSectionResizes(True)
+        self.tblitems_2.horizontalHeader().setMinimumSectionSize(90)
+        self.tblitems_2.horizontalHeader().setDefaultSectionSize(110)
+        self.tblitems_2.horizontalHeader().setHighlightSections(True)
+        self.tblitems_2.horizontalHeader().setProperty("showSortIndicator", True)
+        self.tblitems_2.horizontalHeader().setStretchLastSection(True)
+        self.tblitems_2.verticalHeader().setVisible(True)
+        self.tblitems_2.verticalHeader().setCascadingSectionResizes(False)
+        self.tblitems_2.verticalHeader().setHighlightSections(True)
+        self.tblitems_2.verticalHeader().setProperty("showSortIndicator", False)
+        self.tblitems_2.verticalHeader().setStretchLastSection(True)
         self.tabWidget.addTab(self.tab_3, "")
         self.tab_4 = QWidget()
         self.tab_4.setObjectName(u"tab_4")
@@ -546,7 +835,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -724,6 +1013,83 @@ class Ui_MainWindow(object):
         self.tblitems_1.setSortingEnabled(__sortingEnabled2)
 
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"\u041f\u043b\u0430\u0442\u0430 1", None))
+        ___qtablewidgetitem62 = self.tblitems_2.horizontalHeaderItem(0)
+        ___qtablewidgetitem62.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0430\u043d\u0430\u043b 1", None));
+        ___qtablewidgetitem63 = self.tblitems_2.horizontalHeaderItem(1)
+        ___qtablewidgetitem63.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0430\u043d\u0430\u043b 2", None));
+        ___qtablewidgetitem64 = self.tblitems_2.horizontalHeaderItem(2)
+        ___qtablewidgetitem64.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0430\u043d\u0430\u043b 3", None));
+        ___qtablewidgetitem65 = self.tblitems_2.horizontalHeaderItem(3)
+        ___qtablewidgetitem65.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0430\u043d\u0430\u043b 4", None));
+        ___qtablewidgetitem66 = self.tblitems_2.horizontalHeaderItem(4)
+        ___qtablewidgetitem66.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0430\u043d\u0430\u043b 5", None));
+        ___qtablewidgetitem67 = self.tblitems_2.horizontalHeaderItem(5)
+        ___qtablewidgetitem67.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0430\u043d\u0430\u043b 6", None));
+        ___qtablewidgetitem68 = self.tblitems_2.horizontalHeaderItem(6)
+        ___qtablewidgetitem68.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0430\u043d\u0430\u043b 7", None));
+        ___qtablewidgetitem69 = self.tblitems_2.horizontalHeaderItem(7)
+        ___qtablewidgetitem69.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0430\u043d\u0430\u043b 8", None));
+        ___qtablewidgetitem70 = self.tblitems_2.horizontalHeaderItem(8)
+        ___qtablewidgetitem70.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0430\u043d\u0430\u043b 9", None));
+        ___qtablewidgetitem71 = self.tblitems_2.horizontalHeaderItem(9)
+        ___qtablewidgetitem71.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0430\u043d\u0430\u043b 10", None));
+        ___qtablewidgetitem72 = self.tblitems_2.verticalHeaderItem(0)
+        ___qtablewidgetitem72.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0435\u0436\u0438\u043c\u044b \u0440\u0430\u0431\u043e\u0442\u044b:", None));
+        ___qtablewidgetitem73 = self.tblitems_2.verticalHeaderItem(1)
+        ___qtablewidgetitem73.setText(QCoreApplication.translate("MainWindow", u"\u041c\u043e\u043d\u0438\u0442\u043e\u0440\u0438\u043d\u0433 \u043a\u0430\u0431\u0435\u043b\u044f", None));
+        ___qtablewidgetitem74 = self.tblitems_2.verticalHeaderItem(2)
+        ___qtablewidgetitem74.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u043f\u0443\u0441\u0442\u0438\u043c\u044b\u0435 \u0434\u0438\u0430\u043f\u0430\u0437\u043e\u043d\u044b:", None));
+        ___qtablewidgetitem75 = self.tblitems_2.verticalHeaderItem(3)
+        ___qtablewidgetitem75.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0438\u0430\u043f\u0430\u0437\u043e\u043d \u0441\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 \u0430\u0432\u0430\u0440. ", None));
+        ___qtablewidgetitem76 = self.tblitems_2.verticalHeaderItem(4)
+        ___qtablewidgetitem76.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0438\u0430\u043f\u0430\u0437\u043e\u043d \u0441\u043e\u043f\u0440. \u0448\u043b\u0435\u0439\u0444\u0430 \u0430\u0432\u0430\u0440.", None));
+        ___qtablewidgetitem77 = self.tblitems_2.verticalHeaderItem(5)
+        ___qtablewidgetitem77.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0438\u0430\u043f\u0430\u0437\u043e\u043d \u0441\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 \u043f\u0440\u0435\u0434\u0443\u043f\u0440.", None));
+        ___qtablewidgetitem78 = self.tblitems_2.verticalHeaderItem(6)
+        ___qtablewidgetitem78.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0438\u0430\u043f\u0430\u0437\u043e\u043d \u0441\u043e\u043f\u0440. \u0448\u043b\u0435\u0439\u0444\u0430 \u043f\u0440\u0435\u0434\u0443\u043f\u0440.", None));
+        ___qtablewidgetitem79 = self.tblitems_2.verticalHeaderItem(7)
+        ___qtablewidgetitem79.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0441\u0442\u0430\u0432\u043a\u0438:", None));
+        ___qtablewidgetitem80 = self.tblitems_2.verticalHeaderItem(8)
+        ___qtablewidgetitem80.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0441\u0442\u0430\u0432\u043a\u0430 \u043d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u044f \u043d\u0430 \u0432\u0445\u043e\u0434\u0435 (\u0412)", None));
+        ___qtablewidgetitem81 = self.tblitems_2.verticalHeaderItem(9)
+        ___qtablewidgetitem81.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0441\u0442\u0430\u0432\u043a\u0430 \u0441\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 1 (\u041c\u041e\u043c)", None));
+        ___qtablewidgetitem82 = self.tblitems_2.verticalHeaderItem(11)
+        ___qtablewidgetitem82.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0441\u0442\u0430\u0432\u043a\u0430 \u0441\u043e\u043f\u0440. \u0448\u043b\u0435\u0439\u0444\u0430 (\u043a\u041e\u043c)", None));
+        ___qtablewidgetitem83 = self.tblitems_2.verticalHeaderItem(12)
+        ___qtablewidgetitem83.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043a\u0443\u0449\u0438\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u044f:", None));
+        ___qtablewidgetitem84 = self.tblitems_2.verticalHeaderItem(13)
+        ___qtablewidgetitem84.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 1 (\u041c\u041e\u043c)", None));
+        ___qtablewidgetitem85 = self.tblitems_2.verticalHeaderItem(14)
+        ___qtablewidgetitem85.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u043f\u0440. \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 2 (\u041c\u041e\u043c)", None));
+        ___qtablewidgetitem86 = self.tblitems_2.verticalHeaderItem(15)
+        ___qtablewidgetitem86.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u043f\u0440. \u0448\u043b\u0435\u0439\u0444\u0430 (\u043a\u041e\u043c)", None));
+        ___qtablewidgetitem87 = self.tblitems_2.verticalHeaderItem(16)
+        ___qtablewidgetitem87.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u0435 \u043d\u0430 \u0432\u0445\u043e\u0434\u0435 1 (\u0412)", None));
+        ___qtablewidgetitem88 = self.tblitems_2.verticalHeaderItem(17)
+        ___qtablewidgetitem88.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u0435 \u043d\u0430 \u0432\u0445\u043e\u0434\u0435 2 (\u0412)", None));
+        ___qtablewidgetitem89 = self.tblitems_2.verticalHeaderItem(18)
+        ___qtablewidgetitem89.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0430\u0441\u0447\u0435\u0442\u043d\u043e\u0435 \u0437\u043d\u0430\u0447. \u043e\u0431\u044a\u0435\u043c. \u043d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u044f 1 (\u0412)", None));
+        ___qtablewidgetitem90 = self.tblitems_2.verticalHeaderItem(19)
+        ___qtablewidgetitem90.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0430\u0441\u0447\u0435\u0442\u043d\u043e\u0435 \u0437\u043d\u0430\u0447. \u043e\u0431\u044a\u0435\u043c. \u043d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u044f 2 (\u0412)", None));
+        ___qtablewidgetitem91 = self.tblitems_2.verticalHeaderItem(20)
+        ___qtablewidgetitem91.setText(QCoreApplication.translate("MainWindow", u"\u0410\u0432\u0430\u0440\u0438\u0439\u043d\u044b\u0435 \u0441\u0438\u0433\u043d\u0430\u043b\u044b\":", None));
+        ___qtablewidgetitem92 = self.tblitems_2.verticalHeaderItem(21)
+        ___qtablewidgetitem92.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u043f\u0440\u043e\u0442\u0438\u0432\u043b\u0435\u043d\u0438\u0435 \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 1 < \u0434\u043e\u043f.", None));
+        ___qtablewidgetitem93 = self.tblitems_2.verticalHeaderItem(22)
+        ___qtablewidgetitem93.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u043f\u0440\u043e\u0442\u0438\u0432\u043b\u0435\u043d\u0438\u0435 \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438 2 < \u0434\u043e\u043f.", None));
+        ___qtablewidgetitem94 = self.tblitems_2.verticalHeaderItem(23)
+        ___qtablewidgetitem94.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u043f\u0440\u043e\u0442\u0438\u0432\u043b\u0435\u043d\u0438\u0435 \u0448\u043b\u0435\u0439\u0444\u0430 < \u0434\u043e\u043f.", None));
+        ___qtablewidgetitem95 = self.tblitems_2.verticalHeaderItem(24)
+        ___qtablewidgetitem95.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u043f\u0440\u043e\u0442\u0438\u0432\u043b\u0435\u043d\u0438\u0435 \u0448\u043b\u0435\u0439\u0444\u0430 > \u0434\u043e\u043f.", None));
+        ___qtablewidgetitem96 = self.tblitems_2.verticalHeaderItem(25)
+        ___qtablewidgetitem96.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u0435 1 \u0432\u044b\u0448\u0435 \u0434\u043e\u043f\u0443\u0441\u043a", None));
+        ___qtablewidgetitem97 = self.tblitems_2.verticalHeaderItem(26)
+        ___qtablewidgetitem97.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u0435 2 \u0432\u044b\u0448\u0435 \u0434\u043e\u043f\u0443\u0441\u043a", None));
+
+        __sortingEnabled3 = self.tblitems_2.isSortingEnabled()
+        self.tblitems_2.setSortingEnabled(False)
+        self.tblitems_2.setSortingEnabled(__sortingEnabled3)
+
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"\u041f\u043b\u0430\u0442\u0430 2", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("MainWindow", u"\u0410\u0440\u0445\u0438\u0432", None))
     # retranslateUi
