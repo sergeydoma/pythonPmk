@@ -72,8 +72,8 @@ class myModbus():
 				""""
 				режим ПМК
 				"""
-				modePmk = instrument.read_register(registeraddress = 145)
-				self._dataP4[1][1] = modePmk
+				modePmk1 = instrument.read_register(registeraddress = 145)
+				self._dataP4[1][1] = modePmk1
 				""""
 				Номер версии ПО
 				"""
@@ -85,8 +85,8 @@ class myModbus():
 				""""
 				ID шасси
 				"""
-				IDpmk = instrument.read_registers(registeraddress = 110, number_of_registers = 2)
-				self._dataP4[1][3] = (IDpmk[0] * 65536 + IDpmk[1])
+				IDpmk1 = instrument.read_registers(registeraddress = 110, number_of_registers = 2)
+				self._dataP4[1][3] = (IDpmk1[0] * 65536 + IDpmk1[1])
 				""""
 				ID платы измерения 1
 				"""
@@ -112,8 +112,8 @@ class myModbus():
 				"""
 				Режим старта
 				"""
-				modeStart = instrument.read_bit(registeraddress = 200)
-				self._dataP4[3][0] = modeStart
+				modeStart1 = instrument.read_bit(registeraddress = 200)
+				self._dataP4[3][0] = modeStart1
 				""""
 				Плата 1 режим работы канала
 				"""
@@ -386,8 +386,8 @@ class myModbus():
 				""""
 				ID шасси
 				"""
-				IDpmk = instrument.read_registers(registeraddress = 110, number_of_registers = 2)
-				self._dataP4[10][3] = (IDpmk[0] * 65536 + IDpmk[1])
+				IDpmk2 = instrument.read_registers(registeraddress = 110, number_of_registers = 2)
+				self._dataP4[10][3] = (IDpmk2[0] * 65536 + IDpmk2[1])
 				""""
 				ID платы измерения 1
 				"""
@@ -413,8 +413,8 @@ class myModbus():
 				"""
 				Режим старта
 				"""
-				modeStart = instrument.read_bit(registeraddress = 200)
-				self._dataP4[13][1] = modeStart
+				modeStart2 = instrument.read_bit(registeraddress = 200)
+				self._dataP4[13][0] = modeStart2
 				""""
 				Плата 2 режим работы канала
 				"""
@@ -619,7 +619,7 @@ class myModbus():
 
 
 			except IOError:
-				print("нет связи с устройсвом по адресу", str(self._dataP4[0][0]))
+				print("нет связи с устройсвом по адресу", str(self._dataP4[0][0]+1))
 				self._dataP4[5][1] = 1
 			# 	# instrument.serial.close()
 			# 	time.sleep(5)

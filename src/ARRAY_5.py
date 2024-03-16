@@ -152,7 +152,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		"""
 		dataP4[4][0] = 0
 		if (dataP4[5][0]==0):
-			self.tableWidget.setItem(2, 0, QTableWidgetItem(str(int(dataP4[0][0]))))
+			# self.tableWidget.setItem(2, 0, QTableWidgetItem(str(int(dataP4[0][0]))))
 			var = int(dataP4[1][1])
 			if var == 0:
 				msg = 'Пауза перед измерением наряжения (Р-0)'
@@ -180,15 +180,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 			self.tableWidget.setItem(0, 0, QTableWidgetItem(msg))  # режим ПМК
 			numVersion = str(int(dataP4[1][2]))
 			self.tableWidget.setItem(0, 1, QTableWidgetItem(numVersion))  # Номер версии
-			idPMK = str(hex(int(dataP4[1][3])))
-			self.tableWidget.setItem(0, 2, QTableWidgetItem(idPMK))  # Номер шасси ПМК
+			idPMK1 = int(dataP4[1][3])
+			idPMK1 = str(hex(idPMK1))
+
+			self.tableWidget.setItem(0, 2, QTableWidgetItem(idPMK1))  # Номер шасси ПМК
 
 			md5 = (str(hex(int(dataP4[2][0]))) + ' ' + str(hex(int(dataP4[2][1]))) + ' ' + str(
 				hex(int(dataP4[2][2]))) + ' ' + str(hex(int(dataP4[2][3]))) + ' ' + str(hex(int(dataP4[2][4]))) + ' ' + str(
 				hex(int(dataP4[2][5]))) + ' ' + str(hex(int(dataP4[2][6]))) + ' ' + str(hex(int(dataP4[2][7]))))
 			self.tableWidget.setItem(0, 5, QTableWidgetItem(md5))  # md5
 		if (dataP4[5][1]==0):
-			self.tableWidget.setItem(2, 0, QTableWidgetItem(str(int(dataP4[0][0]))))
+			# self.tableWidget.setItem(2, 0, QTableWidgetItem(str(int(dataP4[0][0]))))
 			var = int(dataP4[10][1])
 			if var == 0:
 				msg = 'Пауза перед измерением наряжения (Р-0)'
@@ -216,8 +218,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 			self.tableWidget.setItem(0, 0, QTableWidgetItem(msg))  # режим ПМК
 			numVersion = str(int(dataP4[10][2]))
 			self.tableWidget.setItem(0, 1, QTableWidgetItem(numVersion))  # Номер версии
-			idPMK = str(hex(int(dataP4[10][3])))
-			self.tableWidget.setItem(0, 2, QTableWidgetItem(idPMK))  # Номер шасси ПМК
+			idPMK2 = int(dataP4[10][3])
+			idPMK2 = str(hex(idPMK2))
+
+			self.tableWidget.setItem(0, 2, QTableWidgetItem(idPMK2))  # Номер шасси ПМК
 
 			md5 = (str(hex(int(dataP4[12][0]))) + ' ' + str(hex(int(dataP4[2][1]))) + ' ' + str(
 				hex(int(dataP4[12][2]))) + ' ' + str(hex(int(dataP4[2][3]))) + ' ' + str(hex(int(dataP4[2][4]))) + ' ' + str(
@@ -225,29 +229,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 			self.tableWidget.setItem(0, 5, QTableWidgetItem(md5))  # md5
 
 
-		idPi1 = (str(hex(int(dataP4[1][4]))) + ' ' + str(hex(int(dataP4[1][5]))) + ' ' + str(hex(int(dataP4[1][6]))) + ' ' +
-				 str(hex(int(dataP4[1][7]))) + ' ' + str(hex(int(dataP4[1][8]))) + ' ' + str(hex(int(dataP4[1][9]))))
-		self.tableWidget.setItem(0, 3, QTableWidgetItem(idPi1))  # Номер платы измерения 1
+			idPi1 = (str(hex(int(dataP4[1][4]))) + ' ' + str(hex(int(dataP4[1][5]))) + ' ' + str(hex(int(dataP4[1][6]))) + ' ' +
+					 str(hex(int(dataP4[1][7]))) + ' ' + str(hex(int(dataP4[1][8]))) + ' ' + str(hex(int(dataP4[1][9]))))
+			self.tableWidget.setItem(0, 3, QTableWidgetItem(idPi1))  # Номер платы измерения 1
 
 		"""""
 		tblitems_1 окно Плата 1
 		"""
 		for i in range(10):
 			modeCh1 = int(dataP1[0][i])  # режим работы канала платы 1
-			modeStart = int(dataP4[3][0])
-			block_start = 0
-			if modeStart == 0:
+			modeStart1 = int(dataP4[3][0])
+			block_start1 = 0
+			if modeStart1 == 0:
 				self.tblitems_1.setItem(1, i, QTableWidgetItem('ОТКЛ.'))
 				self.tblitems_1.item(1, i).setBackground(QtGui.QColor(0, 0, 255))  # Зеленый
 				self.tblitems_1.item(1, i, ).setForeground(QtGui.QColor(255, 255, 255))
 				self.tblitems_1.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-				block_start = 1  # блокировка отображения в момент старта
+				block_start1 = 1  # блокировка отображения в момент старта
 			elif ((modeCh1 == 0) | (modeCh1 == 1) | (modeCh1 == 3) | (modeCh1 == 4) | (modeCh1 == 5)):
-				block_start = 0
+				block_start1 = 0
 				self.tblitems_1.setItem(1, i, QTableWidgetItem('ОТКЛ.'))
 				self.tblitems_1.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 			else:
-				block_start = 0
+				block_start1 = 0
 				self.tblitems_1.setItem(1, i, QTableWidgetItem('ВКЛ.'))
 				self.tblitems_1.item(1, i).setBackground(QtGui.QColor(0, 255, 0))  # Зеленый
 				self.tblitems_1.item(1, i, ).setForeground(QtGui.QColor(0, 0, 0))
@@ -425,7 +429,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		"""
 		Блокировка отображения 
 		"""
-		if block_start == 1:
+		if block_start1 == 1:
 			for k in range(13, 20):
 				for i in range(10):
 					self.tblitems_1.setItem(k, i, QTableWidgetItem('Н/Д'))  # # Авария - предупреждение сопр. шлейфа
@@ -506,7 +510,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		TableWidgt Окно ПМК20 2
 		"""
 		dataP4[4][1] = 0
-		self.tableWidget.setItem(2, 0, QTableWidgetItem(str(int(dataP4[10][0]))))
+		# self.tableWidget.setItem(2, 0, QTableWidgetItem(str(int(dataP4[10][0]))))
 		var = int(dataP4[10][1])
 		if var == 0:
 			msg = 'Пауза перед измерением наряжения (Р-0)'
@@ -553,22 +557,24 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		"""""
 		tblitems_2 окно Плата 2
 		"""
+		self.label_test.setText('4.1.3 = '+str(dataP4[1][3])+'   ' + '4.10.3 = '+ str(dataP4[10][3]))
+
 		for i in range(10):
-			modeCh1 = int(dataP2[0][i])  # режим работы канала платы 1
-			modeStart = int(dataP4[13][0])
-			block_start = 0
-			if modeStart == 0:
+			modeCh2 = int(dataP2[0][i])  # режим работы канала платы 1
+			modeStart2 = int(dataP4[13][0])
+			block_start2 = 0
+			if modeStart2 == 0:
 				self.tblitems_2.setItem(1, i, QTableWidgetItem('ОТКЛ.'))
-				self.tblitems_2.item(1, i).setBackground(QtGui.QColor(0, 0, 255))  # Зеленый
+				self.tblitems_2.item(1, i).setBackground(QtGui.QColor(0, 0, 255))  # Синий
 				self.tblitems_2.item(1, i, ).setForeground(QtGui.QColor(255, 255, 255))
 				self.tblitems_2.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-				block_start = 1  # блокировка отображения в момент старта
-			elif ((modeCh1 == 0) | (modeCh1 == 1) | (modeCh1 == 3) | (modeCh1 == 4) | (modeCh1 == 5)):
-				block_start = 0
+				block_start2 = 1  # блокировка отображения в момент старта
+			elif ((modeCh2 == 0) | (modeCh2 == 1) | (modeCh2 == 3) | (modeCh2 == 4) | (modeCh2 == 5)):
+				block_start2 = 0
 				self.tblitems_2.setItem(1, i, QTableWidgetItem('ОТКЛ.'))
 				self.tblitems_2.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 			else:
-				block_start = 0
+				block_start2 = 0
 				self.tblitems_2.setItem(1, i, QTableWidgetItem('ВКЛ.'))
 				self.tblitems_2.item(1, i).setBackground(QtGui.QColor(0, 255, 0))  # Зеленый
 				self.tblitems_2.item(1, i, ).setForeground(QtGui.QColor(0, 0, 0))
@@ -745,20 +751,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		"""
 		Блокировка отображения 
 		"""
-		if block_start == 1:
-			for k in range(13, 20):
+		if block_start2 == 1:
+			for k in [13,14,15,16,17,18,19,21,22,23,24,25,26]:
 				for i in range(10):
-					self.tblitems_1.setItem(k, i, QTableWidgetItem('Н/Д'))  # # Авария - предупреждение сопр. шлейфа
-					self.tblitems_1.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-					self.tblitems_1.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
-					self.tblitems_1.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
-			for k in range(21, 27):
-				for i in range(10):
-					self.tblitems_1.setItem(k, i, QTableWidgetItem('Н/Д'))  # # Авария - предупреждение сопр. шлейфа
-					self.tblitems_1.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-					self.tblitems_1.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
-					self.tblitems_1.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
-			for k in [1, 2, 3]:
+					self.tblitems_2.setItem(k, i, QTableWidgetItem('Н/Д'))  # # Авария - предупреждение сопр. шлейфа
+					self.tblitems_2.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_2.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tblitems_2.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+			for k in [5, 6, 7]:
 				for i in range(10):
 					self.tblitems_d.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
 					self.tblitems_d.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
@@ -834,7 +834,7 @@ def task(array):
 		# dataP2[:] += 20
 		# confirm change
 		# print (f'Child\n{dataP4}')
-		time.sleep(1)
+		# time.sleep(1)
 		# print ('P4 00 = ', dataP4[0][0])
 		mB.setDataP1(dataP1)
 		mB.setDataP2(dataP2)
