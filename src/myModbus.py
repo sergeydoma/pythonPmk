@@ -53,7 +53,7 @@ class myModbus():
 			# errorcounter = errorcounter + 1
 			print("Ошибка подключения по RS-485_2 IOError ")
 			# instrument.close_port_after_each_call = True
-			self._dataP4[4][0] = 1 # Ошибка подключения по RS-485
+			# self._dataP4[4][0] = 1 # Ошибка подключения по RS-485
 			# time.sleep(5)
 		# except (FileNotFoundError, IOError, RuntimeError, TypeError, NameError, IndexError):
 		# 	print("Ошибка подключения по RS-485_2 - File Not Found")
@@ -357,7 +357,7 @@ class myModbus():
 			# errorcounter = errorcounter + 1
 			print("Ошибка подключения по RS-485_2 IOError ")
 			# instrument.close_port_after_each_call = True
-			self._dataP4[4][1] = 1 # Ошибка подключения по RS-485
+			# self._dataP4[4][1] = 1 # Ошибка подключения по RS-485
 			# time.sleep(5)
 		# except (FileNotFoundError, IOError, RuntimeError, TypeError, NameError, IndexError):
 		# 	print("Ошибка подключения по RS-485_2 - File Not Found")

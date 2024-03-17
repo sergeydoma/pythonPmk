@@ -150,7 +150,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		"""
 		TableWidgt Окно ПМК20 1
 		"""
-		dataP4[4][0] = 0
+		# dataP4[4][0] = 0 #self._dataP4[4][0]
+
 		if (dataP4[5][0]==0):
 			# self.tableWidget.setItem(2, 0, QTableWidgetItem(str(int(dataP4[0][0]))))
 			var = int(dataP4[1][1])
@@ -179,16 +180,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 			self.tableWidget.setItem(0, 0, QTableWidgetItem(msg))  # режим ПМК
 			numVersion = str(int(dataP4[1][2]))
-			self.tableWidget.setItem(0, 1, QTableWidgetItem(numVersion))  # Номер версии
+			self.tableWidget.setItem(1, 0, QTableWidgetItem(numVersion))  # Номер версии
 			idPMK1 = int(dataP4[1][3])
 			idPMK1 = str(hex(idPMK1))
 
-			self.tableWidget.setItem(0, 2, QTableWidgetItem(idPMK1))  # Номер шасси ПМК
+			self.tableWidget.setItem(2, 0, QTableWidgetItem(idPMK1))  # Номер шасси ПМК
 
 			md5 = (str(hex(int(dataP4[2][0]))) + ' ' + str(hex(int(dataP4[2][1]))) + ' ' + str(
 				hex(int(dataP4[2][2]))) + ' ' + str(hex(int(dataP4[2][3]))) + ' ' + str(hex(int(dataP4[2][4]))) + ' ' + str(
 				hex(int(dataP4[2][5]))) + ' ' + str(hex(int(dataP4[2][6]))) + ' ' + str(hex(int(dataP4[2][7]))))
-			self.tableWidget.setItem(0, 5, QTableWidgetItem(md5))  # md5
+			self.tableWidget.setItem(5, 0, QTableWidgetItem(md5))  # md5
+			idPi1 = (str(hex(int(dataP4[1][4]))) + ' ' + str(hex(int(dataP4[1][5]))) + ' ' + str(
+				hex(int(dataP4[1][6]))) + ' ' + str(hex(int(dataP4[1][7]))) + ' ' + str(
+				hex(int(dataP4[1][8]))) + ' ' + str(hex(int(dataP4[1][9]))))
+			self.tableWidget.setItem(3, 0, QTableWidgetItem(idPi1))  # Номер платы измерения 2
+		else:
+			self.tableWidget.setItem(3, 0, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS устр - во
+			self.tableWidget.item(3, 0).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+			self.tableWidget.item(3, 0).setBackground(QtGui.QColor(208, 210, 177))  # серый
+			self.tableWidget.item(3, 0).setForeground(QtGui.QColor(0, 0, 0))
+
+
 		if (dataP4[5][1]==0):
 			# self.tableWidget.setItem(2, 0, QTableWidgetItem(str(int(dataP4[0][0]))))
 			var = int(dataP4[10][1])
@@ -217,21 +229,51 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 			self.tableWidget.setItem(0, 0, QTableWidgetItem(msg))  # режим ПМК
 			numVersion = str(int(dataP4[10][2]))
-			self.tableWidget.setItem(0, 1, QTableWidgetItem(numVersion))  # Номер версии
+			self.tableWidget.setItem(1, 0, QTableWidgetItem(numVersion))  # Номер версии
 			idPMK2 = int(dataP4[10][3])
 			idPMK2 = str(hex(idPMK2))
 
-			self.tableWidget.setItem(0, 2, QTableWidgetItem(idPMK2))  # Номер шасси ПМК
+			self.tableWidget.setItem(2, 0, QTableWidgetItem(idPMK2))  # Номер шасси ПМК
 
 			md5 = (str(hex(int(dataP4[12][0]))) + ' ' + str(hex(int(dataP4[2][1]))) + ' ' + str(
 				hex(int(dataP4[12][2]))) + ' ' + str(hex(int(dataP4[2][3]))) + ' ' + str(hex(int(dataP4[2][4]))) + ' ' + str(
 				hex(int(dataP4[12][5]))) + ' ' + str(hex(int(dataP4[2][6]))) + ' ' + str(hex(int(dataP4[2][7]))))
-			self.tableWidget.setItem(0, 5, QTableWidgetItem(md5))  # md5
+			self.tableWidget.setItem(5, 0, QTableWidgetItem(md5))  # md5
 
+			idPi2 = (str(hex(int(dataP4[10][4]))) + ' ' + str(hex(int(dataP4[10][5]))) + ' ' + str(hex(int(dataP4[10][6]))) + ' ' +
+					 str(hex(int(dataP4[10][7]))) + ' ' + str(hex(int(dataP4[10][8]))) + ' ' + str(hex(int(dataP4[10][9]))))
+			self.tableWidget.setItem(4, 0, QTableWidgetItem(idPi2))  # Номер платы измерения 1
+		else:
+			self.tableWidget.setItem(4, 0, QTableWidgetItem('Н/Д'))  # б
+			self.tableWidget.item(4, 0).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+			self.tableWidget.item(4, 0).setBackground(QtGui.QColor(208, 210, 177))  # серый
+			self.tableWidget.item(4, 0).setForeground(QtGui.QColor(0, 0, 0))
 
-			idPi1 = (str(hex(int(dataP4[1][4]))) + ' ' + str(hex(int(dataP4[1][5]))) + ' ' + str(hex(int(dataP4[1][6]))) + ' ' +
-					 str(hex(int(dataP4[1][7]))) + ' ' + str(hex(int(dataP4[1][8]))) + ' ' + str(hex(int(dataP4[1][9]))))
-			self.tableWidget.setItem(0, 3, QTableWidgetItem(idPi1))  # Номер платы измерения 1
+			for k in [1, 3, 4, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26]:
+				for i in range(10):
+					self.tblitems_2.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
+					self.tblitems_2.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_2.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tblitems_2.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+			# for k in range(7):
+			# 	for i in range(1):
+			# 		self.tableWidget.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS устр - во
+			# 		self.tableWidget.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+			# 		self.tableWidget.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+			# 		self.tableWidget.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+			for k in [5, 6, 7]: #, 5, 6, 7]:
+				for i in range(10):
+					self.tblitems_d.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
+					self.tblitems_d.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+					self.tblitems_d.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
+					self.tblitems_d.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+
+		if (dataP4[5][0]==1) & (dataP4[5][1]==1):
+			for k in [0,1,2,3,4,5]:
+				self.tableWidget.setItem(k, 0, QTableWidgetItem('Н/Д'))  # 				self.tableWidget.item(k, 0).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+				self.tableWidget.item(k, 0).setBackground(QtGui.QColor(208, 210, 177))  # серый
+				self.tableWidget.item(k, 0).setForeground(QtGui.QColor(0, 0, 0))
+
 
 		"""""
 		tblitems_1 окно Плата 1
@@ -448,7 +490,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 					self.tblitems_d.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 					self.tblitems_d.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
 					self.tblitems_d.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
-		blok_RS = int(dataP4[4][0])
+		blok_RS = int(dataP4[14][0])
 		if blok_RS == 1:
 			for k in [1, 3, 4, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26]:
 				for i in range(10):
@@ -511,29 +553,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		"""
 		dataP4[4][1] = 0
 		# self.tableWidget.setItem(2, 0, QTableWidgetItem(str(int(dataP4[10][0]))))
-		var = int(dataP4[10][1])
-		if var == 0:
-			msg = 'Пауза перед измерением наряжения (Р-0)'
-		elif var == 1:
-			msg = 'Измерение напряжения (Р-1)'
-		elif var == 2:
-			msg = 'Пауза перед подачей напряжения U = -100 V (Р-2)'
-		elif var == 3:
-			msg = 'Пауза после подачи напряжения U = -100 V (Р-3)'
-		elif var == 4:
-			msg = 'Измерение сопротивления при U = -100 V (Р-4)'
-		elif var == 5:
-			msg = 'Пауза после измерения сопротивления U = -100 V (Р-5)'
-		elif var == 6:
-			msg = 'Пауза после снятия нпряжения U = -100 V (Р-6)'
-		elif var == 7:
-			msg = 'Пауза после подачи напряжения U = +100 V (Р-7)'
-		elif var == 8:
-			msg = 'Измерение сопротивления при U = +100 V (Р-8)'
-		elif var == 9:
-			msg = 'Пауза после измерения сопротивления U = +100 V (Р-9)'
-		else:
-			msg = 'Пауза после снятия напряжения U = +100 V (Р-10)'
+		# var = int(dataP4[10][1])
+		# if var == 0:
+		# 	msg = 'Пауза перед измерением наряжения (Р-0)'
+		# elif var == 1:
+		# 	msg = 'Измерение напряжения (Р-1)'
+		# elif var == 2:
+		# 	msg = 'Пауза перед подачей напряжения U = -100 V (Р-2)'
+		# elif var == 3:
+		# 	msg = 'Пауза после подачи напряжения U = -100 V (Р-3)'
+		# elif var == 4:
+		# 	msg = 'Измерение сопротивления при U = -100 V (Р-4)'
+		# elif var == 5:
+		# 	msg = 'Пауза после измерения сопротивления U = -100 V (Р-5)'
+		# elif var == 6:
+		# 	msg = 'Пауза после снятия нпряжения U = -100 V (Р-6)'
+		# elif var == 7:
+		# 	msg = 'Пауза после подачи напряжения U = +100 V (Р-7)'
+		# elif var == 8:
+		# 	msg = 'Измерение сопротивления при U = +100 V (Р-8)'
+		# elif var == 9:
+		# 	msg = 'Пауза после измерения сопротивления U = +100 V (Р-9)'
+		# else:
+		# 	msg = 'Пауза после снятия напряжения U = +100 V (Р-10)'
 
 		# self.tableWidget.setItem(0, 0, QTableWidgetItem(msg))  # Num ID Modbus RTU
 		# numVersion = str(int(dataP4[1][2]))
@@ -541,11 +583,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		# idPMK = str(hex(int(dataP4[1][3])))
 		# self.tableWidget.setItem(0, 2, QTableWidgetItem(idPMK))  # Номер шасси ПМК
 
-		idPi1 = (str(hex(int(dataP4[10][4]))) + ' ' + str(hex(int(dataP4[10][5]))) + ' ' + str(
-			hex(int(dataP4[10][6]))) + ' ' + str(hex(int(dataP4[10][7]))) + ' ' + str(
-			hex(int(dataP4[10][8]))) + ' ' + str(hex(int(dataP4[10][9]))))
 
-		self.tableWidget.setItem(0, 4, QTableWidgetItem(idPi1))  # Номер платы измерения 1
 
 		# md5 = (str(hex(int(dataP4[2][0]))) + ' ' + str(hex(int(dataP4[2][1]))) + ' ' + str(
 		# 	hex(int(dataP4[2][2]))) + ' ' + str(hex(int(dataP4[2][3]))) + ' ' + str(
@@ -554,10 +592,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 		# self.tableWidget.setItem(0, 5, QTableWidgetItem(md5))  # Номер платы измерения 1
 
-		"""""
+		"""
 		tblitems_2 окно Плата 2
 		"""
-		self.label_test.setText('4.1.3 = '+str(dataP4[1][3])+'   ' + '4.10.3 = '+ str(dataP4[10][3]))
+		self.label_test.setText('4.4.0 = '+str(dataP4[4][0])+'   ' + '4.4.1 = '+ str(dataP4[4][1]))
 
 		for i in range(10):
 			modeCh2 = int(dataP2[0][i])  # режим работы канала платы 1
@@ -766,24 +804,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 					self.tblitems_d.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
 		blok_RS = dataP4[4][1]
 		if blok_RS == 1:
-			for k in [1, 3, 4, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26]:
-				for i in range(10):
-					self.tblitems_2.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
-					self.tblitems_2.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-					self.tblitems_2.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
-					self.tblitems_2.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
-			for k in range(7):
-				for i in range(1):
-					self.tableWidget.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS устр - во
-					self.tableWidget.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-					self.tableWidget.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
-					self.tableWidget.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
-			for k in [1, 2, 3, 5, 6, 7]:
-				for i in range(10):
-					self.tblitems_d.setItem(k, i, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS плата 1
-					self.tblitems_d.item(k, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-					self.tblitems_d.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
-					self.tblitems_d.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
+			None
 
 			# self.tableWidget.setItem (1, 1, QTableWidgetItem ("УКККФ"))		#(dataP4[0][0]))
 
@@ -834,7 +855,7 @@ def task(array):
 		# dataP2[:] += 20
 		# confirm change
 		# print (f'Child\n{dataP4}')
-		# time.sleep(1)
+		time.sleep(1)
 		# print ('P4 00 = ', dataP4[0][0])
 		mB.setDataP1(dataP1)
 		mB.setDataP2(dataP2)
