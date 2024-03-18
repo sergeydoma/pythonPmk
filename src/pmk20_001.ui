@@ -50,7 +50,7 @@ color: rgb(0, 0, 0);</string>
        <attribute name="title">
         <string>ПМК-20</string>
        </attribute>
-       <widget class="QTableWidget" name="tableWidget">
+       <widget class="QTableWidget" name="tableWidget_PMK">
         <property name="geometry">
          <rect>
           <x>680</x>
@@ -511,6 +511,9 @@ color: rgb(0, 0, 0);</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_test">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>150</x>
