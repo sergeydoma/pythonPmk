@@ -99,25 +99,30 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		self._counter2 = 0
 		self._counter3 = 0
 		self._counter4 = 0
-		self._delay1 = 5
-		self._delay2 = 3
+		self._delay1 = 2
+		self._delay2 = 10
 
 	def update_table(self):
-		# self.beginResetModel()
 		self._dataP1 = dataP1
 		self._dataP2 = dataP2
 		self._dataP4 = dataP4
+		self.model1 = PandasModel(dataP3)
+		self.model1.dataChanged.emit(QtCore.QModelIndex(), QtCore.QModelIndex())
+		self.tableView_Arhive.setModel(self.model1)
+		self.model1.dataChanged.emit(QtCore.QModelIndex(), QtCore.QModelIndex())
+		# self.beginResetModel()
+
 
 
 		"""
 		Состояние сети 
 		"""
-		RS1 = (dataP4[4][0] == 1)
-		RS2 = (dataP4[4][1] == 1)
-		ID1 = (dataP4[5][0] == 1)
-		ID2 = (dataP4[5][1] == 1)
+		RS1 = (int (dataP4[4][0]) == 1)
+		RS2 = (int (dataP4[4][1]) == 1)
+		ID1 = (int (dataP4[5][0]) == 1)
+		ID2 = (int (dataP4[5][1]) == 1)
 
-		if (RS1 & RS2) == 1:
+		if (RS1 | RS2) == 1:
 			if (self._counter1 < self._delay1):
 				self._counter1 += 1
 			else:
@@ -127,7 +132,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		else:
 			self._counter1 = 0
 
-		if ((ID1 & ID2) == 1) & ((RS1 & RS2) == 0) == 1:
+		if ((ID1 & ID2) == 1) & ((RS1 | RS2) == 0) == 1:
 			if (self._counter2 < self._delay2):
 				self._counter2 += 1
 			else:
@@ -141,7 +146,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		else:
 			self._counter2 = 0
 
-		if ID1 & (not ID2) & ((RS1 & RS2) == 0)  == 0:
+		if ID1 & (not ID2) & ((RS1 | RS2) == 0)  == 1:
 			if (self._counter3 < self._delay2):
 				self._counter3 += 1
 			else:
@@ -153,7 +158,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		else:
 			self._counter3 = 0
 
-		if ID2 & (not ID1) & ((RS1 & RS2) == 0) == 1:
+		if ID2 & (not ID1) & ((RS1 | RS2) == 0) == 1:
 			if (self._counter4 < self._delay2):
 				self._counter4 += 1
 			else:
@@ -929,7 +934,7 @@ if 1 == 1:
 	# 			 'Напряжение на входе 1 выше доп.', 'Напряжение на входе 2 выше доп.'])
 
 	dataP3 = pd.DataFrame(dataP3,
-		columns = ['Калал 1', 'Калал 2', 'Калал 3', 'Калал 4', 'Калал 5', 'Калал 6', 'Калал 7', 'Калал 8', 'Калал 9',
+		columns = ['Дата/время', 'Калал 2', 'Калал 3', 'Калал 4', 'Калал 5', 'Калал 6', 'Калал 7', 'Калал 8', 'Калал 9',
 			'Калал 10'],
 		index = ['Режим работы:', 'Режим работы канала', 'Допустимые диапазоны:', 'Диапазон сопр. изоляции авар.',
 			'Диапазон сопр. шлейфа авар.', 'Диапазон сопр. изоляции предупр.', 'Диапазон сопр. шлейфа предупр.',

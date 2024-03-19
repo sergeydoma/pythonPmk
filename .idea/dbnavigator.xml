@@ -44,7 +44,10 @@
     </last-used-providers>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" object-ref="consoles/Connection" />
+      <object connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" object-ref="schemas/pg_catalog/tables/pg_am" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" />
@@ -52,6 +55,11 @@
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="public.rz1_3" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="public.customer" active-filter-id="" />
+    <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="pg_catalog.pg_am" active-filter-id="ba223b6d-16cf-4c0a-862b-13d18ba3c29d">
+      <filter id="ba223b6d-16cf-4c0a-862b-13d18ba3c29d" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="amname" operator="=" value="" active="true" />
+      </filter>
+    </filter-actions>
     <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="public.rz1_4" active-filter-id="EMPTY_FILTER">
       <filter id="782a6e43-0f99-462f-810e-06da0bb85e64" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="chanal_1" operator="=" value="" active="true" />
@@ -65,6 +73,9 @@
       </filter>
     </filter-actions>
     <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="public.pmk" active-filter-id="" />
+    <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="information_schema.sql_features" active-filter-id="" />
+    <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="pg_catalog.pg_amop" active-filter-id="" />
+    <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="information_schema.sql_implementation_info" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
