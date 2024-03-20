@@ -832,6 +832,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 # endregion
 data = np.array([[1, 9, 2], [1, 0, -1], [3, 5, 2], [3, 3, 2], [5, 8, 9], ])
 
+def mDB(array):
+	dataAll = frombuffer(array, dtype = double, count = len(array))
+	# reshape array into preferred shape
+	dataAll = dataAll.reshape((26, 40))
+	dataSumm = np.hsplit(dataAll, 4)
+	dataP1 = dataSumm[0]
+	dataP2 = dataSumm[1]
+	dataP3 = dataSumm[2]
+	dataP4 = dataSumm[3]
+	while(1):
+		print('mDB begin')
+		time.sleep(2)
+
 
 # region Task(array)
 # task executed in a child process
@@ -845,6 +858,7 @@ def task(array):
 	dataP2 = dataSumm[1]
 	dataP3 = dataSumm[2]
 	dataP4 = dataSumm[3]
+
 
 	# check the contents
 	print(f'Child\n{dataP2}')
@@ -950,10 +964,13 @@ if 1 == 1:
 	# create a child process
 	child1 = Process(target = task, args = (array,), daemon = True)
 	child2 = Process(target = visu, args = (array,), daemon = True)
+	child3 = Process(target = mDB, args = (array,), daemon = True)
 	# start the child process
+	child3.start()
 	child2.start()
 	child1.start()
 	# wait for the child process to complete
+	child3.join()
 	child2.join()
 	# check some data in the shared array
 
