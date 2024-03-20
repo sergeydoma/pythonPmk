@@ -117,8 +117,8 @@ class myModbus():
 				""""
 				Плата 1 режим работы канала
 				"""
-				modeCh = instrument.read_registers(registeraddress = 40, number_of_registers = 10)
-				self._dataP1[0] = modeCh
+				modeCh1 = instrument.read_registers(registeraddress = 40, number_of_registers = 10)
+				self._dataP1[0] = modeCh1
 				""""
 				Плата 1 Диапазон сопротивления изоляции аварийный
 				"""
@@ -373,8 +373,8 @@ class myModbus():
 				""""
 				режим ПМК
 				"""
-				modePmk = instrument.read_register(registeraddress = 145)
-				self._dataP4[10][1] = modePmk
+				modePmk2 = instrument.read_register(registeraddress = 145)
+				self._dataP4[10][1] = modePmk2
 				""""
 				Номер версии ПО
 				"""
@@ -418,8 +418,8 @@ class myModbus():
 				""""
 				Плата 2 режим работы канала
 				"""
-				modeCh = instrument.read_registers(registeraddress = 40, number_of_registers = 10)
-				self._dataP2[0] = modeCh
+				modeCh2 = instrument.read_registers(registeraddress = 40, number_of_registers = 10)
+				self._dataP2[0] = modeCh2
 				""""
 				Плата 1 Диапазон сопротивления изоляции аварийный
 				"""
