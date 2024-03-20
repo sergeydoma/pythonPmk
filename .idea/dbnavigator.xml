@@ -44,9 +44,7 @@
     </last-used-providers>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" object-ref="schemas/public/tables/Authors" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" />
@@ -83,6 +81,11 @@
     <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="pg_catalog.pg_amop" active-filter-id="" />
     <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="pg_catalog.pg_transform" active-filter-id="" />
     <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="public.customer" active-filter-id="" />
+    <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="public.pmk_20" active-filter-id="EMPTY_FILTER">
+      <filter id="ccaac333-c0d9-486c-9c99-55fb006b3c3f" name="1" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="id" operator="=" value="1" active="true" />
+      </filter>
+    </filter-actions>
     <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="public.rz1" active-filter-id="" />
     <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="pg_catalog.pg_aggregate" active-filter-id="" />
     <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="public.Books" active-filter-id="EMPTY_FILTER">
@@ -97,9 +100,14 @@
       </filter>
     </filter-actions>
     <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="information_schema.sql_features" active-filter-id="" />
-    <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="public.pmk20" active-filter-id="">
+    <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="public.pmk20" active-filter-id="EMPTY_FILTER">
       <filter id="eb854a55-fd6f-4579-8ddc-66f54c43d96c" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="idpmk" operator="=" value="" active="true" />
+      </filter>
+    </filter-actions>
+    <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="public.user" active-filter-id="946edfc5-1af3-4c1e-b1b6-4ac455d93ff3">
+      <filter id="946edfc5-1af3-4c1e-b1b6-4ac455d93ff3" name="4" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="id" operator="&lt;" value="4" active="true" />
       </filter>
     </filter-actions>
     <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="information_schema.sql_implementation_info" active-filter-id="" />
@@ -184,7 +192,7 @@
           <tcp-port-to value="4999" />
           <debugger-type value="JDBC" />
         </debugger>
-        <object-filters hide-empty-schemas="false" hide-pseudo-columns="false" hide-audit-columns="false">
+        <object-filters hide-empty-schemas="false" hide-pseudo-columns="true" hide-audit-columns="true">
           <object-type-filter>
             <object-type name="SCHEMA" enabled="true" />
             <object-type name="USER" enabled="true" />
