@@ -9,16 +9,23 @@ try:
                                   password="123",
                                   host="127.0.0.1",
                                   port="5432",
-                                  database="postgres_db")
+                                  database="pmk20_db")
 
     # Создайте курсор для выполнения операций с базой данных
     cursor = connection.cursor()
     # SQL-запрос для создания новой таблицы
-    create_table_query = '''CREATE TABLE pmk
-                          (ID INT PRIMARY KEY     NOT NULL,
-                            TIME            TIMESTAMPTZ,
-                            MODEL           TEXT    NOT NULL,
-                            PRICE         REAL); '''
+    create_table_query = '''CREATE TABLE pmk20
+                          ( TIME            TIMESTAMPTZ,
+                            IDPMK           TEXT,
+                            NumPlat         INT,
+                            NumCh           INT,
+                            Uinput1         FLOAT,
+                            Uinput2         FLOAT,
+                            RZ1             FLOAT,
+                            RZ2             FLOAT,
+                            RLOOP           FLOAT,
+                            Uvol            FLOAT
+                            ); '''
     # Выполнение команды: это создает новую таблицу
     cursor.execute(create_table_query)
     connection.commit()

@@ -5,7 +5,7 @@ import time
 import psycopg2
 from psycopg2 import Error
 
-from exchange import data_exchange as de
+# from exchange import data_exchange as de
 
 
 data_pmk = de()

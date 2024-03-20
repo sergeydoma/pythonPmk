@@ -15,13 +15,14 @@ try:
                                   password="123",
                                   host="127.0.0.1",
                                   port="5432",
-                                  database="postgres_db")
+                                  database="pmk20_db")
 
     cursor = connection.cursor()
     # Выполнение SQL-запроса для вставки данных в таблицу
 
-    insert_query = """ INSERT INTO pmk (TIME, MODEL, PRICE) VALUES (
-     CURRENT_TIMESTAMP , 'Iphone12', 1100)"""
+    insert_query = """ INSERT INTO pmk (TIME, IDPMK, NumPlat, NumCh,Uinput1,
+    Uinput2, RZ1, RZ2, RLOOP, Uvol) VALUES (
+     CURRENT_TIMESTAMP , "22FF", 1100)"""
     cursor.execute(insert_query)
     connection.commit()
     print("1 запись успешно вставлена")
