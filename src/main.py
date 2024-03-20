@@ -15,6 +15,11 @@ from numpy import frombuffer
 from numpy import double
 from edit_dialog import Ui_MainWindow
 from myModbus import myModbus
+import time
+
+
+import psycopg2
+from psycopg2 import Error
 
 
 # region Absract Model
@@ -112,15 +117,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		self.model1.dataChanged.emit(QtCore.QModelIndex(), QtCore.QModelIndex())
 		# self.beginResetModel()
 
-
-
 		"""
 		Состояние сети 
 		"""
-		RS1 = (int (dataP4[4][0]) == 1)
-		RS2 = (int (dataP4[4][1]) == 1)
-		ID1 = (int (dataP4[5][0]) == 1)
-		ID2 = (int (dataP4[5][1]) == 1)
+		RS1 = (int(dataP4[4][0]) == 1)
+		RS2 = (int(dataP4[4][1]) == 1)
+		ID1 = (int(dataP4[5][0]) == 1)
+		ID2 = (int(dataP4[5][1]) == 1)
 
 		if (RS1 | RS2) == 1:
 			if (self._counter1 < self._delay1):
@@ -146,7 +149,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		else:
 			self._counter2 = 0
 
-		if ID1 & (not ID2) & ((RS1 | RS2) == 0)  == 1:
+		if ID1 & (not ID2) & ((RS1 | RS2) == 0) == 1:
 			if (self._counter3 < self._delay2):
 				self._counter3 += 1
 			else:
@@ -180,7 +183,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		"""
 		# dataP4[4][0] = 0 #self._dataP4[4][0]
 
-		if (dataP4[5][0]==0):
+		if (dataP4[5][0] == 0):
 			# self.tableWidget.setItem(2, 0, QTableWidgetItem(str(int(dataP4[0][0]))))
 			var = int(dataP4[1][1])
 			if var == 0:
@@ -215,8 +218,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 			self.tableWidget_PMK.setItem(2, 0, QTableWidgetItem(idPMK1))  # Номер шасси ПМК
 
 			md5 = (str(hex(int(dataP4[2][0]))) + ' ' + str(hex(int(dataP4[2][1]))) + ' ' + str(
-				hex(int(dataP4[2][2]))) + ' ' + str(hex(int(dataP4[2][3]))) + ' ' + str(hex(int(dataP4[2][4]))) + ' ' + str(
-				hex(int(dataP4[2][5]))) + ' ' + str(hex(int(dataP4[2][6]))) + ' ' + str(hex(int(dataP4[2][7]))))
+				hex(int(dataP4[2][2]))) + ' ' + str(hex(int(dataP4[2][3]))) + ' ' + str(
+				hex(int(dataP4[2][4]))) + ' ' + str(hex(int(dataP4[2][5]))) + ' ' + str(
+				hex(int(dataP4[2][6]))) + ' ' + str(hex(int(dataP4[2][7]))))
 			self.tableWidget_PMK.setItem(5, 0, QTableWidgetItem(md5))  # md5
 			idPi1 = (str(hex(int(dataP4[1][4]))) + ' ' + str(hex(int(dataP4[1][5]))) + ' ' + str(
 				hex(int(dataP4[1][6]))) + ' ' + str(hex(int(dataP4[1][7]))) + ' ' + str(
@@ -225,11 +229,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		else:
 			self.tableWidget_PMK.setItem(3, 0, QTableWidgetItem('Н/Д'))  # блокировка  значения по RS устр - во
 			self.tableWidget_PMK.item(3, 0).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-			self.tableWidget_PMK.item(3, 0).setBackground(QtGui.QColor(208, 210, 177))  # серый
-			# self.tableWidget_PMK.item(3, 0).setForeground(QtGui.QColor(0, 0, 0))
+			self.tableWidget_PMK.item(3, 0).setBackground(QtGui.QColor(208, 210,
+				177))  # серый  # self.tableWidget_PMK.item(3, 0).setForeground(QtGui.QColor(0, 0, 0))
 
-
-		if (dataP4[5][1]==0):
+		if (dataP4[5][1] == 0):
 			self.tableWidget_PMK.setItem(2, 0, QTableWidgetItem(str(int(dataP4[0][0]))))
 			var = int(dataP4[10][1])
 			if var == 0:
@@ -264,12 +267,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 			self.tableWidget_PMK.setItem(2, 0, QTableWidgetItem(idPMK2))  # Номер шасси ПМК
 
 			md5 = (str(hex(int(dataP4[12][0]))) + ' ' + str(hex(int(dataP4[2][1]))) + ' ' + str(
-				hex(int(dataP4[12][2]))) + ' ' + str(hex(int(dataP4[2][3]))) + ' ' + str(hex(int(dataP4[2][4]))) + ' ' + str(
-				hex(int(dataP4[12][5]))) + ' ' + str(hex(int(dataP4[2][6]))) + ' ' + str(hex(int(dataP4[2][7]))))
+				hex(int(dataP4[12][2]))) + ' ' + str(hex(int(dataP4[2][3]))) + ' ' + str(
+				hex(int(dataP4[2][4]))) + ' ' + str(hex(int(dataP4[12][5]))) + ' ' + str(
+				hex(int(dataP4[2][6]))) + ' ' + str(hex(int(dataP4[2][7]))))
 			self.tableWidget_PMK.setItem(5, 0, QTableWidgetItem(md5))  # md5
 
-			idPi2 = (str(hex(int(dataP4[10][4]))) + ' ' + str(hex(int(dataP4[10][5]))) + ' ' + str(hex(int(dataP4[10][6]))) + ' ' +
-					 str(hex(int(dataP4[10][7]))) + ' ' + str(hex(int(dataP4[10][8]))) + ' ' + str(hex(int(dataP4[10][9]))))
+			idPi2 = (str(hex(int(dataP4[10][4]))) + ' ' + str(hex(int(dataP4[10][5]))) + ' ' + str(
+				hex(int(dataP4[10][6]))) + ' ' + str(hex(int(dataP4[10][7]))) + ' ' + str(
+				hex(int(dataP4[10][8]))) + ' ' + str(hex(int(dataP4[10][9]))))
 			self.tableWidget_PMK.setItem(4, 0, QTableWidgetItem(idPi2))  # Номер платы измерения 1
 		else:
 			self.tableWidget_PMK.setItem(4, 0, QTableWidgetItem('Н/Д'))  # б
@@ -314,19 +319,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 				self.tblitems_1.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range(10):
 			deltaAlarm1ch = str(int(dataP1[1][i])) + ' %'
-			self.tblitems_1.setItem(3, i,QTableWidgetItem(deltaAlarm1ch))  # допустимое авар. отклонение сопр. изоляции 1
+			self.tblitems_1.setItem(3, i,
+				QTableWidgetItem(deltaAlarm1ch))  # допустимое авар. отклонение сопр. изоляции 1
 			self.tblitems_1.item(3, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range(10):
 			deltaAlarm1ch = str(int(dataP1[2][i])) + ' %'
-			self.tblitems_1.setItem(4, i,QTableWidgetItem(deltaAlarm1ch))  # допустимое авар. отклонение сопр. шлеййфа 1
+			self.tblitems_1.setItem(4, i,
+				QTableWidgetItem(deltaAlarm1ch))  # допустимое авар. отклонение сопр. шлеййфа 1
 			self.tblitems_1.item(4, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range(10):
 			deltaWorn1ch = str(int(dataP1[3][i])) + ' %'
-			self.tblitems_1.setItem(5, i, QTableWidgetItem(deltaWorn1ch))  # допустимое прдедупр. отклонение сопр. изоляции 1
+			self.tblitems_1.setItem(5, i,
+				QTableWidgetItem(deltaWorn1ch))  # допустимое прдедупр. отклонение сопр. изоляции 1
 			self.tblitems_1.item(5, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range(10):
 			deltaWorn1ch = str(int(dataP1[4][i])) + ' %'
-			self.tblitems_1.setItem(6, i, QTableWidgetItem(deltaWorn1ch))  # допустимое предупр. отклонение сопр. шлеййфа 1
+			self.tblitems_1.setItem(6, i,
+				QTableWidgetItem(deltaWorn1ch))  # допустимое предупр. отклонение сопр. шлеййфа 1
 			self.tblitems_1.item(6, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range(10):
 			setUch1 = str(int(dataP1[5][i]))  # +' В'
@@ -482,7 +491,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		"""
 		tblitems_2 окно Плата 2
 		"""
-		self.label_test.setText('4.3.0 = '+str(dataP4[3][0])+'   ' + '4.13.0 = '+ str(dataP4[13][0]))
+		self.label_test.setText('4.3.0 = ' + str(dataP4[3][0]) + '   ' + '4.13.0 = ' + str(dataP4[13][0]))
 
 		for i in range(10):
 			modeCh2 = int(dataP2[0][i])  # режим работы канала платы 1
@@ -511,7 +520,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 				self.tblitems_2.item(1, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range(10):
 			deltaAlarm1ch = str(int(dataP2[1][i])) + ' %'
-			self.tblitems_2.setItem(3, i,QTableWidgetItem(deltaAlarm1ch))  # допустимое авар. отклонение сопр. изоляции 1
+			self.tblitems_2.setItem(3, i,
+				QTableWidgetItem(deltaAlarm1ch))  # допустимое авар. отклонение сопр. изоляции 1
 			self.tblitems_2.item(3, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range(10):
 			deltaAlarm1ch = str(int(dataP2[2][i])) + ' %'
@@ -805,10 +815,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 					self.tableWidget_PMK.item(k, i).setBackground(QtGui.QColor(208, 210, 177))  # серый
 					self.tableWidget_PMK.item(k, i, ).setForeground(QtGui.QColor(0, 0, 0))
 
-
-
-
-			# self.tableWidget.setItem (1, 1, QTableWidgetItem ("УКККФ"))		#(dataP4[0][0]))
+	# self.tableWidget.setItem (1, 1, QTableWidgetItem ("УКККФ"))		#(dataP4[0][0]))
 
 	# self.table.close()
 	# self.table.show()
@@ -826,15 +833,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		print('ВВеден номер = ', intCombo)
 		dataP4[0][0] = intCombo
 
-	# self.tblitems_2.setItem (1, 1, QTableWidgetItem ("Ура!!!!!", ))
+
+# self.tblitems_2.setItem (1, 1, QTableWidgetItem ("Ура!!!!!", ))
 
 
 # endregion
 data = np.array([[1, 9, 2], [1, 0, -1], [3, 5, 2], [3, 3, 2], [5, 8, 9], ])
 
-def mDB(array):
 
+def mDB(array):
 	dataAll = frombuffer(array, dtype = double, count = len(array))
+	dataAll.fill(1.0)
 	# reshape array into preferred shape
 	dataAll = dataAll.reshape((26, 40))
 	dataSumm = np.hsplit(dataAll, 4)
@@ -842,8 +851,153 @@ def mDB(array):
 	dataP2 = dataSumm[1]
 	dataP3 = dataSumm[2]
 	dataP4 = dataSumm[3]
-	while(1):
-		print('mDB begin')
+	setMode0 = 0
+	setMode1 = 0
+	startLoad = 0
+	while (1):
+		modePMK1 = int (dataP4[1][1])
+		modePMK2 = int (dataP4[10][1])
+		modePMK = 0
+		ErrorCon1 = int (dataP4[5][0])
+		ErrorCon2 = int (dataP4[5][1])
+		idPMK1 = dataP4[1][3]
+		idPMK2 = dataP4[10][3]
+		idPMK = 0
+		# numPat  = int (dataP4[18][0])
+
+		if ErrorCon1 == 0:
+			if modePMK1 == 1:
+				setMode0 = 1
+				# startLoad = 0
+			elif ((modePMK1 == 10) & (setMode0 == 1)) == 1:
+				startLoad = 1
+				setMode0 = 0
+			idPMK = int (idPMK1)
+
+		elif ErrorCon2 == 0:
+			if modePMK2 == 1:
+				setMode0 = 1
+				# startLoad = 0
+			elif(modePMK2 == 10) & (setMode0 == 1) == 1:
+				startLoad = 1
+				setMode0 = 0
+			idPMK = int (idPMK2)
+		else:
+			startLoad = 0
+
+
+		if startLoad == 1:
+			print("СТАРТ ЗАПИСИ SQL !!!")
+
+			# startLoad = 0
+			idPMK = str(hex (idPMK))
+			NumPlat = str(1)
+			for i in range (10):
+				NumCh = str(i)
+				Uinput1 = str(dataP1[12][i])
+				Uinput2 = str(dataP1[13][i])
+				RZ1 = str(dataP1[9][i])
+				RZ2 = str(dataP1[10][i])
+				Rloop = str(dataP1[11][i])
+				Uvol = str(int (dataP1[14][i]))
+
+				try:
+					t = str(time.time())
+					print(t)
+					t = '2014-04-04 20:00:00'
+					# Подключиться к существующей базе данных
+					connection = psycopg2.connect(user = "postgres", # пароль, который указали при установке PostgreSQL
+						password = "123", host = "127.0.0.1", port = "5432", database = "pmk20_db")
+					cursor = connection.cursor()
+
+					# Выполнение SQL-запроса для вставки данных в таблицу
+					insert_query_db = """ INSERT INTO pmk_23 (                           
+											TIME            ,
+											IDPMK           ,                                  
+											NumPlat         ,
+											NumCh           ,
+											Uinput1         ,
+											Uinput2         ,
+											Rz1             ,
+											Rz2             ,
+											Rloop           ,
+											Uvol                      
+												)  
+											VALUES (CURRENT_TIMESTAMP, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+					cursor.execute(insert_query_db, (idPMK , NumPlat, NumCh, Uinput1, Uinput2, RZ1, RZ2, Rloop, Uvol ))
+					connection.commit()
+					print("1 запись успешно вставлена")
+					# Получить результат
+					cursor.execute("SELECT * from pmk")
+					record = cursor.fetchall()
+					print("Результат", record)
+
+				# # Выполнение SQL-запроса для обновления таблицы  # update_query = """Update pmk set price = 1500 where id = 1"""  # cursor.execute(update_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())  #  # # Выполнение SQL-запроса для удаления таблицы  # delete_query = """Delete from mobile where id = 1"""  # cursor.execute(delete_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())
+
+				except (Exception, Error) as error:
+					print("Ошибка при работе с PostgreSQL", error)
+				finally:
+					if connection:
+						cursor.close()
+						connection.close()
+						print("Соединение с PostgreSQL закрыто")
+
+
+
+			idPMK = str(hex(idPMK))
+
+			NumPlat = str(2)
+			for i in range(10):
+				NumCh = str(i)
+				Uinput1 = str(dataP2[12][i])
+				Uinput2 = str(dataP2[13][i])
+				RZ1 = str(dataP2[9][i])
+				RZ2 = str(dataP2[10][i])
+				Rloop = str(dataP2[11][i])
+				Uvol = str(dataP2[14][i])
+				try:
+					t = str(time.time())
+					print(t)
+					t = '2014-04-04 20:00:00'
+					# Подключиться к существующей базе данных
+					connection = psycopg2.connect(user = "postgres",  # пароль, который указали при установке PostgreSQL
+						password = "123", host = "127.0.0.1", port = "5432", database = "pmk20_db")
+					cursor = connection.cursor()
+
+					# Выполнение SQL-запроса для вставки данных в таблицу
+					insert_query_db = """ INSERT INTO pmk_23 (                           
+														TIME            ,
+														IDPMK           ,                                  
+														NumPlat         ,
+														NumCh           ,
+														Uinput1         ,
+														Uinput2         ,
+														Rz1             ,
+														Rz2             ,
+														Rloop           ,
+														Uvol                      
+															)  
+														VALUES (CURRENT_TIMESTAMP, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+					cursor.execute(insert_query_db, (idPMK, NumPlat, NumCh, Uinput1, Uinput2, RZ1, RZ2, Rloop, Uvol))
+					connection.commit()
+					print("1 запись успешно вставлена")
+					# Получить результат
+					cursor.execute("SELECT * from pmk")
+					record = cursor.fetchall()
+					print("Результат", record)
+
+				# # Выполнение SQL-запроса для обновления таблицы  # update_query = """Update pmk set price = 1500 where id = 1"""  # cursor.execute(update_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())  #  # # Выполнение SQL-запроса для удаления таблицы  # delete_query = """Delete from mobile where id = 1"""  # cursor.execute(delete_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())
+
+				except (Exception, Error) as error:
+					print("Ошибка при работе с PostgreSQL", error)
+				finally:
+					if connection:
+						cursor.close()
+						connection.close()
+						print("Соединение с PostgreSQL закрыто")
+
+
+			startLoad = 0
 		time.sleep(2)
 
 
@@ -859,7 +1013,6 @@ def task(array):
 	dataP2 = dataSumm[1]
 	dataP3 = dataSumm[2]
 	dataP4 = dataSumm[3]
-
 
 	# check the contents
 	print(f'Child\n{dataP2}')

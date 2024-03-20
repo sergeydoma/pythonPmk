@@ -10,16 +10,17 @@ from exchange import data_exchange as de
 class load_rz1:
     data_pmk = de()
     w = data_pmk.get_rz1()
-    val1 = str(101) #w[0]
-    val2 = str(2)   #w[1]
-    val3 = str(3)    #  w[2]
-    val4 = str(4) #  w[3]
-    val5 = str(5) #w[4]
-    val6 = str(6)#w[5]
-    val7 = str(7)
-    val8 = str(8)
-    val9 = str(9)
-    val10 = str(10)
+    idPMK = str(101) #w[0]
+    NumPlat = str (222)
+    NumCh = str(2)   #w[1]
+    Uinput1 = str(3)    #  w[2]
+    Uinput2 = str(4) #  w[3]
+    RZ1 = str(5) #w[4]
+    RZ2 = str(6)#w[5]
+    Rloop = str(7)
+    Uvol = str(8)
+    # val9 = str(9)
+    # val10 = str(10)
 
 
 
@@ -36,7 +37,7 @@ class load_rz1:
                                       database="pmk20_db")
 
         cursor = connection.cursor()
-        print('val2 = ',val2)
+        # print('val2 = ',val2)
         # Выполнение SQL-запроса для вставки данных в таблицу
         insert_query_db = """ INSERT INTO pmk_23 (                           
                                 TIME            ,
@@ -51,7 +52,7 @@ class load_rz1:
                                 Uvol                      
                                     )  
                                 VALUES (CURRENT_TIMESTAMP, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        cursor.execute(insert_query_db, (val1 , val1, val2, val3, val4, val5, val6, val7, val8, ))
+        cursor.execute(insert_query_db, (idPMK , NumPlat, NumCh, Uinput1, Uinput2, RZ1, RZ2, Rloop, Uvol ))
         connection.commit()
         print("1 запись успешно вставлена")
         # Получить результат

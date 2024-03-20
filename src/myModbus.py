@@ -173,15 +173,15 @@ class myModbus():
 				"""
 				Плата 1 Сопротивление изоляции 2 (MОм).
 				"""
-				RZ1 = instrument.read_registers(registeraddress = 60, number_of_registers = 10)
+				RZ2 = instrument.read_registers(registeraddress = 60, number_of_registers = 10)
 				for i in range(10):
-					self._dataP1[10][i] = round((RZ1[i] * 16 / 1000), 2)
+					self._dataP1[10][i] = round((RZ2[i] * 16 / 1000), 2)
 				"""
 				Плата 1 Cопротивление шлейфа (кОм).
 				"""
-				deltaAV = instrument.read_registers(registeraddress = 70, number_of_registers = 10)
+				Rloop1 = instrument.read_registers(registeraddress = 70, number_of_registers = 10)
 				for i in range(10):
-					self._dataP1[11][i] = round((deltaAV[i] / 1000), 3)
+					self._dataP1[11][i] = round((Rloop1[i] / 1000), 3)
 				"""
 				Плата 1 Значение напряжения на входе 1  В.
 				"""
@@ -480,9 +480,9 @@ class myModbus():
 				"""
 				Плата 1 Cопротивление шлейфа (кОм).
 				"""
-				deltaAV = instrument.read_registers(registeraddress = 70, number_of_registers = 10)
+				Rloop = instrument.read_registers(registeraddress = 70, number_of_registers = 10)
 				for i in range(10):
-					self._dataP2[11][i] = round((deltaAV[i] / 1000), 3)
+					self._dataP2[11][i] = round((Rloop[i] / 1000), 3)
 				"""
 				Плата 1 Значение напряжения на входе 1  В.
 				"""
