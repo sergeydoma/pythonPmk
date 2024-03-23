@@ -890,7 +890,7 @@ def mDB(array):
 		else:
 			startLoad = 0
 
-		startLoad =1
+		# startLoad =1
 
 		if startLoad == 1:
 			print("СТАРТ ЗАПИСИ SQL !!!")
@@ -1018,7 +1018,7 @@ def mDB(array):
 								print("Соединение с PostgreSQL закрыто")
 
 		startLoad = 0
-		time.sleep(5)
+		time.sleep(1)
 
 
 # region Task(array)
