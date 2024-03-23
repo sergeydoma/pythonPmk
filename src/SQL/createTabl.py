@@ -18,7 +18,7 @@ try:
                           ( 
                             c_id SERIAL PRIMARY KEY,
                             TIME            TIMESTAMPTZ,
-                            IDPMK           BYTEA,
+                            IDPMK           TEXT,
                             NumPlat         INT,
                             NumCh           INT,
                             Uinput1         FLOAT,

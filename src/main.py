@@ -897,7 +897,8 @@ def mDB(array):
 			if start1 == 1:
 				print("СТАРТ ЗАПИСИ TABLE 1")
 			# startLoad = 0
-				idPMK = bytes(_idPMK1)
+				idPMK = int(_idPMK1)
+				idPMK = str(hex(idPMK))
 
 				NumPlat = 1
 				for i in range (10):
@@ -908,7 +909,7 @@ def mDB(array):
 					RZ1 = dataP1[9][i]
 					RZ2 = dataP1[10][i]
 					Rloop = dataP1[11][i]
-					Uvol = dataP1[14][i]
+					Uvol = round (dataP1[14][i],2)
 
 					try:
 						# t = str(time.time())
@@ -952,19 +953,19 @@ def mDB(array):
 							print("Соединение с PostgreSQL закрыто")
 
 			if start2 == 1:
-				idPMK = bytes(_idPMK)
+				idPMK = int(_idPMK2)
+				idPMK = str(hex(idPMK))
 				print("СТАРТ ЗАПИСИ TABLE 2")
 			NumPlat = 2
 			for i in range(10):
 				# if dataP2[0][i]+1 == 2:
 					NumCh = i+1
 					Uinput1 = (dataP2[12][i])/10
-
 					Uinput2 = (dataP2[13][i])/10
 					RZ1 = dataP2[9][i]
 					RZ2 = dataP2[10][i]
 					Rloop = dataP2[11][i]
-					Uvol = dataP2[14][i]
+					Uvol = round(dataP2[14][i], 2)
 					try:
 						t = str(time.time())
 						print(t)

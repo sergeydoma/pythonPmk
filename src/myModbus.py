@@ -512,7 +512,7 @@ class myModbus():
 					else:
 						K1[i] = (Rdm1[i] + 2447 / 16) / (Rdp1[i] + 2447 / 16)
 						Ux1[i] = (Um * (K1[i] - 1)) / (K1[i] + 1)
-					self._dataP2[14][i] = Ux1[i]
+					self._dataP2[14][i] = round(Ux1[i], 2)
 				print('Rp1', Rdp1)
 				print('Rm1', Rdm1)
 				"""
@@ -534,7 +534,8 @@ class myModbus():
 					else:
 						K2[i] = (Rdm2[i] + 2447 / 16) / (Rdp2[i] + 2447 / 16)
 						Ux2[i] = (Um * (K2[i] - 1)) / (K2[i] + 1)
-					self._dataP2[15][i] = Ux2[i]
+					self._dataP2[15][i] = round(Ux2[i], 2)
+
 				print('Rp2', Rdp2)
 				print('Rm2', Rdm2)
 				"""
