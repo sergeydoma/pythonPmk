@@ -487,7 +487,7 @@ class myModbus():
 				Плата 1 Значение напряжения на входе 1  В.
 				"""
 				Uin1 = instrument.read_registers(registeraddress = 190, number_of_registers = 10)
-				self._dataP1[12] = Uin1
+				self._dataP2[12] = Uin1
 				"""
 				Плата 1 Значение напряжения на входе 2  В.
 				"""
