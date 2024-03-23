@@ -902,55 +902,60 @@ def mDB(array):
 
 				NumPlat = 1
 				for i in range (10):
-					# if dataP1[0][i]+1 == 2:
-					NumCh = i+1
-					Uinput1 = (dataP1[12][i]/10)
-					Uinput2 = (dataP1[13][i]/10)
-					RZ1 = dataP1[9][i]
-					RZ2 = dataP1[10][i]
-					Rloop = dataP1[11][i]
-					Uvol = round (dataP1[14][i],2)
+					if ((dataP1[0][i] != 0)&
+						(dataP1[0][i] != 1)&
+						(dataP1[0][i] != 3)&
+						(dataP1[0][i] != 4)&
+						(dataP1[0][i] != 5)&
+						(dataP1[0][i] != 9)):
+						NumCh = i+1
+						Uinput1 = (dataP1[12][i]/10)
+						Uinput2 = (dataP1[13][i]/10)
+						RZ1 = dataP1[9][i]
+						RZ2 = dataP1[10][i]
+						Rloop = dataP1[11][i]
+						Uvol = round (dataP1[14][i],2)
 
-					try:
-						# t = str(time.time())
-						# # print(t)
-						# t = '2014-04-04 20:00:00'
-						# Подключиться к существующей базе данных
-						connection = psycopg2.connect(user = "postgres", # пароль, который указали при установке PostgreSQL
-							password = "123", host = "127.0.0.1", port = "5432", database = "pmk20_db")
-						cursor = connection.cursor()
+						try:
+							# t = str(time.time())
+							# # print(t)
+							# t = '2014-04-04 20:00:00'
+							# Подключиться к существующей базе данных
+							connection = psycopg2.connect(user = "postgres", # пароль, который указали при установке PostgreSQL
+								password = "123", host = "127.0.0.1", port = "5432", database = "pmk20_db")
+							cursor = connection.cursor()
 
-						# Выполнение SQL-запроса для вставки данных в таблицу
-						insert_query_db = """ INSERT INTO pmk (                           
-												TIME            ,
-												IDPMK           ,                                  
-												NumPlat         ,
-												NumCh           ,
-												Uinput1         ,
-												Uinput2         ,
-												Rz1             ,
-												Rz2             ,
-												Rloop           ,
-												Uvol                      
-													)  
-												VALUES (CURRENT_TIMESTAMP, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-						cursor.execute(insert_query_db, (idPMK , NumPlat, NumCh, Uinput1, Uinput2, RZ1, RZ2, Rloop, Uvol ))
-						connection.commit()
-						print("1 запись успешно вставлена")
-						# Получить результат
-						cursor.execute("SELECT * from pmk")
-						# record = cursor.fetchall()
-						print("Результат", record)
+							# Выполнение SQL-запроса для вставки данных в таблицу
+							insert_query_db = """ INSERT INTO pmk (                           
+													TIME            ,
+													IDPMK           ,                                  
+													NumPlat         ,
+													NumCh           ,
+													Uinput1         ,
+													Uinput2         ,
+													Rz1             ,
+													Rz2             ,
+													Rloop           ,
+													Uvol                      
+														)  
+													VALUES (CURRENT_TIMESTAMP, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+							cursor.execute(insert_query_db, (idPMK , NumPlat, NumCh, Uinput1, Uinput2, RZ1, RZ2, Rloop, Uvol ))
+							connection.commit()
+							print("1 запись успешно вставлена")
+							# Получить результат
+							cursor.execute("SELECT * from pmk")
+							# record = cursor.fetchall()
+							print("Результат", record)
 
-					# # Выполнение SQL-запроса для обновления таблицы  # update_query = """Update pmk set price = 1500 where id = 1"""  # cursor.execute(update_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())  #  # # Выполнение SQL-запроса для удаления таблицы  # delete_query = """Delete from mobile where id = 1"""  # cursor.execute(delete_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())
+						# # Выполнение SQL-запроса для обновления таблицы  # update_query = """Update pmk set price = 1500 where id = 1"""  # cursor.execute(update_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())  #  # # Выполнение SQL-запроса для удаления таблицы  # delete_query = """Delete from mobile where id = 1"""  # cursor.execute(delete_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())
 
-					except (Exception, Error) as error:
-						print("Ошибка при работе с PostgreSQL", error)
-					finally:
-						if connection:
-							cursor.close()
-							connection.close()
-							print("Соединение с PostgreSQL закрыто")
+						except (Exception, Error) as error:
+							print("Ошибка при работе с PostgreSQL", error)
+						finally:
+							if connection:
+								cursor.close()
+								connection.close()
+								print("Соединение с PostgreSQL закрыто")
 
 			if start2 == 1:
 				idPMK = int(_idPMK2)
@@ -958,7 +963,12 @@ def mDB(array):
 				print("СТАРТ ЗАПИСИ TABLE 2")
 				NumPlat = 2
 				for i in range(10):
-					# if dataP2[0][i]+1 == 2:
+					if ((dataP2[0][i] != 0)&
+						(dataP2[0][i] != 1)&
+						(dataP2[0][i] != 3)&
+						(dataP2[0][i] != 4)&
+						(dataP2[0][i] != 5)&
+						(dataP2[0][i] != 9)):
 						NumCh = i+1
 						Uinput1 = (dataP2[12][i]/10)
 						Uinput2 = (dataP2[13][i]/10)
