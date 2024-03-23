@@ -894,7 +894,7 @@ def mDB(array):
 
 		if startLoad == 1:
 			print("СТАРТ ЗАПИСИ SQL !!!")
-			if start1 == 1:
+			if ((start1 == 1) & (ErrorCon1 == 0)) ==1:
 				print("СТАРТ ЗАПИСИ TABLE 1")
 			# startLoad = 0
 				idPMK = int(_idPMK1)
@@ -957,7 +957,7 @@ def mDB(array):
 								connection.close()
 								print("Соединение с PostgreSQL закрыто")
 
-			if start2 == 1:
+			if ((start2 == 1) & (ErrorCon2 == 0)) ==1:
 				idPMK = int(_idPMK2)
 				idPMK = str(hex(idPMK))
 				print("СТАРТ ЗАПИСИ TABLE 2")
@@ -1018,7 +1018,7 @@ def mDB(array):
 								print("Соединение с PostgreSQL закрыто")
 
 		startLoad = 0
-		time.sleep(1)
+		# time.sleep(1)
 
 
 # region Task(array)
@@ -1144,7 +1144,7 @@ if __name__ == "__main__":
 	child2.start()
 	child1.start()
 	# wait for the child process to complete
-	# child3.join()
+
 	child2.join()
 	# check some data in the shared array
 
