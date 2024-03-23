@@ -482,7 +482,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		"""
 		tblitems_2 окно Плата 2
 		"""
-		self.label_test.setText('4.3.0 = '+str(dataP4[3][0])+'   ' + '4.13.0 = '+ str(dataP4[13][0]))
+		self.label_test.setText('4.5.0 = '+str(dataP4[5][0])+'   ' + '4.5.1 = '+ str(dataP4[5][1]))
 
 		for i in range(10):
 			modeCh2 = int(dataP2[0][i])  # режим работы канала платы 1

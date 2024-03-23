@@ -93,6 +93,11 @@
         <condition column="id_book" operator="=" value="" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="public.pmk_23" active-filter-id="919759eb-c492-4834-8e4f-8d47e5ca3adb">
+      <filter id="919759eb-c492-4834-8e4f-8d47e5ca3adb" name="Filter" temporary="false" custom-name="false" type="custom">
+        <condition><![CDATA[numplat = '1' and numch = '1']]></condition>
+      </filter>
+    </filter-actions>
     <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="information_schema.attributes" active-filter-id="" />
     <filter-actions connection-id="435aea54-74aa-440b-ba56-0fa8c4fbfbc1" dataset="public.pmk" active-filter-id="EMPTY_FILTER">
       <filter id="5bc980cf-3be3-4568-8fd5-2743e0820f85" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">

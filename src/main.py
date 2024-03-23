@@ -124,7 +124,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		RS2 = (int(dataP4[4][1]) == 1)
 		ID1 = (int(dataP4[5][0]) == 1)
 		ID2 = (int(dataP4[5][1]) == 1)
-
 		if (RS1 | RS2) == 1:
 			if (self._counter1 < self._delay1):
 				self._counter1 += 1
@@ -366,11 +365,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 			self.tblitems_1.setItem(15, i, QTableWidgetItem(Rloop))  # Сопр. шлеййфа
 			self.tblitems_1.item(15, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range(10):
-			Uin1 = str(int(dataP1[12][i]))  # +' В'
+			Uin1 = str(dataP1[12][i]/10)  # +' В'
 			self.tblitems_1.setItem(16, i, QTableWidgetItem(Uin1))  # значение напряжения на входе1
 			self.tblitems_1.item(16, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range(10):
-			Uin2 = str(int(dataP1[13][i]))  # +' В'
+			Uin2 = str(dataP1[13][i]/10)  # +' В'
 			self.tblitems_1.setItem(17, i, QTableWidgetItem(Uin2))  # значение напряжения на входе1
 			self.tblitems_1.item(17, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range(10):
@@ -567,11 +566,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 			self.tblitems_2.setItem(15, i, QTableWidgetItem(Rloop))  # Сопр. шлеййфа
 			self.tblitems_2.item(15, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range(10):
-			Uin1 = str(int(dataP2[12][i]))  # +' В'
+			Uin1 = str(dataP2[12][i]/10)  # +' В'
 			self.tblitems_2.setItem(16, i, QTableWidgetItem(Uin1))  # значение напряжения на входе1
 			self.tblitems_2.item(16, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range(10):
-			Uin2 = str(int(dataP2[13][i]))  # +' В'
+			Uin2 = str(dataP2[13][i]/10)  # +' В'
 			self.tblitems_2.setItem(17, i, QTableWidgetItem(Uin2))  # значение напряжения на входе1
 			self.tblitems_2.item(17, i).setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 		for i in range(10):
@@ -830,6 +829,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		tCombo2 = int(self.comboBox_2.currentText(), 16)
 		intCombo = tCombo1 * 16 + tCombo2
 		# dat.set_id_serial (intCombo)
+
 		print('ВВеден номер = ', intCombo)
 		dataP4[0][0] = intCombo
 
@@ -860,145 +860,154 @@ def mDB(array):
 		modePMK = 0
 		ErrorCon1 = int (dataP4[5][0])
 		ErrorCon2 = int (dataP4[5][1])
-		idPMK1 = dataP4[1][3]
-		idPMK2 = dataP4[10][3]
-		idPMK = 0
+		_idPMK1 = dataP4[1][3]
+		_idPMK2 = dataP4[10][3]
+		_idPMK = 0
+		start1 = int(dataP4[3][0])
+		start2 = int(dataP4[13][0])
+		# modeSh2 = dataP2[0]
+		# modeSh1 = dataP1[0]
+
 		# numPat  = int (dataP4[18][0])
 
-		if ErrorCon1 == 0:
-			if modePMK1 == 1:
-				setMode0 = 1
-				# startLoad = 0
-			elif ((modePMK1 == 10) & (setMode0 == 1)) == 1:
-				startLoad = 1
-				setMode0 = 0
-			idPMK = int (idPMK1)
+		# if ErrorCon1 == 0:
+		# 	if modePMK1 == 1:
+		# 		setMode0 = 1
+		# 		# startLoad = 0
+		# 	elif ((modePMK1 == 10) & (setMode0 == 1)) == 1:
+		# 		startLoad = 1
+		# 		setMode0 = 0
+		# 	_idPMK = int(_idPMK1)
+		#
+		# elif ErrorCon2 == 0:
+		# 	if modePMK2 == 1:
+		# 		setMode0 = 1
+		# 		# startLoad = 0
+		# 	elif(modePMK2 == 10) & (setMode0 == 1) == 1:
+		# 		startLoad = 1
+		# 		setMode0 = 0
+		# 	_idPMK = int(_idPMK2)
+		# else:
+		# 	startLoad = 0
 
-		elif ErrorCon2 == 0:
-			if modePMK2 == 1:
-				setMode0 = 1
-				# startLoad = 0
-			elif(modePMK2 == 10) & (setMode0 == 1) == 1:
-				startLoad = 1
-				setMode0 = 0
-			idPMK = int (idPMK2)
-		else:
-			startLoad = 0
-
+		startLoad =1
 
 		if startLoad == 1:
 			print("СТАРТ ЗАПИСИ SQL !!!")
-
+			if start1 == 1:
+				print("СТАРТ ЗАПИСИ TABLE 1")
 			# startLoad = 0
-			idPMK = str(hex (idPMK))
-			NumPlat = str(1)
-			for i in range (10):
-				NumCh = str(i)
-				Uinput1 = str(dataP1[12][i])
-				Uinput2 = str(dataP1[13][i])
-				RZ1 = str(dataP1[9][i])
-				RZ2 = str(dataP1[10][i])
-				Rloop = str(dataP1[11][i])
-				Uvol = str(int (dataP1[14][i]))
+				idPMK = bytes(_idPMK1)
 
-				try:
-					t = str(time.time())
-					print(t)
-					t = '2014-04-04 20:00:00'
-					# Подключиться к существующей базе данных
-					connection = psycopg2.connect(user = "postgres", # пароль, который указали при установке PostgreSQL
-						password = "123", host = "127.0.0.1", port = "5432", database = "pmk20_db")
-					cursor = connection.cursor()
+				NumPlat = 1
+				for i in range (10):
+					# if dataP1[0][i]+1 == 2:
+					NumCh = i+1
+					Uinput1 = (dataP1[12][i]/10)
+					Uinput2 = (dataP1[13][i]/10)
+					RZ1 = dataP1[9][i]
+					RZ2 = dataP1[10][i]
+					Rloop = dataP1[11][i]
+					Uvol = dataP1[14][i]
 
-					# Выполнение SQL-запроса для вставки данных в таблицу
-					insert_query_db = """ INSERT INTO pmk_23 (                           
-											TIME            ,
-											IDPMK           ,                                  
-											NumPlat         ,
-											NumCh           ,
-											Uinput1         ,
-											Uinput2         ,
-											Rz1             ,
-											Rz2             ,
-											Rloop           ,
-											Uvol                      
-												)  
-											VALUES (CURRENT_TIMESTAMP, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-					cursor.execute(insert_query_db, (idPMK , NumPlat, NumCh, Uinput1, Uinput2, RZ1, RZ2, Rloop, Uvol ))
-					connection.commit()
-					print("1 запись успешно вставлена")
-					# Получить результат
-					cursor.execute("SELECT * from pmk")
-					record = cursor.fetchall()
-					print("Результат", record)
+					try:
+						# t = str(time.time())
+						# # print(t)
+						# t = '2014-04-04 20:00:00'
+						# Подключиться к существующей базе данных
+						connection = psycopg2.connect(user = "postgres", # пароль, который указали при установке PostgreSQL
+							password = "123", host = "127.0.0.1", port = "5432", database = "pmk20_db")
+						cursor = connection.cursor()
 
-				# # Выполнение SQL-запроса для обновления таблицы  # update_query = """Update pmk set price = 1500 where id = 1"""  # cursor.execute(update_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())  #  # # Выполнение SQL-запроса для удаления таблицы  # delete_query = """Delete from mobile where id = 1"""  # cursor.execute(delete_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())
+						# Выполнение SQL-запроса для вставки данных в таблицу
+						insert_query_db = """ INSERT INTO pmk (                           
+												TIME            ,
+												IDPMK           ,                                  
+												NumPlat         ,
+												NumCh           ,
+												Uinput1         ,
+												Uinput2         ,
+												Rz1             ,
+												Rz2             ,
+												Rloop           ,
+												Uvol                      
+													)  
+												VALUES (CURRENT_TIMESTAMP, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+						cursor.execute(insert_query_db, (idPMK , NumPlat, NumCh, Uinput1, Uinput2, RZ1, RZ2, Rloop, Uvol ))
+						connection.commit()
+						print("1 запись успешно вставлена")
+						# Получить результат
+						cursor.execute("SELECT * from pmk")
+						# record = cursor.fetchall()
+						print("Результат", record)
 
-				except (Exception, Error) as error:
-					print("Ошибка при работе с PostgreSQL", error)
-				finally:
-					if connection:
-						cursor.close()
-						connection.close()
-						print("Соединение с PostgreSQL закрыто")
+					# # Выполнение SQL-запроса для обновления таблицы  # update_query = """Update pmk set price = 1500 where id = 1"""  # cursor.execute(update_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())  #  # # Выполнение SQL-запроса для удаления таблицы  # delete_query = """Delete from mobile where id = 1"""  # cursor.execute(delete_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())
 
+					except (Exception, Error) as error:
+						print("Ошибка при работе с PostgreSQL", error)
+					finally:
+						if connection:
+							cursor.close()
+							connection.close()
+							print("Соединение с PostgreSQL закрыто")
 
-
-			idPMK = str(hex(idPMK))
-
-			NumPlat = str(2)
+			if start2 == 1:
+				idPMK = bytes(_idPMK)
+				print("СТАРТ ЗАПИСИ TABLE 2")
+			NumPlat = 2
 			for i in range(10):
-				NumCh = str(i)
-				Uinput1 = str(dataP2[12][i])
-				Uinput2 = str(dataP2[13][i])
-				RZ1 = str(dataP2[9][i])
-				RZ2 = str(dataP2[10][i])
-				Rloop = str(dataP2[11][i])
-				Uvol = str(dataP2[14][i])
-				try:
-					t = str(time.time())
-					print(t)
-					t = '2014-04-04 20:00:00'
-					# Подключиться к существующей базе данных
-					connection = psycopg2.connect(user = "postgres",  # пароль, который указали при установке PostgreSQL
-						password = "123", host = "127.0.0.1", port = "5432", database = "pmk20_db")
-					cursor = connection.cursor()
+				# if dataP2[0][i]+1 == 2:
+					NumCh = i+1
+					Uinput1 = (dataP2[12][i])/10
 
-					# Выполнение SQL-запроса для вставки данных в таблицу
-					insert_query_db = """ INSERT INTO pmk_23 (                           
-														TIME            ,
-														IDPMK           ,                                  
-														NumPlat         ,
-														NumCh           ,
-														Uinput1         ,
-														Uinput2         ,
-														Rz1             ,
-														Rz2             ,
-														Rloop           ,
-														Uvol                      
-															)  
-														VALUES (CURRENT_TIMESTAMP, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-					cursor.execute(insert_query_db, (idPMK, NumPlat, NumCh, Uinput1, Uinput2, RZ1, RZ2, Rloop, Uvol))
-					connection.commit()
-					print("1 запись успешно вставлена")
-					# Получить результат
-					cursor.execute("SELECT * from pmk")
-					record = cursor.fetchall()
-					print("Результат", record)
+					Uinput2 = (dataP2[13][i])/10
+					RZ1 = dataP2[9][i]
+					RZ2 = dataP2[10][i]
+					Rloop = dataP2[11][i]
+					Uvol = dataP2[14][i]
+					try:
+						t = str(time.time())
+						print(t)
+						t = '2014-04-04 20:00:00'
+						# Подключиться к существующей базе данных
+						connection = psycopg2.connect(user = "postgres",  # пароль, который указали при установке PostgreSQL
+							password = "123", host = "127.0.0.1", port = "5432", database = "pmk20_db")
+						cursor = connection.cursor()
 
-				# # Выполнение SQL-запроса для обновления таблицы  # update_query = """Update pmk set price = 1500 where id = 1"""  # cursor.execute(update_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())  #  # # Выполнение SQL-запроса для удаления таблицы  # delete_query = """Delete from mobile where id = 1"""  # cursor.execute(delete_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())
+						# Выполнение SQL-запроса для вставки данных в таблицу
+						insert_query_db = """ INSERT INTO pmk (                           
+															TIME            ,
+															IDPMK           ,                                  
+															NumPlat         ,
+															NumCh           ,
+															Uinput1         ,
+															Uinput2         ,
+															Rz1             ,
+															Rz2             ,
+															Rloop           ,
+															Uvol                      
+																)  
+															VALUES (CURRENT_TIMESTAMP, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+						cursor.execute(insert_query_db, (idPMK, NumPlat, NumCh, Uinput1, Uinput2, RZ1, RZ2, Rloop, Uvol))
+						connection.commit()
+						print("1 запись успешно вставлена")
+						# Получить результат
+						cursor.execute("SELECT * from pmk")
+						record = cursor.fetchall()
+						print("Результат", record)
 
-				except (Exception, Error) as error:
-					print("Ошибка при работе с PostgreSQL", error)
-				finally:
-					if connection:
-						cursor.close()
-						connection.close()
-						print("Соединение с PostgreSQL закрыто")
+					# # Выполнение SQL-запроса для обновления таблицы  # update_query = """Update pmk set price = 1500 where id = 1"""  # cursor.execute(update_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())  #  # # Выполнение SQL-запроса для удаления таблицы  # delete_query = """Delete from mobile where id = 1"""  # cursor.execute(delete_query)  # connection.commit()  # count = cursor.rowcount  # print(count, "Запись успешно удалена")  # # Получить результат  # cursor.execute("SELECT * from mobile")  # print("Результат", cursor.fetchall())
 
+					except (Exception, Error) as error:
+						print("Ошибка при работе с PostgreSQL", error)
+					finally:
+						if connection:
+							cursor.close()
+							connection.close()
+							print("Соединение с PostgreSQL закрыто")
 
-			startLoad = 0
-		time.sleep(2)
+		startLoad = 0
+		time.sleep(5)
 
 
 # region Task(array)
@@ -1015,7 +1024,7 @@ def task(array):
 	dataP4 = dataSumm[3]
 
 	# check the contents
-	print(f'Child\n{dataP2}')
+	# print(f'Child\n{dataP2}')
 
 	mB = myModbus()
 	# increment the data
@@ -1114,7 +1123,7 @@ if __name__ == "__main__":
 			'Напряжение на входе 2 выше доп.'])
 
 	# confirm contents of the new array
-	print(f'Parent\n{data}')
+	# print(f'Parent\n{data}')
 	# create a child process
 	child1 = Process(target = task, args = (array,), daemon = True)
 	child2 = Process(target = visu, args = (array,), daemon = True)
@@ -1128,4 +1137,4 @@ if __name__ == "__main__":
 	child2.join()
 	# check some data in the shared array
 
-	print(f'Parent\n{data}')
+	# print(f'Parent\n{data}')

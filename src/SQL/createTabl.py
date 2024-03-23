@@ -14,19 +14,19 @@ try:
     # Создайте курсор для выполнения операций с базой данных
     cursor = connection.cursor()
     # SQL-запрос для создания новой таблицы
-    create_table_query = '''CREATE TABLE pmk_23
+    create_table_query = '''CREATE TABLE pmk
                           ( 
                             c_id SERIAL PRIMARY KEY,
                             TIME            TIMESTAMPTZ,
-                            IDPMK           TEXT,
-                            NumPlat         TEXT,
-                            NumCh           TEXT,
-                            Uinput1         TEXT,
-                            Uinput2         TEXT,
-                            RZ1             TEXT,
-                            RZ2             TEXT,
-                            RLOOP           TEXT,
-                            Uvol            TEXT
+                            IDPMK           BYTEA,
+                            NumPlat         INT,
+                            NumCh           INT,
+                            Uinput1         FLOAT,
+                            Uinput2         FLOAT,
+                            RZ1             FLOAT,
+                            RZ2             FLOAT,
+                            RLOOP           FLOAT,
+                            Uvol            FLOAT
                             ); '''
     # Выполнение команды: это создает новую таблицу
     cursor.execute(create_table_query)
