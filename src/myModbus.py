@@ -67,7 +67,7 @@ class myModbus():
 			# self._dataP4[5][0] = 0
 			# self._dataP4[5][1] = 0
 
-			print("Подключение по RS - 485 выполнено")
+			# print("Подключение по RS - 485 выполнено")
 			try:
 				""""
 				режим ПМК
@@ -80,7 +80,7 @@ class myModbus():
 				Nversion = instrument.read_registers(registeraddress = 90, number_of_registers = 2)
 				self._dataP4[1][2] = (Nversion[0] * 65536 + Nversion[1])
 
-				print('NVERSION = ', self._dataP4[1][2])
+				# print('NVERSION = ', self._dataP4[1][2])
 				instrument.close_port_after_each_call = True
 				""""
 				ID шасси
@@ -212,8 +212,8 @@ class myModbus():
 						K1[i] = (Rdm1[i] + 2447 / 16) / (Rdp1[i] + 2447 / 16)
 						Ux1[i] = (Um * (K1[i] - 1)) / (K1[i] + 1)
 					self._dataP1[14][i] = Ux1[i]
-				print('Rp1', Rdp1)
-				print('Rm1', Rdm1)
+				# print('Rp1', Rdp1)
+				# print('Rm1', Rdm1)
 				"""
 				Плата 1 Значение объемного напряжения 2 В.
 				"""
@@ -234,8 +234,8 @@ class myModbus():
 						K2[i] = (Rdm2[i] + 2447 / 16) / (Rdp2[i] + 2447 / 16)
 						Ux2[i] = (Um * (K2[i] - 1)) / (K2[i] + 1)
 					self._dataP1[15][i] = Ux2[i]
-				print('Rp2', Rdp2)
-				print('Rm2', Rdm2)
+				# print('Rp2', Rdp2)
+				# print('Rm2', Rdm2)
 				"""
 				Плата 1 Значение сопротивления изоляции 1 ниже заданного диапазона (авария предупреждение)
 				"""
@@ -249,7 +249,7 @@ class myModbus():
 					else:
 						self._dataP1[16][i] = 0
 
-				print("alarm rz1", self._dataP1[14][0])
+				# print("alarm rz1", self._dataP1[14][0])
 				"""
 				Плата 1 Значение сопротивления изоляции 2 ниже заданного диапазона (авария предупреждение)
 				"""
@@ -291,7 +291,7 @@ class myModbus():
 				"""
 				U1_alarm = instrument.read_bits(registeraddress = 140, number_of_bits = 10)
 				self._dataP1[20] = U1_alarm
-				print("U1 =", U1_alarm)
+				# print("U1 =", U1_alarm)
 				"""
 				Плата 1 Напряжение на входе 2 выше заданного диапазона (авария )
 				"""
@@ -368,7 +368,7 @@ class myModbus():
 		# instrument.serial.close()
 		else:
 			self._dataP4[4][1] = 0
-			print("Подключение по RS - 485 выполнено")
+			# print("Подключение по RS - 485 выполнено")
 			try:
 				""""
 				режим ПМК
@@ -381,7 +381,7 @@ class myModbus():
 				Nversion = instrument.read_registers(registeraddress = 90, number_of_registers = 2)
 				self._dataP4[10][2] = (Nversion[0] * 65536 + Nversion[1])
 
-				print('NVERSION = ', self._dataP4[1][2])
+				# print('NVERSION = ', self._dataP4[1][2])
 				instrument.close_port_after_each_call = True
 				""""
 				ID шасси
@@ -513,8 +513,8 @@ class myModbus():
 						K1[i] = (Rdm1[i] + 2447 / 16) / (Rdp1[i] + 2447 / 16)
 						Ux1[i] = (Um * (K1[i] - 1)) / (K1[i] + 1)
 					self._dataP2[14][i] = round(Ux1[i], 2)
-				print('Rp1', Rdp1)
-				print('Rm1', Rdm1)
+				# print('Rp1', Rdp1)
+				# print('Rm1', Rdm1)
 				"""
 				Плата 1 Значение объемного напряжения 2 В.
 				"""
@@ -536,8 +536,8 @@ class myModbus():
 						Ux2[i] = (Um * (K2[i] - 1)) / (K2[i] + 1)
 					self._dataP2[15][i] = round(Ux2[i], 2)
 
-				print('Rp2', Rdp2)
-				print('Rm2', Rdm2)
+				# print('Rp2', Rdp2)
+				# print('Rm2', Rdm2)
 				"""
 				Плата 1 Значение сопротивления изоляции 1 ниже заданного диапазона (авария предупреждение)
 				"""
@@ -551,7 +551,7 @@ class myModbus():
 					else:
 						self._dataP2[16][i] = 0
 
-				print("alarm rz1", self._dataP1[14][0])
+				# print("alarm rz1", self._dataP1[14][0])
 				"""
 				Плата 1 Значение сопротивления изоляции 2 ниже заданного диапазона (авария предупреждение)
 				"""
@@ -593,7 +593,7 @@ class myModbus():
 				"""
 				U1_alarm = instrument.read_bits(registeraddress = 140, number_of_bits = 10)
 				self._dataP2[20] = U1_alarm
-				print("U1 =", U1_alarm)
+				# print("U1 =", U1_alarm)
 				"""
 				Плата 1 Напряжение на входе 2 выше заданного диапазона (авария )
 				"""

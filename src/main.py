@@ -1,5 +1,6 @@
-# share 2d numpy array via a shared array
-import ctypes
+import minimalmodbus
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+
 import sys
 import time
 from multiprocessing import Process
@@ -20,6 +21,8 @@ import time
 
 import psycopg2
 from psycopg2 import Error
+
+
 
 
 # region Absract Model
@@ -111,10 +114,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		self._dataP1 = dataP1
 		self._dataP2 = dataP2
 		self._dataP4 = dataP4
-		self.model1 = PandasModel(dataP3)
-		self.model1.dataChanged.emit(QtCore.QModelIndex(), QtCore.QModelIndex())
-		self.tableView_Arhive.setModel(self.model1)
-		self.model1.dataChanged.emit(QtCore.QModelIndex(), QtCore.QModelIndex())
+		# self.model1 = PandasModel(dataP3)
+		# self.model1.dataChanged.emit(QtCore.QModelIndex(), QtCore.QModelIndex())
+		# self.tableView_Arhive.setModel(self.model1)
+		# self.model1.dataChanged.emit(QtCore.QModelIndex(), QtCore.QModelIndex())
 		# self.beginResetModel()
 
 		"""
@@ -490,7 +493,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 		"""
 		tblitems_2 окно Плата 2
 		"""
-		self.label_test.setText('4.3.0 = ' + str(dataP4[3][0]) + '   ' + '4.13.0 = ' + str(dataP4[13][0]))
+		# self.label_test.setText('4.3.0 = ' + str(dataP4[3][0]) + '   ' + '4.13.0 = ' + str(dataP4[13][0]))
 
 		for i in range(10):
 			modeCh2 = int(dataP2[0][i])  # режим работы канала платы 1
@@ -842,6 +845,59 @@ data = np.array([[1, 9, 2], [1, 0, -1], [3, 5, 2], [3, 3, 2], [5, 8, 9], ])
 
 
 def mDB(array):
+
+	try:
+		# Подключение к существующей базе данных
+		connection = psycopg2.connect(user = "postgres", # пароль, который указали при установке PostgreSQL
+			password = "123", host = "127.0.0.1", port = "5432")
+		connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+		# Курсор для выполнения операций с базой данных
+		cursor = connection.cursor()
+		sql_create_database = 'create database pmk20_db'
+		cursor.execute(sql_create_database)
+	except (Exception, Error) as error:
+		print("Ошибка при работе с PostgreSQL", error)
+	finally:
+		if connection:
+			cursor.close()
+			connection.close()
+			print("Соединение с PostgreSQL закрыто")
+	time.sleep(2)
+	try:
+		# Подключиться к существующей базе данных
+		connection = psycopg2.connect(user = "postgres", # пароль, который указали при установке PostgreSQL
+			password = "123", host = "127.0.0.1", port = "5432", database = "pmk20_db")
+
+		# Создайте курсор для выполнения операций с базой данных
+		cursor = connection.cursor()
+		# SQL-запрос для создания новой таблицы
+		create_table_query = '''CREATE TABLE pmk
+	                          ( 
+	                            c_id SERIAL PRIMARY KEY,
+	                            TIME            TIMESTAMPTZ,
+	                            IDPMK           TEXT,
+	                            NumPlat         INT,
+	                            NumCh           INT,
+	                            Uinput1         FLOAT,
+	                            Uinput2         FLOAT,
+	                            RZ1             FLOAT,
+	                            RZ2             FLOAT,
+	                            RLOOP           FLOAT,
+	                            Uvol            FLOAT
+	                            ); '''
+		# Выполнение команды: это создает новую таблицу
+		cursor.execute(create_table_query)
+		connection.commit()
+		print("Таблица успешно создана в PostgreSQL")
+
+	except (Exception, Error) as error:
+		print("Ошибка при работе с PostgreSQL", error)
+	finally:
+		if connection:
+			cursor.close()
+			connection.close()
+			print("Соединение с PostgreSQL закрыто")
+
 	dataAll = frombuffer(array, dtype = double, count = len(array))
 	dataAll.fill(1.0)
 	# reshape array into preferred shape
@@ -890,10 +946,12 @@ def mDB(array):
 		else:
 			startLoad = 0
 
+		# print('START LOAD = ', startLoad)
 		# startLoad =1
 
 		if startLoad == 1:
 			print("СТАРТ ЗАПИСИ SQL !!!")
+
 			if ((start1 == 1) & (ErrorCon1 == 0)) ==1:
 				print("СТАРТ ЗАПИСИ TABLE 1")
 			# startLoad = 0
@@ -1017,7 +1075,7 @@ def mDB(array):
 								connection.close()
 								print("Соединение с PostgreSQL закрыто")
 
-		startLoad = 0
+			startLoad = 0
 		# time.sleep(1)
 
 

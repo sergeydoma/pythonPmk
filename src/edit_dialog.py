@@ -217,10 +217,6 @@ class Ui_MainWindow(object):
         self.label_2.setEnabled(False)
         self.label_2.setGeometry(QRect(50, 410, 181, 17))
         self.label_2.setFont(font)
-        self.label_test = QLabel(self.tab_1)
-        self.label_test.setObjectName(u"label_test")
-        self.label_test.setEnabled(False)
-        self.label_test.setGeometry(QRect(150, 800, 471, 71))
         self.tabWidget.addTab(self.tab_1, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
@@ -815,18 +811,6 @@ class Ui_MainWindow(object):
         self.tblitems_2.verticalHeader().setProperty("showSortIndicator", False)
         self.tblitems_2.verticalHeader().setStretchLastSection(True)
         self.tabWidget.addTab(self.tab_3, "")
-        self.tab_4 = QWidget()
-        self.tab_4.setObjectName(u"tab_4")
-        self.tableView_Arhive = QTableView(self.tab_4)
-        self.tableView_Arhive.setObjectName(u"tableView_Arhive")
-        self.tableView_Arhive.setGeometry(QRect(10, 1, 1391, 841))
-        self.tableView_Arhive.setStyleSheet(u"color: rgb(0, 0, 0);\n"
-"background-color: rgb(234, 232, 220);\n"
-"")
-        self.tableView_Arhive.setLineWidth(3)
-        self.tableView_Arhive.setMidLineWidth(2)
-        self.tableView_Arhive.setSortingEnabled(True)
-        self.tabWidget.addTab(self.tab_4, "")
 
         self.gridLayout_2.addWidget(self.tabWidget, 0, 0, 1, 1)
 
@@ -837,7 +821,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -934,7 +918,6 @@ class Ui_MainWindow(object):
         self.tblitems_d.setSortingEnabled(__sortingEnabled1)
 
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0438\u0430\u0433\u043d\u043e\u0441\u0442\u0438\u043a\u0430 \u041f\u041c\u041a", None))
-        self.label_test.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), QCoreApplication.translate("MainWindow", u"\u041f\u041c\u041a-20", None))
         ___qtablewidgetitem25 = self.tblitems_1.horizontalHeaderItem(0)
         ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"\u041a\u0430\u043d\u0430\u043b 1", None));
@@ -1092,6 +1075,5 @@ class Ui_MainWindow(object):
         self.tblitems_2.setSortingEnabled(__sortingEnabled3)
 
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"\u041f\u043b\u0430\u0442\u0430 2", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("MainWindow", u"\u0410\u0440\u0445\u0438\u0432", None))
     # retranslateUi
 
