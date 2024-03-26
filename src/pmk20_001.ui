@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ООО &quot;СИРИУС&quot; ПМК-20</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(189, 192, 144);
@@ -41,7 +41,7 @@ background-color: rgb(234, 232, 220);
 color: rgb(0, 0, 0);</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="documentMode">
        <bool>false</bool>
@@ -729,32 +729,32 @@ color: rgb(0, 0, 0);</string>
         </row>
         <row>
          <property name="text">
-          <string>Сопротивление изоляции 1 &lt; доп.</string>
+          <string>Сопротивление изоляции 1 &lt; доп. знач.</string>
          </property>
         </row>
         <row>
          <property name="text">
-          <string>Сопротивление изоляции 2 &lt; доп.</string>
+          <string>Сопротивление изоляции 2 &lt; доп. знач.</string>
          </property>
         </row>
         <row>
          <property name="text">
-          <string>Сопротивление шлейфа &lt; доп.</string>
+          <string>Сопротивление шлейфа &lt;  доп. знач.</string>
          </property>
         </row>
         <row>
          <property name="text">
-          <string>Сопротивление шлейфа &gt; доп.</string>
+          <string>Сопротивление шлейфа &gt;  доп. знач.</string>
          </property>
         </row>
         <row>
          <property name="text">
-          <string>Напряжение 1 выше допуск</string>
+          <string>Напряжение на входе 1 &gt; доп. знач.</string>
          </property>
         </row>
         <row>
          <property name="text">
-          <string>Напряжение 2 выше допуск</string>
+          <string>Напряжение на входе 2  &gt; доп. знач.</string>
          </property>
         </row>
         <column>
@@ -1539,32 +1539,32 @@ background-color: rgb(234, 232, 220);
         </row>
         <row>
          <property name="text">
-          <string>Сопротивление изоляции 1 &lt; доп.</string>
+          <string>Сопротивление изоляции 1 &lt; доп. знач.</string>
          </property>
         </row>
         <row>
          <property name="text">
-          <string>Сопротивление изоляции 2 &lt; доп.</string>
+          <string>Сопротивление изоляции 2 &lt; доп. знач.</string>
          </property>
         </row>
         <row>
          <property name="text">
-          <string>Сопротивление шлейфа &lt; доп.</string>
+          <string>Сопротивление шлейфа &lt; доп. знач.</string>
          </property>
         </row>
         <row>
          <property name="text">
-          <string>Сопротивление шлейфа &gt; доп.</string>
+          <string>Сопротивление шлейфа &gt; доп. знач.</string>
          </property>
         </row>
         <row>
          <property name="text">
-          <string>Напряжение 1 выше допуск</string>
+          <string>Напряжение на входе 1 &gt; доп. знач.</string>
          </property>
         </row>
         <row>
          <property name="text">
-          <string>Напряжение 2 выше допуск</string>
+          <string>Напряжение на входе 2 &gt; доп. знач.</string>
          </property>
         </row>
         <column>
