@@ -41,7 +41,7 @@ background-color: rgb(234, 232, 220);
 color: rgb(0, 0, 0);</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="documentMode">
        <bool>false</bool>
@@ -379,7 +379,7 @@ color: rgb(0, 0, 0);</string>
         </row>
         <row>
          <property name="text">
-          <string>Неисправновть АЦП</string>
+          <string>Неисправность АЦП</string>
          </property>
         </row>
         <row>
@@ -405,7 +405,7 @@ color: rgb(0, 0, 0);</string>
         </row>
         <row>
          <property name="text">
-          <string>Неисправновть АЦП</string>
+          <string>Неисправность АЦП</string>
          </property>
         </row>
         <row>
@@ -718,7 +718,7 @@ color: rgb(0, 0, 0);</string>
         </row>
         <row>
          <property name="text">
-          <string>Аварийные сигналы&quot;:</string>
+          <string>Аварийные сигналы:</string>
          </property>
          <property name="font">
           <font>
@@ -1528,7 +1528,7 @@ background-color: rgb(234, 232, 220);
         </row>
         <row>
          <property name="text">
-          <string>Аварийные сигналы&quot;:</string>
+          <string>Аварийные сигналы:</string>
          </property>
          <property name="font">
           <font>
